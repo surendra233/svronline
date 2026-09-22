@@ -4,644 +4,3051 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SVR Food Products – Sir Arthur Cotton | Order Online</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Bricolage+Grotesque:wght@600;800&family=Hind:wght@400;500;600&family=Noto+Sans+Telugu:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#f2f5ee; --surface:#ffffff; --ink:#1d2a1f; --muted:#66756a; --line:#dde5d6;
-  --brand:#1b7a3a; --brand-ink:#ffffff; --gold:#d4af37; --gold-light:#f9e596; --tile:#eef2e8; --off:#1b7a3a;
+
+  --bg:#f2f5ee;
+  --surface:#ffffff;
+  --ink:#1d2a1f;
+  --muted:#66756a;
+  --line:#dde5d6;
+  --brand:#1b7a3a;
+  --brand-ink:#ffffff;
+  --gold:#d4af37;
+  --gold-light:#f9e596;
+  --tile:#eef2e8;
+  --off:#1b7a3a;
   --head:#0a0905;
 }
+
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0f1511; --surface:#18211b; --ink:#eaf1e6; --muted:#9db0a2; --line:#2a382e;
-    --brand:#3fae5f; --brand-ink:#08130b; --gold:#e0b03c; --gold-light:#faea9f; --tile:#223027; --off:#5cc46c; --head:#080704;
+    --bg:#0f1511;
+    --surface:#18211b;
+    --ink:#eaf1e6;
+    --muted:#9db0a2;
+    --line:#2a382e;
+    --brand:#3fae5f;
+    --brand-ink:#08130b;
+    --gold:#e0b03c;
+    --gold-light:#faea9f;
+    --tile:#223027;
+    --off:#5cc46c;
+    --head:#080704;
   }
 }
+
 :root[data-theme="dark"]{
-  --bg:#0f1511; --surface:#18211b; --ink:#eaf1e6; --muted:#9db0a2; --line:#2a382e;
-  --brand:#3fae5f; --brand-ink:#08130b; --gold:#e0b03c; --gold-light:#faea9f; --tile:#223027; --off:#5cc46c; --head:#080704;
+  --bg:#0f1511;
+  --surface:#18211b;
+  --ink:#eaf1e6;
+  --muted:#9db0a2;
+  --line:#2a382e;
+  --brand:#3fae5f;
+  --brand-ink:#08130b;
+  --gold:#e0b03c;
+  --gold-light:#faea9f;
+  --tile:#223027;
+  --off:#5cc46c;
+  --head:#080704;
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Hind','Noto Sans Telugu',system-ui,sans-serif;font-size:16px;line-height:1.5;padding-bottom:96px}
-h1,h2,h3{margin:0;line-height:1.2}
-button,input,select,textarea{font:inherit;color:inherit}
 
-/* ==================== CINEMATIC HEADER ==================== */
+html{
+  scroll-padding-top:env(safe-area-inset-top,0px)
+}
+
+*,*::before,*::after{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Hind','Noto Sans Telugu',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  padding-bottom:96px
+}
+
+h1,h2,h3{
+  margin:0;
+  line-height:1.2
+}
+
+button,input,select,textarea{
+  font:inherit;
+  color:inherit
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header{
-  background: radial-gradient(circle at 50% 30%, #201a0d 0%, #0a0905 85%);
-  border-bottom: 2px solid transparent;
-  border-image: linear-gradient(90deg, transparent, var(--gold), #fff2b2, var(--gold), transparent) 1;
-  padding: 14px 16px;
-  position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-}
-header::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-}
-.brand-bar{
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  position: relative;
-  z-index: 1;
-}
-.brand-logo-frame {
-  position: relative;
-  padding: 3px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #f9e596, #8c6f1c, #d4af37);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
-  flex-shrink: 0;
-}
-.brand-logo{
-  width: 62px;
-  height: 62px;
-  object-fit: cover;
-  border-radius: 9px;
-  background: #ffffff;
-  display: block;
-}
-.brand-info{
-  flex: 1;
-  min-width: 0;
-  text-align: left;
-}
-.brand-info h1{
-  font-family: 'Cinzel', 'Bricolage Grotesque', serif;
-  font-size: 1.25rem;
-  font-weight: 900;
-  background: linear-gradient(180deg, #ffffff 0%, #f4e29e 60%, #c59b27 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8));
-  margin: 0;
-}
-.brand-badge {
-  display: inline-block;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #100e07;
-  background: linear-gradient(90deg, #d4af37, #fdf1b8, #d4af37);
-  padding: 2px 10px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 3px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-.brand-info p{
-  margin: 5px 0 0;
-  color: #e2d6b5;
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  opacity: 0.95;
+  background:var(--head);
+  border-bottom:3px solid var(--gold);
+  padding:8px 12px;
+  text-align:center;
+  box-shadow:0 4px 18px rgba(0,0,0,.5);
 }
 
-main{max-width:720px;margin:0 auto;padding:16px 16px 8px;display:none}
-main.active{display:block}
-.notice{background:var(--tile);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.92rem;color:var(--muted);margin-bottom:14px}
-.list{display:grid;gap:12px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;gap:12px;align-items:center}
-.tile{flex:0 0 104px;height:120px;border-radius:10px;background:var(--tile);display:grid;place-items:center;overflow:hidden}
-.tile img{max-width:100%;max-height:100%;object-fit:cover;display:block;border-radius:8px}
-.info{flex:1;min-width:0}
-.info h3{font-size:1.05rem;font-weight:800}
-.te{font-family:'Noto Sans Telugu',sans-serif;color:var(--muted);font-size:.95rem}
-.sub{color:var(--muted);font-size:.88rem}
-.pr{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin:4px 0 8px}
-.pr b{font-size:1.15rem}
-.pr s{color:var(--muted);font-size:.92rem}
-.pr em{font-style:normal;color:var(--off);font-weight:600;font-size:.88rem}
-.add{border:0;background:var(--brand);color:var(--brand-ink);border-radius:999px;padding:8px 22px;font-weight:600;cursor:pointer}
-.step{display:inline-flex;align-items:center;border:1.5px solid var(--brand);border-radius:999px;overflow:hidden}
-.step button{width:36px;height:34px;border:0;background:transparent;color:var(--brand);font-size:1.25rem;cursor:pointer}
-.step span{min-width:28px;text-align:center;font-weight:600}
-:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.bar{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);display:none;z-index:5}
-.bar.on{display:block}
-.bar button{width:100%;max-width:720px;display:flex;justify-content:space-between;margin:0 auto;border:0;background:var(--brand);color:var(--brand-ink);border-radius:12px;padding:14px 18px;font-weight:600;cursor:pointer}
-.sheet{position:fixed;inset:0;background:var(--bg);z-index:10;overflow-y:auto;display:none;padding-top:env(safe-area-inset-top,0px)}
-.sheet.on{display:block}
-.sheet .in{max-width:720px;margin:0 auto;padding:16px 18px calc(40px + env(safe-area-inset-bottom,0px))}
-.back{border:0;background:none;color:var(--brand);font-weight:600;padding:6px 0;cursor:pointer}
-h2{font-size:1.35rem;margin:8px 0 10px}
-.line{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line)}
-.line.save{color:var(--off)}
-.total{font-weight:600;font-size:1.1rem;border-bottom:0}
-label{display:block;font-weight:600;font-size:.92rem;margin:14px 0 4px}
-input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
-select:focus,input:focus,textarea:focus{border-color:var(--brand);outline:none}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pay{display:grid;gap:8px;margin-top:6px}
-.pay label{display:flex;align-items:flex-start;gap:12px;margin:0;padding:14px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);font-weight:500;cursor:pointer}
-.pay input{width:auto;margin-top:5px}
-.pay small{display:block;color:var(--muted);font-weight:400;margin-top:4px}
-.pay-tag{display:inline-block;background:var(--brand);color:#fff;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;margin-left:6px}
-.pay-tag.upi{background:#0066cc}
-.cta{display:block;width:100%;text-align:center;text-decoration:none;border:0;border-radius:12px;padding:14px;font-weight:600;cursor:pointer;margin-top:12px;font-size:1rem}
-.wa{background:#1fa855;color:#fff}
-.sec{background:var(--surface);color:var(--brand);border:1.5px solid var(--brand)}
-.pri{background:var(--brand);color:var(--brand-ink)}
-.done{text-align:center;padding-top:24px}
-.done .big{font-size:3rem}
-.small{color:var(--muted);font-size:.9rem}
-.foot{background:var(--head);border-top:4px solid var(--gold);margin-top:24px;padding:20px 12px calc(110px + env(safe-area-inset-bottom,0px));text-align:center;display:none}
-.foot.active{display:block}
-.foot img{display:block;margin:0 auto 12px;width:min(340px,88%);height:auto;border-radius:8px}
-.foot p{color:#e9d9a6;font-size:.85rem;margin:4px 0}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);z-index:20;display:none;align-items:center;justify-content:center;padding:20px}
-.modal.on{display:flex}
-.modal .box{background:var(--surface);border-radius:18px;padding:26px 22px;max-width:400px;width:100%;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,0.35)}
-.modal .box p{color:var(--muted);margin:0 0 10px}
-.who{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.modal .box .cta{margin-top:10px}
-.modal .box .cta:first-of-type{margin-top:16px}
-.link{border:0;background:none;color:var(--brand);font-weight:600;text-decoration:underline;cursor:pointer;padding:0}
+.header-banner{
+  display:block;
+  margin:0 auto;
+  width:100%;
+  max-width:900px;
+  height:auto;
+  max-height:220px;
+  border-radius:8px;
+  object-fit:contain;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  max-width:720px;
+  margin:0 auto;
+  padding:16px 16px 8px;
+  display:none
+}
+
+main.active{
+  display:block
+}
+
+.notice{
+  background:var(--tile);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:.92rem;
+  color:var(--muted);
+  margin-bottom:14px
+}
+
+.list{
+  display:grid;
+  gap:12px
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px;
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+
+.tile{
+  flex:0 0 104px;
+  height:120px;
+  border-radius:10px;
+  background:var(--tile);
+  display:grid;
+  place-items:center;
+  overflow:hidden
+}
+
+.tile img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:8px
+}
+
+.info{
+  flex:1;
+  min-width:0
+}
+
+.info h3{
+  font-size:1.05rem;
+  font-weight:800
+}
+
+.te{
+  font-family:'Noto Sans Telugu',sans-serif;
+  color:var(--muted);
+  font-size:.95rem
+}
+
+.sub{
+  color:var(--muted);
+  font-size:.88rem
+}
+
+.pr{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:6px;
+  margin:4px 0 8px
+}
+
+.pr b{
+  font-size:1.15rem
+}
+
+.pr s{
+  color:var(--muted);
+  font-size:.92rem
+}
+
+.pr em{
+  font-style:normal;
+  color:var(--off);
+  font-weight:600;
+  font-size:.88rem
+}
+
+.add{
+  border:0;
+  background:var(--brand);
+  color:var(--brand-ink);
+  border-radius:999px;
+  padding:8px 22px;
+  font-weight:600;
+  cursor:pointer
+}
+
+.step{
+  display:inline-flex;
+  align-items:center;
+  border:1.5px solid var(--brand);
+  border-radius:999px;
+  overflow:hidden
+}
+
+.step button{
+  width:36px;
+  height:34px;
+  border:0;
+  background:transparent;
+  color:var(--brand);
+  font-size:1.25rem;
+  cursor:pointer
+}
+
+.step span{
+  min-width:28px;
+  text-align:center;
+  font-weight:600
+}
+
+:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:2px
+}
+
+/* =========================
+   CART BAR
+========================= */
+
+.bar{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  display:none;
+  z-index:5
+}
+
+.bar.on{
+  display:block
+}
+
+.bar button{
+  width:100%;
+  max-width:720px;
+  display:flex;
+  justify-content:space-between;
+  margin:0 auto;
+  border:0;
+  background:var(--brand);
+  color:var(--brand-ink);
+  border-radius:12px;
+  padding:14px 18px;
+  font-weight:600;
+  cursor:pointer
+}
+
+/* =========================
+   SHEETS
+========================= */
+
+.sheet{
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  z-index:10;
+  overflow-y:auto;
+  display:none;
+  padding-top:env(safe-area-inset-top,0px)
+}
+
+.sheet.on{
+  display:block
+}
+
+.sheet .in{
+  max-width:720px;
+  margin:0 auto;
+  padding:16px 18px calc(40px + env(safe-area-inset-bottom,0px))
+}
+
+.back{
+  border:0;
+  background:none;
+  color:var(--brand);
+  font-weight:600;
+  padding:6px 0;
+  cursor:pointer
+}
+
+h2{
+  font-size:1.35rem;
+  margin:8px 0 10px
+}
+
+.line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:7px 0;
+  border-bottom:1px dashed var(--line)
+}
+
+.line.save{
+  color:var(--off)
+}
+
+.total{
+  font-weight:600;
+  font-size:1.1rem;
+  border-bottom:0
+}
+
+/* =========================
+   FORMS
+========================= */
+
+label{
+  display:block;
+  font-weight:600;
+  font-size:.92rem;
+  margin:14px 0 4px
+}
+
+input,select,textarea{
+  width:100%;
+  padding:11px 12px;
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--ink)
+}
+
+select:focus,input:focus,textarea:focus{
+  border-color:var(--brand);
+  outline:none
+}
+
+.row2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.pay{
+  display:grid;
+  gap:8px;
+  margin-top:6px
+}
+
+.pay label{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin:0;
+  padding:14px;
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  background:var(--surface);
+  font-weight:500;
+  cursor:pointer
+}
+
+.pay input{
+  width:auto;
+  margin-top:5px
+}
+
+.pay small{
+  display:block;
+  color:var(--muted);
+  font-weight:400;
+  margin-top:4px
+}
+
+.pay-tag{
+  display:inline-block;
+  background:var(--brand);
+  color:#fff;
+  padding:2px 8px;
+  border-radius:6px;
+  font-size:.75rem;
+  font-weight:700;
+  margin-left:6px
+}
+
+.pay-tag.upi{
+  background:#0066cc
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.cta{
+  display:block;
+  width:100%;
+  text-align:center;
+  text-decoration:none;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:12px;
+  font-size:1rem
+}
+
+.wa{
+  background:#1fa855;
+  color:#fff
+}
+
+.sec{
+  background:var(--surface);
+  color:var(--brand);
+  border:1.5px solid var(--brand)
+}
+
+.pri{
+  background:var(--brand);
+  color:var(--brand-ink)
+}
+
+/* =========================
+   CONFIRMATION
+========================= */
+
+.done{
+  text-align:center;
+  padding-top:24px
+}
+
+.done .big{
+  font-size:3rem
+}
+
+.small{
+  color:var(--muted);
+  font-size:.9rem
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.foot{
+  background:var(--head);
+  border-top:4px solid var(--gold);
+  margin-top:24px;
+  padding:20px 12px calc(110px + env(safe-area-inset-bottom,0px));
+  text-align:center;
+  display:none
+}
+
+.foot.active{
+  display:block
+}
+
+.foot img{
+  display:block;
+  margin:0 auto 12px;
+  width:min(500px,88%);
+  height:auto;
+  border-radius:8px
+}
+
+.foot p{
+  color:#e9d9a6;
+  font-size:.85rem;
+  margin:4px 0
+}
+
+/* =========================
+   ROLE MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(4px);
+  z-index:20;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px
+}
+
+.modal.on{
+  display:flex
+}
+
+.modal .box{
+  background:var(--surface);
+  border-radius:18px;
+  padding:26px 22px;
+  max-width:400px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 12px 36px rgba(0,0,0,.35)
+}
+
+.modal .box p{
+  color:var(--muted);
+  margin:0 0 10px
+}
+
+.who{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px
+}
+
+.modal .box .cta{
+  margin-top:10px
+}
+
+.modal .box .cta:first-of-type{
+  margin-top:16px
+}
+
+.link{
+  border:0;
+  background:none;
+  color:var(--brand);
+  font-weight:600;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:0
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+  text-align:center;
+  padding:30px 10px;
+  color:var(--muted)
+}
+
+.sheet-status{
+  font-size:.78rem;
+  text-align:center;
+  color:var(--muted);
+  margin-top:8px
+}
+
+/* =========================
+   OTHER STATE MANUAL INPUT
+========================= */
+
+.manual-location{
+  display:none;
+  margin-top:8px
+}
+
+.manual-location.on{
+  display:block
+}
+
+.hidden{
+  display:none !important
+}
+
+@media(max-width:520px){
+  .card{
+    align-items:flex-start
+  }
+
+  .tile{
+    flex:0 0 90px;
+    height:105px
+  }
+
+  .row2{
+    grid-template-columns:1fr
+  }
+
+  .header-banner{
+    max-height:180px
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="brand-bar">
-    <div class="brand-logo-frame">
-      <img class="brand-logo" src="https://lh3.googleusercontent.com/d/1B4_wx9WdTTyEQJDjDpPYSgXDG_8QVmlq" alt="SVR Logo" onerror="this.src='https://via.placeholder.com/62/12100a/c8961a?text=SVR'">
-    </div>
-    <div class="brand-info">
-      <h1>SVR Food Products</h1>
-      <div><span class="brand-badge">Sir Arthur Cotton</span></div>
-      <p>Idli Ravva &amp; Urad Gota · ఇడ్లీ రవ్వ &amp; మినపగుళ్ళు</p>
-    </div>
-  </div>
+  <img
+    class="header-banner"
+    id="headerBanner"
+    src="https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH"
+    alt="SVR Food Products – Sir Arthur Cotton Brand"
+    onerror="this.src='https://via.placeholder.com/900x220/12100a/c8961a?text=SVR+FOOD+PRODUCTS'"
+  >
 </header>
 
 <main id="mainContent">
-  <div class="notice who"><span>Ordering as <b id="whoLabel"></b></span><button class="link" id="changeWho">Change</button></div>
-  <div class="notice">Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.</div>
-  <div class="list" id="list"></div>
+
+  <div class="notice who">
+    <span>
+      <span id="orderingAsText">Ordering as</span>
+      <b id="whoLabel"></b>
+    </span>
+    <button class="link" id="changeWho">Change</button>
+  </div>
+
+  <div class="notice" id="catalogNotice">
+    Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.
+  </div>
+
+  <div class="list" id="list">
+    <div class="loading">Loading products...</div>
+  </div>
+
+  <div class="sheet-status" id="sheetStatus"></div>
+
 </main>
 
 <footer class="foot" id="mainFoot">
-  <img src="https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0" alt="SVR Foods Footer Banner" onerror="this.style.display='none'">
-  <p style="font-weight:700;font-size:1.05rem;color:#d4af37;">SVR Food Products – Sir Arthur Cotton</p>
-  <p>Contact: +91 98669 48633 | support@svrfoods.com</p>
-  <p>Duppalapudi (V), E.G. Dist, Andhra Pradesh</p>
+
+  <img
+    id="footerBanner"
+    src="https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0"
+    alt="SVR Foods Footer Banner"
+    onerror="this.style.display='none'"
+  >
+
+  <p id="footerBrand" style="font-weight:700;font-size:1.05rem;color:#d4af37;">
+    SVR Food Products – Sir Arthur Cotton
+  </p>
+
+  <p id="footerContact">
+    Contact: +91 89853 61991 | support@svrfoods.com
+  </p>
+
+  <p id="footerAddress">
+    Duppalapudi (V), E.G. Dist, Andhra Pradesh
+  </p>
+
   <p>© SVR Food Products</p>
+
 </footer>
 
-<div class="modal on" id="who"><div class="box" role="dialog" aria-modal="true" aria-labelledby="whoT">
-  <h2 id="whoT" style="color:var(--ink)">Welcome to SVR Foods</h2>
-  <p>Please select who you are to view the product catalog &amp; prices:</p>
-  <button class="cta pri" data-t="Distributor">🏢 I am a Distributor</button>
-  <button class="cta sec" data-t="Hotel">🏨 I am a Hotel / Restaurant</button>
-  <button class="cta sec" data-t="User">👤 I am a Retail Customer</button>
-</div></div>
+<!-- ROLE MODAL -->
 
-<div class="bar" id="bar"><button id="openCart"><span id="barCount">0 items</span><span id="barTotal">₹0</span></button></div>
+<div class="modal on" id="who">
 
-<div class="sheet" id="checkout"><div class="in">
-  <button class="back" id="closeCheckout">&larr; Back to products</button>
-  <h2>Your order</h2>
-  <div id="cartLines"></div>
+  <div class="box" role="dialog" aria-modal="true" aria-labelledby="whoT">
 
-  <h2 style="margin-top:26px" id="detailsTitle">Delivery details</h2>
-  <div id="fields"></div>
-  <label for="notes">Notes (optional)</label>
-  <input id="notes" placeholder="Preferred delivery time, landmark, etc.">
+    <h2 id="whoT" style="color:var(--ink)">
+      Welcome to SVR Foods
+    </h2>
 
-  <h2 style="margin-top:26px">Payment &amp; Delivery Terms</h2>
-  <div class="pay" id="paymentInfo"></div>
+    <p id="whoDescription">
+      Please select who you are to view the product catalog &amp; prices:
+    </p>
 
-  <button class="cta pri" id="place">Place order</button>
-</div></div>
+    <button class="cta pri" data-t="Distributor">
+      I am a Distributor
+    </button>
 
-<div class="sheet" id="confirm"><div class="in done">
-  <div class="big">✅</div>
-  <h2 id="cTitle">Order Created</h2>
-  <p id="cText">Click below to send your order directly to our WhatsApp number.</p>
-  <a class="cta wa" id="waBtn" target="_blank" rel="noopener">Send order on WhatsApp</a>
-  <button class="cta sec" id="copyBtn">Copy order details</button>
-  <p class="small" id="cHelp" style="margin-top:14px;"></p>
-  <button class="back" id="newOrder" style="margin-top:16px;">Start a new order</button>
-</div></div>
+    <button class="cta sec" data-t="Hotel">
+      I am a Hotel / Restaurant
+    </button>
+
+    <button class="cta sec" data-t="User">
+      I am a Retail Customer
+    </button>
+
+  </div>
+
+</div>
+
+<!-- CART BAR -->
+
+<div class="bar" id="bar">
+
+  <button id="openCart">
+    <span id="barCount">0 items</span>
+    <span id="barTotal">₹0</span>
+  </button>
+
+</div>
+
+<!-- CHECKOUT -->
+
+<div class="sheet" id="checkout">
+
+  <div class="in">
+
+    <button class="back" id="closeCheckout">
+      &larr; Back to products
+    </button>
+
+    <h2 id="yourOrderTitle">Your order</h2>
+
+    <div id="cartLines"></div>
+
+    <h2 style="margin-top:26px" id="detailsTitle">
+      Delivery details
+    </h2>
+
+    <div id="fields"></div>
+
+    <label for="notes" id="notesLabel">
+      Notes (optional)
+    </label>
+
+    <input
+      id="notes"
+      placeholder="Preferred delivery time, landmark, etc."
+    >
+
+    <h2 style="margin-top:26px">
+      Payment &amp; Delivery Terms
+    </h2>
+
+    <div class="pay" id="paymentInfo"></div>
+
+    <button class="cta pri" id="place">
+      Place order
+    </button>
+
+  </div>
+
+</div>
+
+<!-- CONFIRMATION -->
+
+<div class="sheet" id="confirm">
+
+  <div class="in done">
+
+    <div class="big">✓</div>
+
+    <h2 id="cTitle">
+      Order Created
+    </h2>
+
+    <p id="cText">
+      Click below to send your order directly to our WhatsApp number.
+    </p>
+
+    <a
+      class="cta wa"
+      id="waBtn"
+      target="_blank"
+      rel="noopener"
+    >
+      Send order on WhatsApp
+    </a>
+
+    <button class="cta sec" id="copyBtn">
+      Copy order details
+    </button>
+
+    <p class="small" id="cHelp" style="margin-top:14px;"></p>
+
+    <button
+      class="back"
+      id="newOrder"
+      style="margin-top:16px;"
+    >
+      Start a new order
+    </button>
+
+  </div>
+
+</div>
 
 <script>
+
+/* ============================================================
+   GOOGLE SHEET CONFIGURATION
+============================================================ */
+
+const GOOGLE_SHEET_ID =
+"19guYbtUvmOtY3FB_qlIVT-ftQUTqmvg_oOYTFymGovM";
+
+/*
+  Published Google Sheet:
+  https://docs.google.com/spreadsheets/d/e/2PACX-1vS96rGynHTVwgig54rKmbBl-Cl8eg6p-ueyKyg1ulff8aMhhAPQ6TFChQqeiKknHAotNX62GjY4MiC8/pubhtml
+
+  The normal Spreadsheet ID above is used for Google Visualization.
+*/
+
+const SHEET_NAMES = {
+  SETTINGS: "SETTINGS",
+  PRODUCTS: "PRODUCTS",
+  ROLE_PRICES: "ROLE_PRICES",
+  PAYMENT_DELIVERY: "PAYMENT_DELIVERY",
+  MESSAGES: "MESSAGES",
+  LOCATIONS: "LOCATIONS",
+  SOCIAL_LINKS: "SOCIAL_LINKS"
+};
+
+
+/* ============================================================
+   FALLBACK CONFIGURATION
+   If Sheet data cannot be loaded, website still works.
+============================================================ */
+
 const CONFIG = {
+
   shopName: "SVR Food Products",
-  whatsappNumber: "919866948633",
+
+  brandName: "Sir Arthur Cotton",
+
+  whatsappNumber: "918985361991",
+
+  phone: "+91 89853 61991",
+
+  email: "support@svrfoods.com",
+
+  address: "Duppalapudi (V), E.G. Dist, Andhra Pradesh",
+
+  tagline: "నాణ్యతకు నమ్మకం • రుచికి చిరునామా",
+
+  headerBanner:
+    "https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH",
+
+  footerBanner:
+    "https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0",
+
   currency: "₹",
+
   deliveryCharge: 0,
+
   freeDeliveryAbove: 0,
+
   products: [
+
     {
-      id: "idli1",
-      name: "Idli Ravva – Sir Arthur Cotton",
-      te: "ఇడ్లీ రవ్వ",
-      size: "1 Kg",
-      price: 55,
-      mrp: 60,
-      img: "https://lh3.googleusercontent.com/d/1EleI0ac2vmVrc7A_UbNfIAxPtq7JTDXA"
+      id:"idli1",
+      name:"Idli Ravva – Sir Arthur Cotton",
+      te:"ఇడ్లీ రవ్వ",
+      size:"1 Kg",
+      price:55,
+      mrp:60,
+      img:"https://lh3.googleusercontent.com/d/1EleI0ac2vmVrc7A_UbNfIAxPtq7JTDXA"
     },
+
     {
-      id: "idli5",
-      name: "Idli Ravva – Sir Arthur Cotton",
-      te: "ఇడ్లీ రవ్వ",
-      size: "5 Kg",
-      price: 265,
-      mrp: 320,
-      img: "https://lh3.googleusercontent.com/d/1tBwWFevtSKOg8OrL5YQnGE1ExqtCVKXj"
+      id:"idli5",
+      name:"Idli Ravva – Sir Arthur Cotton",
+      te:"ఇడ్లీ రవ్వ",
+      size:"5 Kg",
+      price:265,
+      mrp:320,
+      img:"https://lh3.googleusercontent.com/d/1tBwWFevtSKOg8OrL5YQnGE1ExqtCVKXj"
     },
+
     {
-      id: "idli30",
-      name: "Idli Ravva – Bulk Bag",
-      te: "ఇడ్లీ రవ్వ (బల్క్)",
-      size: "30 Kg",
-      price: 1300,
-      mrp: 1450,
-      img: "https://lh3.googleusercontent.com/d/1BgVtVHGvSy4Q08WTRol3FvriPEmF1S3S"
+      id:"idli30",
+      name:"Idli Ravva – Bulk Bag",
+      te:"ఇడ్లీ రవ్వ (బల్క్)",
+      size:"30 Kg",
+      price:1300,
+      mrp:1450,
+      img:"https://lh3.googleusercontent.com/d/1BgVtVHGvSy4Q08WTRol3FvriPEmF1S3S"
     },
+
     {
-      id: "urad1",
-      name: "Urad Gota – Premium",
-      te: "మినపగుళ్ళు",
-      size: "1 Kg",
-      price: 135,
-      mrp: 155,
-      img: "https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
+      id:"urad1",
+      name:"Urad Gota – Premium",
+      te:"మినపగుళ్ళు",
+      size:"1 Kg",
+      price:135,
+      mrp:155,
+      img:"https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
     },
+
     {
-      id: "urad5",
-      name: "Urad Gota – Premium",
-      te: "మినపగుళ్ళు",
-      size: "5 Kg",
-      price: 660,
-      mrp: 750,
-      img: "https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
+      id:"urad5",
+      name:"Urad Gota – Premium",
+      te:"మినపగుళ్ళు",
+      size:"5 Kg",
+      price:660,
+      mrp:750,
+      img:"https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
     },
+
     {
-      id: "vari_nuka",
-      name: "Vari Nuka",
-      te: "వరి నూక",
-      size: "1 Kg",
-      price: 30,
-      mrp: 40,
-      img: "https://lh3.googleusercontent.com/d/12bD7-8CLAjRa9AM-69dP1jxToCNEj1jg"
+      id:"vari_nuka",
+      name:"Vari Nuka",
+      te:"వరి నూక",
+      size:"1 Kg",
+      price:30,
+      mrp:40,
+      img:"https://lh3.googleusercontent.com/d/12bD7-8CLAjRa9AM-69dP1jxToCNEj1jg"
     }
+
   ]
 };
 
-const LOCATION_DATA = {
-  "Andhra Pradesh": [
-    "Alluri Sitharama Raju", "Anakapalli", "Ananthapuramu", "Annamayya",
-    "Bapatla", "Chittoor", "Dr. B.R. Ambedkar Konaseema", "East Godavari",
-    "Eluru", "Guntur", "Kakinada", "Krishna", "Kurnool", "Nandyal",
-    "NTR", "Palnadu", "Parvathipuram Manyam", "Prakasam", "Sri Potti Sriramulu Nellore",
-    "Sri Sathya Sai", "Srikakulam", "Tirupati", "Visakhapatnam",
-    "Vizianagaram", "West Godavari", "YSR Kadapa"
-  ],
-  "Telangana": [
-    "Adilabad", "Bhadradri Kothagudem", "Hyderabad", "Jagtial", "Jangaon",
-    "Jayashankar Bhupalpally", "Jogulamba Gadwal", "Kamareddy", "Karimnagar",
-    "Khammam", "Kumuram Bheem Asifabad", "Mahabubabad", "Mahabubnagar",
-    "Mancherial", "Medak", "Medchal–Malkajgiri", "Mulugu", "Nagarkurnool",
-    "Nalgonda", "Narayanpet", "Nirmal", "Nizamabad", "Peddapalli",
-    "Rajanna Sircilla", "Rangareddy", "Sangareddy", "Siddipet",
-    "Suryapet", "Vikarabad", "Wanaparthy", "Warangal", "Hanamkonda", "Yadadri Bhuvanagiri"
-  ],
-  "Karnataka": ["Bengaluru Urban", "Bengaluru Rural", "Mysuru", "Ballari", "Other"],
-  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Other"],
-  "Odisha": ["Ganjam", "Khordha", "Koraput", "Other"],
-  "Other": ["Other District"]
+
+/* ============================================================
+   ROLE PRICES FALLBACK
+============================================================ */
+
+let ROLE_PRICES = {
+
+  idli1:{
+    Distributor:50,
+    Hotel:52,
+    User:55
+  },
+
+  idli5:{
+    Distributor:250,
+    Hotel:255,
+    User:265
+  },
+
+  idli30:{
+    Distributor:1250,
+    Hotel:1275,
+    User:1300
+  },
+
+  urad1:{
+    Distributor:125,
+    Hotel:130,
+    User:135
+  },
+
+  urad5:{
+    Distributor:630,
+    Hotel:645,
+    User:660
+  },
+
+  vari_nuka:{
+    Distributor:27,
+    Hotel:28,
+    User:30
+  }
+
 };
+
+
+/* ============================================================
+   LOCATION FALLBACK
+============================================================ */
+
+let LOCATION_DATA = {
+
+  "Andhra Pradesh":[
+    "Alluri Sitharama Raju",
+    "Anakapalli",
+    "Ananthapuramu",
+    "Annamayya",
+    "Bapatla",
+    "Chittoor",
+    "Dr. B.R. Ambedkar Konaseema",
+    "East Godavari",
+    "Eluru",
+    "Guntur",
+    "Kakinada",
+    "Krishna",
+    "Kurnool",
+    "Nandyal",
+    "NTR",
+    "Palnadu",
+    "Prakasam",
+    "Sri Potti Sriramulu Nellore",
+    "Sri Sathya Sai",
+    "Srikakulam",
+    "Tirupati",
+    "Visakhapatnam",
+    "Vizianagaram",
+    "West Godavari",
+    "YSR Kadapa"
+  ],
+
+  "Telangana":[
+    "Adilabad",
+    "Bhadradri Kothagudem",
+    "Hyderabad",
+    "Jagtial",
+    "Jangaon",
+    "Jayashankar Bhupalpally",
+    "Jogulamba Gadwal",
+    "Kamareddy",
+    "Karimnagar",
+    "Khammam",
+    "Kumuram Bheem Asifabad",
+    "Mahabubabad",
+    "Mahabubnagar",
+    "Mancherial",
+    "Medak",
+    "Medchal–Malkajgiri",
+    "Mulugu",
+    "Nagarkurnool",
+    "Nalgonda",
+    "Narayanpet",
+    "Nirmal",
+    "Nizamabad",
+    "Peddapalli",
+    "Rajanna Sircilla",
+    "Rangareddy",
+    "Sangareddy",
+    "Siddipet",
+    "Suryapet",
+    "Vikarabad",
+    "Wanaparthy",
+    "Warangal",
+    "Hanamkonda",
+    "Yadadri Bhuvanagiri"
+  ]
+
+};
+
+
+/* ============================================================
+   MESSAGES FALLBACK
+============================================================ */
+
+let MESSAGES = {
+
+  welcome_title:"Welcome to SVR Foods",
+
+  welcome_text:
+    "Please select who you are to view the product catalog & prices",
+
+  catalog_notice:
+    "Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.",
+
+  ordering_as:"Ordering as",
+
+  change_role:"Change",
+
+  add_button:"ADD",
+
+  checkout:"Checkout",
+
+  back_products:"Back to products",
+
+  your_order:"Your order",
+
+  delivery_details:"Delivery details",
+
+  notes:"Notes (optional)",
+
+  place_order:"Place order",
+
+  order_created:"Order Created",
+
+  order_success:"Order Placed!",
+
+  send_whatsapp:"Send order on WhatsApp",
+
+  copy_details:"Copy order details",
+
+  new_order:"Start a new order"
+
+};
+
+
+/* ============================================================
+   PAYMENT FALLBACK
+============================================================ */
+
+let PAYMENT_DATA = {
+
+  Distributor:{
+    mode:"COD",
+    status:"Free Door Delivery",
+    note:"Payment upon delivery"
+  },
+
+  Hotel:{
+    mode:"COD",
+    status:"Free Door Delivery",
+    note:"Payment upon delivery"
+  },
+
+  User:{
+    mode:"UPI",
+    status:"Dispatch after Payment",
+    note:"UPI payment required before dispatch"
+  }
+
+};
+
+
+/* ============================================================
+   STATE
+============================================================ */
 
 let state = {
-  role: null,
-  cart: {},
-  latestOrderMsg: ""
+
+  role:null,
+
+  cart:{},
+
+  latestOrderMsg:"",
+
+  sheetLoaded:false
+
 };
 
-function generateDailyOrderNumber(prefix = "SVR") {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  const dateKey = `${year}${month}${day}`;
 
-  const storedDate = localStorage.getItem("svr_order_date");
-  let currentCount = parseInt(localStorage.getItem("svr_order_count") || "0", 10);
+/* ============================================================
+   GOOGLE SHEET FETCH
+============================================================ */
 
-  if (storedDate !== dateKey) {
-    currentCount = 1;
-    localStorage.setItem("svr_order_date", dateKey);
-  } else {
-    currentCount += 1;
-  }
+function sheetUrl(sheetName){
 
-  localStorage.setItem("svr_order_count", currentCount);
-  return `${prefix}-${dateKey}-${String(currentCount).padStart(3, "0")}`;
+  return `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
 }
 
-function renderProducts() {
-  const listEl = document.getElementById("list");
-  listEl.innerHTML = CONFIG.products.map(p => {
-    const qty = state.cart[p.id] || 0;
-    return `
-      <div class="card">
-        <div class="tile">
-          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/150/eef2e8/1b7a3a?text=SVR+Foods'">
-        </div>
-        <div class="info">
-          <h3>${p.name}</h3>
-          <div class="te">${p.te}</div>
-          <div class="sub">Pack: <b>${p.size}</b></div>
-          <div class="pr">
-            <b>${CONFIG.currency}${p.price}</b>
-            <s>${CONFIG.currency}${p.mrp}</s>
-            <em>Save ${CONFIG.currency}${p.mrp - p.price}</em>
+
+/*
+  Google returns:
+  google.visualization.Query.setResponse(...)
+*/
+
+async function fetchSheet(sheetName){
+
+  const response = await fetch(sheetUrl(sheetName), {
+    method:"GET",
+    cache:"no-store"
+  });
+
+  if(!response.ok){
+
+    throw new Error(
+      `Could not load ${sheetName}: HTTP ${response.status}`
+    );
+
+  }
+
+  const text = await response.text();
+
+  const match = text.match(
+    /google\.visualization\.Query\.setResponse\(([\s\S]+)\);?/
+  );
+
+  if(!match){
+
+    throw new Error(
+      `Invalid Google Sheet response for ${sheetName}`
+    );
+
+  }
+
+  const json = JSON.parse(match[1]);
+
+  return parseGvizTable(json);
+
+}
+
+
+/* ============================================================
+   GVIZ TABLE PARSER
+============================================================ */
+
+function parseGvizTable(json){
+
+  const table = json.table;
+
+  const headers =
+    table.cols.map(
+      (col,index) =>
+        String(col.label || col.id || `Column${index+1}`).trim()
+    );
+
+  const rows = [];
+
+  (table.rows || []).forEach(row => {
+
+    const obj = {};
+
+    headers.forEach((header,index) => {
+
+      const cell = row.c && row.c[index];
+
+      obj[header] =
+        cell && cell.v !== null && cell.v !== undefined
+          ? String(cell.v)
+          : "";
+
+    });
+
+    rows.push(obj);
+
+  });
+
+  return rows;
+}
+
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function isTrue(value){
+
+  return String(value || "")
+    .trim()
+    .toLowerCase() === "true";
+
+}
+
+
+function cleanNumber(value, fallback=0){
+
+  const n = Number(
+    String(value || "")
+      .replace(/₹/g,"")
+      .replace(/,/g,"")
+      .trim()
+  );
+
+  return Number.isFinite(n) ? n : fallback;
+
+}
+
+
+function getSetting(rows,key,fallback=""){
+
+  const row = rows.find(
+    r => String(r.Setting || "").trim() === key
+  );
+
+  if(!row) return fallback;
+
+  if(
+    row.Active !== undefined &&
+    row.Active !== "" &&
+    !isTrue(row.Active)
+  ){
+
+    return fallback;
+
+  }
+
+  return String(row.Value || fallback).trim();
+
+}
+
+
+/* ============================================================
+   LOAD SETTINGS
+============================================================ */
+
+async function loadSettings(){
+
+  const rows = await fetchSheet(SHEET_NAMES.SETTINGS);
+
+  CONFIG.shopName =
+    getSetting(rows,"shop_name",CONFIG.shopName);
+
+  CONFIG.brandName =
+    getSetting(rows,"brand_name",CONFIG.brandName);
+
+  CONFIG.whatsappNumber =
+    getSetting(
+      rows,
+      "whatsapp_number",
+      CONFIG.whatsappNumber
+    ).replace(/\D/g,"");
+
+  CONFIG.phone =
+    getSetting(rows,"phone",CONFIG.phone);
+
+  CONFIG.email =
+    getSetting(rows,"email",CONFIG.email);
+
+  CONFIG.address =
+    getSetting(rows,"address",CONFIG.address);
+
+  CONFIG.tagline =
+    getSetting(rows,"tagline",CONFIG.tagline);
+
+  CONFIG.headerBanner =
+    getSetting(
+      rows,
+      "header_banner",
+      CONFIG.headerBanner
+    );
+
+  CONFIG.footerBanner =
+    getSetting(
+      rows,
+      "footer_banner",
+      CONFIG.footerBanner
+    );
+
+  CONFIG.currency =
+    getSetting(
+      rows,
+      "currency",
+      CONFIG.currency
+    );
+
+  CONFIG.deliveryCharge =
+    cleanNumber(
+      getSetting(
+        rows,
+        "delivery_charge",
+        CONFIG.deliveryCharge
+      ),
+      0
+    );
+
+  CONFIG.freeDeliveryAbove =
+    cleanNumber(
+      getSetting(
+        rows,
+        "free_delivery_above",
+        CONFIG.freeDeliveryAbove
+      ),
+      0
+    );
+
+}
+
+
+/* ============================================================
+   LOAD PRODUCTS
+============================================================ */
+
+async function loadProducts(){
+
+  const rows = await fetchSheet(SHEET_NAMES.PRODUCTS);
+
+  const products = rows
+    .filter(row => {
+
+      return (
+        row.ID &&
+        isTrue(row.Active)
+      );
+
+    })
+    .sort(
+      (a,b) =>
+        cleanNumber(a["Sort Order"]) -
+        cleanNumber(b["Sort Order"])
+    )
+    .map(row => {
+
+      return {
+
+        id:String(row.ID).trim(),
+
+        name:String(row["Product Name"] || "").trim(),
+
+        te:String(row["Telugu Name"] || "").trim(),
+
+        size:String(row["Pack Size"] || "").trim(),
+
+        price:cleanNumber(row.Price),
+
+        mrp:cleanNumber(row.MRP),
+
+        img:String(row["Image URL"] || "").trim()
+
+      };
+
+    })
+    .filter(p => p.id && p.name);
+
+  if(products.length){
+
+    CONFIG.products = products;
+
+  }
+
+}
+
+
+/* ============================================================
+   LOAD ROLE PRICES
+============================================================ */
+
+async function loadRolePrices(){
+
+  const rows = await fetchSheet(
+    SHEET_NAMES.ROLE_PRICES
+  );
+
+  const prices = {};
+
+  rows.forEach(row => {
+
+    const id = String(
+      row["Product ID"] || ""
+    ).trim();
+
+    if(!id) return;
+
+    prices[id] = {
+
+      Distributor:
+        cleanNumber(row["Distributor Price"]),
+
+      Hotel:
+        cleanNumber(row["Hotel Price"]),
+
+      User:
+        cleanNumber(row["Retail Price"])
+
+    };
+
+  });
+
+  if(Object.keys(prices).length){
+
+    ROLE_PRICES = prices;
+
+  }
+
+}
+
+
+/* ============================================================
+   LOAD PAYMENT DELIVERY
+============================================================ */
+
+async function loadPaymentDelivery(){
+
+  const rows = await fetchSheet(
+    SHEET_NAMES.PAYMENT_DELIVERY
+  );
+
+  const data = {};
+
+  rows
+    .filter(row => isTrue(row.Active))
+    .forEach(row => {
+
+      const role =
+        String(row.Role || "").trim();
+
+      if(!role) return;
+
+      data[role] = {
+
+        mode:String(row["Payment Mode"] || "").trim(),
+
+        status:String(row["Delivery Status"] || "").trim(),
+
+        note:String(row["Payment Note"] || "").trim()
+
+      };
+
+    });
+
+  if(Object.keys(data).length){
+
+    PAYMENT_DATA = data;
+
+  }
+
+}
+
+
+/* ============================================================
+   LOAD MESSAGES
+============================================================ */
+
+async function loadMessages(){
+
+  const rows = await fetchSheet(
+    SHEET_NAMES.MESSAGES
+  );
+
+  const data = {};
+
+  rows
+    .filter(row => isTrue(row.Active))
+    .forEach(row => {
+
+      const id =
+        String(row["Message ID"] || "").trim();
+
+      if(id){
+
+        data[id] =
+          String(row.Message || "").trim();
+
+      }
+
+    });
+
+  if(Object.keys(data).length){
+
+    MESSAGES = {
+      ...MESSAGES,
+      ...data
+    };
+
+  }
+
+}
+
+
+/* ============================================================
+   LOAD LOCATIONS
+============================================================ */
+
+async function loadLocations(){
+
+  const rows = await fetchSheet(
+    SHEET_NAMES.LOCATIONS
+  );
+
+  const data = {};
+
+  rows
+    .filter(row => isTrue(row.Active))
+    .forEach(row => {
+
+      const countryState =
+        String(row.State || "").trim();
+
+      const district =
+        String(row.District || "").trim();
+
+      if(!countryState || !district) return;
+
+      if(
+        countryState === "Other State" ||
+        countryState === "Other"
+      ){
+
+        return;
+
+      }
+
+      if(!data[countryState]){
+
+        data[countryState] = [];
+
+      }
+
+      if(
+        district &&
+        !data[countryState].includes(district)
+      ){
+
+        data[countryState].push(district);
+
+      }
+
+    });
+
+  if(Object.keys(data).length){
+
+    LOCATION_DATA = data;
+
+  }
+
+}
+
+
+/* ============================================================
+   APPLY SETTINGS TO WEBSITE
+============================================================ */
+
+function applySettings(){
+
+  document.title =
+    `${CONFIG.shopName} – ${CONFIG.brandName} | Order Online`;
+
+  document.getElementById("headerBanner").src =
+    CONFIG.headerBanner;
+
+  document.getElementById("footerBanner").src =
+    CONFIG.footerBanner;
+
+  document.getElementById("footerBrand").textContent =
+    `${CONFIG.shopName} – ${CONFIG.brandName}`;
+
+  document.getElementById("footerContact").textContent =
+    `Contact: ${CONFIG.phone} | ${CONFIG.email}`;
+
+  document.getElementById("footerAddress").textContent =
+    CONFIG.address;
+
+}
+
+
+/* ============================================================
+   APPLY MESSAGES
+============================================================ */
+
+function applyMessages(){
+
+  document.getElementById("whoT").textContent =
+    MESSAGES.welcome_title;
+
+  document.getElementById("whoDescription").textContent =
+    MESSAGES.welcome_text;
+
+  document.getElementById("catalogNotice").textContent =
+    MESSAGES.catalog_notice;
+
+  document.getElementById("orderingAsText").textContent =
+    MESSAGES.ordering_as;
+
+  document.getElementById("changeWho").textContent =
+    MESSAGES.change_role;
+
+  document.getElementById("yourOrderTitle").textContent =
+    MESSAGES.your_order;
+
+  document.getElementById("detailsTitle").textContent =
+    MESSAGES.delivery_details;
+
+  document.getElementById("notesLabel").textContent =
+    MESSAGES.notes;
+
+  document.getElementById("place").textContent =
+    MESSAGES.place_order;
+
+  document.getElementById("waBtn").textContent =
+    MESSAGES.send_whatsapp;
+
+  document.getElementById("copyBtn").textContent =
+    MESSAGES.copy_details;
+
+  document.getElementById("newOrder").textContent =
+    MESSAGES.new_order;
+
+}
+
+
+/* ============================================================
+   GET ROLE PRICE
+============================================================ */
+
+function getProductPrice(product){
+
+  const role = state.role;
+
+  if(
+    role &&
+    ROLE_PRICES[product.id] &&
+    cleanNumber(ROLE_PRICES[product.id][role],0) > 0
+  ){
+
+    return cleanNumber(
+      ROLE_PRICES[product.id][role]
+    );
+
+  }
+
+  return cleanNumber(product.price);
+
+}
+
+
+/* ============================================================
+   RENDER PRODUCTS
+============================================================ */
+
+function renderProducts(){
+
+  const listEl =
+    document.getElementById("list");
+
+  if(!CONFIG.products.length){
+
+    listEl.innerHTML =
+      `<div class="loading">No products available.</div>`;
+
+    return;
+
+  }
+
+  listEl.innerHTML =
+    CONFIG.products.map(product => {
+
+      const qty =
+        state.cart[product.id] || 0;
+
+      const price =
+        getProductPrice(product);
+
+      const saving =
+        Math.max(
+          0,
+          cleanNumber(product.mrp) - price
+        );
+
+      return `
+
+        <div class="card">
+
+          <div class="tile">
+
+            <img
+              src="${escapeHtml(product.img)}"
+              alt="${escapeHtml(product.name)}"
+              loading="lazy"
+              onerror="this.src='https://via.placeholder.com/150/eef2e8/1b7a3a?text=SVR+Foods'"
+            >
+
           </div>
-          ${qty === 0 
-            ? `<button class="add" onclick="updateQty('${p.id}', 1)">ADD</button>` 
-            : `<div class="step">
-                <button onclick="updateQty('${p.id}', -1)">−</button>
-                <span>${qty}</span>
-                <button onclick="updateQty('${p.id}', 1)">+</button>
-              </div>`
-          }
+
+          <div class="info">
+
+            <h3>
+              ${escapeHtml(product.name)}
+            </h3>
+
+            <div class="te">
+              ${escapeHtml(product.te)}
+            </div>
+
+            <div class="sub">
+              Pack: <b>${escapeHtml(product.size)}</b>
+            </div>
+
+            <div class="pr">
+
+              <b>
+                ${CONFIG.currency}${price}
+              </b>
+
+              ${
+                product.mrp
+                ? `<s>${CONFIG.currency}${product.mrp}</s>`
+                : ""
+              }
+
+              ${
+                saving > 0
+                ? `<em>Save ${CONFIG.currency}${saving}</em>`
+                : ""
+              }
+
+            </div>
+
+            ${
+              qty === 0
+
+              ? `
+                <button
+                  class="add"
+                  onclick="updateQty('${escapeJs(product.id)}',1)"
+                >
+                  ${escapeHtml(MESSAGES.add_button)}
+                </button>
+              `
+
+              : `
+                <div class="step">
+
+                  <button
+                    onclick="updateQty('${escapeJs(product.id)}',-1)"
+                  >
+                    −
+                  </button>
+
+                  <span>${qty}</span>
+
+                  <button
+                    onclick="updateQty('${escapeJs(product.id)}',1)"
+                  >
+                    +
+                  </button>
+
+                </div>
+              `
+            }
+
+          </div>
+
         </div>
-      </div>
-    `;
-  }).join("");
+
+      `;
+
+    }).join("");
+
 }
 
-function updateQty(id, delta) {
-  const current = state.cart[id] || 0;
-  const next = current + delta;
-  if (next <= 0) {
+
+/* ============================================================
+   ESCAPE HELPERS
+============================================================ */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* ============================================================
+   CART
+============================================================ */
+
+function updateQty(id,delta){
+
+  const current =
+    state.cart[id] || 0;
+
+  const next =
+    current + delta;
+
+  if(next <= 0){
+
     delete state.cart[id];
-  } else {
+
+  }else{
+
     state.cart[id] = next;
+
   }
+
   renderProducts();
   updateBottomBar();
+
 }
 
-function updateBottomBar() {
-  const bar = document.getElementById("bar");
-  const totalItems = Object.values(state.cart).reduce((sum, q) => sum + q, 0);
-  
-  if (totalItems === 0) {
+
+function updateBottomBar(){
+
+  const bar =
+    document.getElementById("bar");
+
+  const totalItems =
+    Object.values(state.cart)
+      .reduce(
+        (sum,q) => sum + q,
+        0
+      );
+
+  if(totalItems === 0){
+
     bar.classList.remove("on");
+
     return;
+
   }
 
   let subtotal = 0;
-  CONFIG.products.forEach(p => {
-    if (state.cart[p.id]) subtotal += state.cart[p.id] * p.price;
+
+  CONFIG.products.forEach(product => {
+
+    const qty =
+      state.cart[product.id] || 0;
+
+    if(qty){
+
+      subtotal +=
+        qty * getProductPrice(product);
+
+    }
+
   });
 
-  document.getElementById("barCount").textContent = `${totalItems} item${totalItems > 1 ? "s" : ""}`;
-  document.getElementById("barTotal").textContent = `${CONFIG.currency}${subtotal} ➔ Checkout`;
+  document.getElementById("barCount").textContent =
+    `${totalItems} item${totalItems > 1 ? "s" : ""}`;
+
+  document.getElementById("barTotal").textContent =
+    `${CONFIG.currency}${subtotal} ➔ ${MESSAGES.checkout}`;
+
   bar.classList.add("on");
+
 }
 
-function renderCheckoutFields() {
-  const fields = document.getElementById("fields");
-  fields.innerHTML = `
-    <label for="custName">Full Name / Business Name *</label>
-    <input id="custName" placeholder="Enter name" required>
 
-    <label for="custPhone">Phone Number *</label>
-    <input id="custPhone" type="tel" placeholder="10-digit mobile number" required>
+/* ============================================================
+   LOCATION HELPERS
+============================================================ */
+
+function getStates(){
+
+  return [
+    ...Object.keys(LOCATION_DATA),
+    "Other State"
+  ];
+
+}
+
+
+function handleStateChange(){
+
+  const stateVal =
+    document.getElementById("custState").value;
+
+  const distSelect =
+    document.getElementById("custDistrict");
+
+  const manualState =
+    document.getElementById("manualStateWrap");
+
+  const manualDistrict =
+    document.getElementById("manualDistrictWrap");
+
+  distSelect.innerHTML =
+    `<option value="">Select District</option>`;
+
+  if(stateVal === "Other State"){
+
+    distSelect.classList.add("hidden");
+    manualState.classList.add("on");
+    manualDistrict.classList.add("on");
+
+    return;
+
+  }
+
+  distSelect.classList.remove("hidden");
+  manualState.classList.remove("on");
+  manualDistrict.classList.remove("on");
+
+  if(stateVal && LOCATION_DATA[stateVal]){
+
+    LOCATION_DATA[stateVal].forEach(district => {
+
+      const opt =
+        document.createElement("option");
+
+      opt.value = district;
+      opt.textContent = district;
+
+      distSelect.appendChild(opt);
+
+    });
+
+  }
+
+}
+
+
+/* ============================================================
+   CHECKOUT FIELDS
+============================================================ */
+
+function renderCheckoutFields(){
+
+  const fields =
+    document.getElementById("fields");
+
+  const isFirm =
+    state.role === "Distributor" ||
+    state.role === "Hotel";
+
+  fields.innerHTML = `
+
+    <label for="custName">
+      ${isFirm
+        ? "సంస్థ పేరు / Firm Name *"
+        : "మీ పేరు / Full Name *"
+      }
+    </label>
+
+    <input
+      id="custName"
+      placeholder="${
+        isFirm
+        ? "e.g. Sri Rama Stores"
+        : "Enter your full name"
+      }"
+      required
+    >
+
+
+    <label for="contactPerson">
+      ${
+        isFirm
+        ? "కాంటాక్ట్ పర్సన్ / Contact Person *"
+        : "ప్రత్యామ్నాయ పేరు (Optional)"
+      }
+    </label>
+
+    <input
+      id="contactPerson"
+      placeholder="Contact person name"
+      ${isFirm ? "required" : ""}
+    >
+
+
+    <label for="custPhone">
+      WhatsApp / మొబైల్ నెంబర్ *
+    </label>
+
+    <input
+      id="custPhone"
+      type="tel"
+      inputmode="numeric"
+      maxlength="10"
+      placeholder="10-digit mobile number"
+      required
+    >
+
 
     <div class="row2">
+
       <div>
-        <label for="custState">State *</label>
-        <select id="custState" onchange="handleStateChange()">
-          <option value="">Select State</option>
-          ${Object.keys(LOCATION_DATA).map(s => `<option value="${s}" ${s === "Andhra Pradesh" ? "selected" : ""}>${s}</option>`).join("")}
+
+        <label for="custState">
+          రాష్ట్రం / State *
+        </label>
+
+        <select
+          id="custState"
+          onchange="handleStateChange()"
+        >
+
+          <option value="">
+            Select State
+          </option>
+
+          ${getStates()
+            .map(s =>
+              `<option value="${escapeHtml(s)}">
+                ${escapeHtml(s)}
+              </option>`
+            )
+            .join("")
+          }
+
         </select>
+
       </div>
+
+
       <div>
-        <label for="custDistrict">District *</label>
+
+        <label for="custDistrict">
+          జిల్లా / District *
+        </label>
+
         <select id="custDistrict">
-          <option value="">Select District</option>
+
+          <option value="">
+            Select District
+          </option>
+
         </select>
+
+        <div
+          id="manualDistrictWrap"
+          class="manual-location"
+        >
+
+          <input
+            id="manualDistrict"
+            placeholder="Enter District"
+          >
+
+        </div>
+
       </div>
+
     </div>
 
-    <label for="custAddress">Village / Town / Street / Door No. *</label>
-    <textarea id="custAddress" rows="2" placeholder="House/Shop no, street, landmark" required></textarea>
 
-    <label for="custPincode">PIN Code *</label>
-    <input id="custPincode" type="number" placeholder="e.g. 533262" required>
+    <div
+      id="manualStateWrap"
+      class="manual-location"
+    >
+
+      <label for="manualState">
+        State Name *
+      </label>
+
+      <input
+        id="manualState"
+        placeholder="Enter your State"
+      >
+
+    </div>
+
+
+    <div class="row2">
+
+      <div>
+
+        <label for="custMandal">
+          మండలం / Mandal / City / Town *
+        </label>
+
+        <input
+          id="custMandal"
+          placeholder="e.g. Mandapeta"
+          required
+        >
+
+      </div>
+
+      <div>
+
+        <label for="custVillage">
+          గ్రామం / Village / Area *
+        </label>
+
+        <input
+          id="custVillage"
+          placeholder="e.g. Ippanapadu"
+          required
+        >
+
+      </div>
+
+    </div>
+
+
+    <label for="custAddress">
+      ఇంటి / వీధి నెం. / Door No / Street *
+    </label>
+
+    <textarea
+      id="custAddress"
+      rows="2"
+      placeholder="D.No, Street"
+      required
+    ></textarea>
+
+
+    <label for="custLandmark">
+      Landmark
+    </label>
+
+    <input
+      id="custLandmark"
+      placeholder="Near SBI Bank, Temple, etc."
+    >
+
+
+    <label for="custPincode">
+      పిన్ కోడ్ / PIN Code *
+    </label>
+
+    <input
+      id="custPincode"
+      type="text"
+      inputmode="numeric"
+      maxlength="6"
+      placeholder="e.g. 533340"
+      required
+    >
+
   `;
+
   handleStateChange();
+
 }
 
-function handleStateChange() {
-  const stateVal = document.getElementById("custState").value;
-  const distSelect = document.getElementById("custDistrict");
-  distSelect.innerHTML = '<option value="">Select District</option>';
 
-  if (stateVal && LOCATION_DATA[stateVal]) {
-    LOCATION_DATA[stateVal].forEach(d => {
-      const opt = document.createElement("option");
-      opt.value = d;
-      opt.textContent = d;
-      distSelect.appendChild(opt);
+/* ============================================================
+   PAYMENT SECTION
+============================================================ */
+
+function renderPaymentSection(){
+
+  const payContainer =
+    document.getElementById("paymentInfo");
+
+  const role =
+    state.role;
+
+  const payment =
+    PAYMENT_DATA[role] ||
+    PAYMENT_DATA.User;
+
+  if(
+    payment.mode === "COD" ||
+    role === "Distributor" ||
+    role === "Hotel"
+  ){
+
+    payContainer.innerHTML = `
+
+      <label
+        style="
+          border-color:var(--brand);
+          background:var(--surface);
+        "
+      >
+
+        <input
+          type="radio"
+          name="payMethod"
+          value="COD"
+          checked
+        >
+
+        <div>
+
+          <b style="color:var(--ink);">
+            Cash on Delivery (COD)
+
+            <span class="pay-tag">
+              ${escapeHtml(
+                payment.status ||
+                "FREE DOOR DELIVERY"
+              )}
+            </span>
+
+          </b>
+
+          <small>
+            ${escapeHtml(
+              payment.note ||
+              "Payment upon delivery"
+            )}
+          </small>
+
+        </div>
+
+      </label>
+
+    `;
+
+  }else{
+
+    payContainer.innerHTML = `
+
+      <label
+        style="
+          border-color:#0066cc;
+          background:var(--surface);
+        "
+      >
+
+        <input
+          type="radio"
+          name="payMethod"
+          value="UPI"
+          checked
+        >
+
+        <div>
+
+          <b style="color:var(--ink);">
+            WhatsApp QR / UPI Payment
+
+            <span class="pay-tag upi">
+              ${escapeHtml(
+                payment.status ||
+                "DISPATCH AFTER PAYMENT"
+              )}
+            </span>
+
+          </b>
+
+          <small>
+            ${escapeHtml(
+              payment.note ||
+              "UPI payment required before dispatch"
+            )}
+          </small>
+
+        </div>
+
+      </label>
+
+    `;
+
+  }
+
+}
+
+
+/* ============================================================
+   CART OPEN
+============================================================ */
+
+document
+  .getElementById("openCart")
+  .addEventListener("click",() => {
+
+    const linesEl =
+      document.getElementById("cartLines");
+
+    let subtotal = 0;
+
+    let totalSaved = 0;
+
+    let html = "";
+
+    CONFIG.products.forEach(product => {
+
+      const qty =
+        state.cart[product.id];
+
+      if(qty){
+
+        const price =
+          getProductPrice(product);
+
+        const itemTotal =
+          qty * price;
+
+        subtotal += itemTotal;
+
+        totalSaved +=
+          qty *
+          Math.max(
+            0,
+            cleanNumber(product.mrp) - price
+          );
+
+        html += `
+
+          <div class="line">
+
+            <span>
+              ${escapeHtml(product.name)}
+              (${escapeHtml(product.size)})
+              ×${qty}
+            </span>
+
+            <b>
+              ${CONFIG.currency}${itemTotal}
+            </b>
+
+          </div>
+
+        `;
+
+      }
+
     });
-  }
-}
 
-// Render Role-specific Payment & Delivery Section
-function renderPaymentSection() {
-  const payContainer = document.getElementById("paymentInfo");
 
-  if (state.role === "Distributor" || state.role === "Hotel") {
-    payContainer.innerHTML = `
-      <label style="border-color:var(--brand); background:var(--surface);">
-        <input type="radio" name="payMethod" value="COD_FREE_DELIVERY" checked>
-        <div>
-          <b style="color:var(--ink);">Direct Cash on Delivery (COD) <span class="pay-tag">FREE DOOR DELIVERY</span></b>
-          <small>Payment upon delivery at your door / shop premises. Free bulk delivery for ${state.role} partners.</small>
-        </div>
-      </label>
+    html += `
+
+      <div class="line save">
+
+        <span>
+          డిస్కౌంట్ ఆదా (Savings)
+        </span>
+
+        <b>
+          -${CONFIG.currency}${totalSaved}
+        </b>
+
+      </div>
+
+
+      <div class="line total">
+
+        <span>
+          మొత్తం బిల్లు (Grand Total)
+        </span>
+
+        <span style="color:var(--brand);">
+          ${CONFIG.currency}${subtotal}
+        </span>
+
+      </div>
+
     `;
-  } else {
-    // Retail User
-    payContainer.innerHTML = `
-      <label style="border-color:#0066cc; background:var(--surface);">
-        <input type="radio" name="payMethod" value="WHATSAPP_PREPAID" checked>
-        <div>
-          <b style="color:var(--ink);">WhatsApp QR / UPI Payment <span class="pay-tag upi">DISPATCH AFTER PAYMENT</span></b>
-          <small>1. Place order &rarr; 2. Send details via WhatsApp &rarr; 3. We will share the Payment QR Code &rarr; 4. Goods will be dispatched immediately once payment is verified.</small>
-        </div>
-      </label>
-    `;
-  }
-}
 
-document.getElementById("openCart").addEventListener("click", () => {
-  const linesEl = document.getElementById("cartLines");
-  let subtotal = 0;
-  let totalSaved = 0;
+    linesEl.innerHTML = html;
 
-  let html = "";
-  CONFIG.products.forEach(p => {
-    const q = state.cart[p.id];
-    if (q) {
-      const itemTotal = q * p.price;
-      subtotal += itemTotal;
-      totalSaved += q * (p.mrp - p.price);
-      html += `
-        <div class="line">
-          <span>${p.name} (${p.size}) × ${q}</span>
-          <b>${CONFIG.currency}${itemTotal}</b>
-        </div>
-      `;
-    }
+    renderCheckoutFields();
+
+    renderPaymentSection();
+
+    document
+      .getElementById("checkout")
+      .classList.add("on");
+
   });
 
-  html += `
-    <div class="line save">
-      <span>Discount / Savings</span>
-      <b>-${CONFIG.currency}${totalSaved}</b>
-    </div>
-    <div class="line total">
-      <span>Grand Total</span>
-      <span style="color:var(--brand);">${CONFIG.currency}${subtotal}</span>
-    </div>
-  `;
-  linesEl.innerHTML = html;
 
-  renderCheckoutFields();
-  renderPaymentSection();
-  document.getElementById("checkout").classList.add("on");
-});
+/* ============================================================
+   CLOSE CHECKOUT
+============================================================ */
 
-document.getElementById("closeCheckout").addEventListener("click", () => {
-  document.getElementById("checkout").classList.remove("on");
-});
+document
+  .getElementById("closeCheckout")
+  .addEventListener("click",() => {
 
-document.getElementById("place").addEventListener("click", () => {
-  const name = document.getElementById("custName").value.trim();
-  const phone = document.getElementById("custPhone").value.trim();
-  const userState = document.getElementById("custState").value;
-  const district = document.getElementById("custDistrict").value;
-  const address = document.getElementById("custAddress").value.trim();
-  const pincode = document.getElementById("custPincode").value.trim();
-  const notes = document.getElementById("notes").value.trim();
+    document
+      .getElementById("checkout")
+      .classList.remove("on");
 
-  if (!name || !phone || !userState || !district || !address || !pincode) {
-    alert("Please fill in all required fields including State and District.");
-    return;
-  }
-
-  const orderId = generateDailyOrderNumber("SVR");
-  let subtotal = 0;
-  let summaryText = "";
-
-  CONFIG.products.forEach(p => {
-    const q = state.cart[p.id];
-    if (q) {
-      subtotal += q * p.price;
-      summaryText += `• ${p.name} (${p.size}) × ${q} = ${CONFIG.currency}${q * p.price}\n`;
-    }
   });
 
-  const fullAddress = `${address}, ${district}, ${userState} - ${pincode}`;
 
-  // Role-specific payment & delivery summary in WhatsApp text
-  let paymentTerms = "";
-  if (state.role === "Distributor" || state.role === "Hotel") {
-    paymentTerms = `*Payment & Delivery:* Direct COD (Cash on Delivery) - Free Door Delivery\n`;
-  } else {
-    paymentTerms = `*Payment & Delivery:* Prepaid via WhatsApp (Please send UPI/QR Code for payment before dispatch)\n`;
-  }
+/* ============================================================
+   PLACE ORDER
+============================================================ */
 
-  const waMsg = 
-`*NEW ORDER: #${orderId}*
-------------------------------
+document
+  .getElementById("place")
+  .addEventListener("click",() => {
+
+    const name =
+      document
+        .getElementById("custName")
+        .value
+        .trim();
+
+
+    const contactPerson =
+      document
+        .getElementById("contactPerson")
+        ?.value
+        .trim() || "";
+
+
+    const phone =
+      document
+        .getElementById("custPhone")
+        .value
+        .trim();
+
+
+    const userState =
+      document
+        .getElementById("custState")
+        .value;
+
+
+    let district =
+      document
+        .getElementById("custDistrict")
+        .value;
+
+
+    const manualStateEl =
+      document.getElementById("manualState");
+
+
+    const manualDistrictEl =
+      document.getElementById("manualDistrict");
+
+
+    const isOtherState =
+      userState === "Other State";
+
+
+    const finalState =
+      isOtherState
+      ? (manualStateEl?.value.trim() || "")
+      : userState;
+
+
+    if(isOtherState){
+
+      district =
+        manualDistrictEl?.value.trim() || "";
+
+    }
+
+
+    const mandal =
+      document
+        .getElementById("custMandal")
+        .value
+        .trim();
+
+
+    const village =
+      document
+        .getElementById("custVillage")
+        .value
+        .trim();
+
+
+    const address =
+      document
+        .getElementById("custAddress")
+        .value
+        .trim();
+
+
+    const landmark =
+      document
+        .getElementById("custLandmark")
+        .value
+        .trim();
+
+
+    const pincode =
+      document
+        .getElementById("custPincode")
+        .value
+        .trim();
+
+
+    const notes =
+      document
+        .getElementById("notes")
+        .value
+        .trim();
+
+
+    const isFirm =
+      state.role === "Distributor" ||
+      state.role === "Hotel";
+
+
+    const phoneValid =
+      /^\d{10}$/.test(phone);
+
+
+    const pinValid =
+      /^\d{6}$/.test(pincode);
+
+
+    if(
+      !name ||
+      (isFirm && !contactPerson) ||
+      !phoneValid ||
+      !finalState ||
+      !district ||
+      !mandal ||
+      !village ||
+      !address ||
+      !pinValid
+    ){
+
+      alert(
+        "దయచేసి అన్ని ముఖ్యమైన వివరాలను సరిగ్గా నమోదు చేయండి."
+      );
+
+      return;
+
+    }
+
+
+    const orderId =
+      generateDailyOrderNumber("SVR");
+
+
+    let subtotal = 0;
+
+    let summaryText = "";
+
+
+    CONFIG.products.forEach(product => {
+
+      const qty =
+        state.cart[product.id];
+
+      if(qty){
+
+        const price =
+          getProductPrice(product);
+
+        const itemTotal =
+          qty * price;
+
+        subtotal += itemTotal;
+
+        summaryText +=
+          `* ${product.name} (${product.size}) x${qty} = ${CONFIG.currency}${itemTotal}\n`;
+
+      }
+
+    });
+
+
+    let deliveryCharge = 0;
+
+    if(
+      CONFIG.freeDeliveryAbove > 0 &&
+      subtotal < CONFIG.freeDeliveryAbove
+    ){
+
+      deliveryCharge =
+        CONFIG.deliveryCharge;
+
+    }
+
+
+    const grandTotal =
+      subtotal + deliveryCharge;
+
+
+    const payment =
+      PAYMENT_DATA[state.role] ||
+      PAYMENT_DATA.User;
+
+
+    const paymentMode =
+      payment.mode ||
+      (
+        isFirm
+        ? "COD"
+        : "UPI"
+      );
+
+
+    const paymentStatus =
+      payment.status ||
+      (
+        isFirm
+        ? "Free Door Delivery"
+        : "Dispatch after Payment"
+      );
+
+
+    const paymentNote =
+      payment.note ||
+      (
+        isFirm
+        ? "Payment upon delivery"
+        : "UPI payment required before dispatch"
+      );
+
+
+    let paymentTerms = "";
+
+    if(paymentMode === "COD"){
+
+      paymentTerms =
+`[+] *Delivery Status:* ${paymentStatus}
+[+] *Payment Mode:* CASH ON DELIVERY (COD)
+
+[>] *Payment Note:* ${paymentNote}`;
+
+    }else{
+
+      paymentTerms =
+`[+] *Delivery Status:* ${paymentStatus}
+[+] *Payment Mode:* ONLINE / PREPAID (WhatsApp QR)
+
+[>] *Payment Note:* ${paymentNote}`;
+
+    }
+
+
+    const waMsg =
+
+`*${CONFIG.shopName.toUpperCase()} (${CONFIG.brandName.toUpperCase()} BRAND)*
+*ORDER REQUEST / ఆర్డర్ వివరాలు*
+----------------------------------------
+*Order ID:* #${orderId}
 *Customer Type:* ${state.role}
-*Name:* ${name}
-*Phone:* ${phone}
-*Address:* ${fullAddress}
-${notes ? `*Notes:* ${notes}\n` : ""}${paymentTerms}------------------------------
-*Items Ordered:*
-${summaryText}------------------------------
-*Total Amount:* ${CONFIG.currency}${subtotal}
-------------------------------
-${state.role === 'User' ? '_Kindly share the Payment QR Code. Order will be dispatched upon payment._' : '_Please confirm dispatch schedule._'}`;
 
-  state.latestOrderMsg = waMsg;
+*ORDER DETAILS*
+----------------------------------------
+${summaryText}----------------------------------------
+*Subtotal:* ${CONFIG.currency}${subtotal}
+*Delivery:* ${
+  deliveryCharge === 0
+  ? "Free (ఉచితం)"
+  : CONFIG.currency + deliveryCharge
+}
+*TOTAL:* ${CONFIG.currency}${grandTotal}
 
-  document.getElementById("cTitle").textContent = `Order Placed! (#${orderId})`;
-  if (state.role === "Distributor" || state.role === "Hotel") {
-    document.getElementById("cText").textContent = `Thank you, ${name}. Direct Cash on Delivery and Free Door Delivery are selected. Click below to confirm via WhatsApp.`;
-  } else {
-    document.getElementById("cText").textContent = `Thank you, ${name}. Click below to send your order details via WhatsApp. We will send you our Payment QR code, and your order will be dispatched once payment is completed.`;
+${paymentTerms}
+
+*DELIVERY ADDRESS*
+----------------------------------------
+${
+  isFirm
+  ? `*Firm Name:* ${name}
+*Contact Person:* ${contactPerson}
+`
+  : `*Name:* ${name}
+`
+}
+*State:* ${finalState}
+*District:* ${district}
+*Mandal / City:* ${mandal}
+*Village / Area:* ${village}
+*Door No / Street:* ${address}
+${landmark ? `*Landmark:* ${landmark}\n` : ""}
+*PIN Code:* ${pincode}
+*WhatsApp / Contact:* ${phone}
+${notes ? `*Notes:* ${notes}\n` : ""}
+----------------------------------------
+_${CONFIG.shopName}_
+_"${CONFIG.tagline}"_`;
+
+
+    state.latestOrderMsg =
+      waMsg;
+
+
+    document.getElementById("cTitle").textContent =
+      `${MESSAGES.order_success} (#${orderId})`;
+
+
+    if(isFirm){
+
+      document.getElementById("cText").textContent =
+        `ధన్యవాదాలు, ${name}. ${paymentMode === "COD" ? "Cash on Delivery and Door Delivery are selected." : ""} Click below to send your order on WhatsApp.`;
+
+    }else{
+
+      document.getElementById("cText").textContent =
+        `ధన్యవాదాలు, ${name}. Please click the button below to send your order to WhatsApp.`;
+
+    }
+
+
+    document.getElementById("cHelp").textContent =
+      `Order ID: #${orderId} | Total: ${CONFIG.currency}${grandTotal}`;
+
+
+    document.getElementById("waBtn").href =
+      `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
+
+
+    document
+      .getElementById("checkout")
+      .classList.remove("on");
+
+
+    document
+      .getElementById("confirm")
+      .classList.add("on");
+
+
+    state.cart = {};
+
+    renderProducts();
+
+    updateBottomBar();
+
+  });
+
+
+/* ============================================================
+   COPY ORDER
+============================================================ */
+
+document
+  .getElementById("copyBtn")
+  .addEventListener("click",() => {
+
+    if(!state.latestOrderMsg){
+
+      return;
+
+    }
+
+    navigator.clipboard
+      .writeText(state.latestOrderMsg)
+      .then(() => {
+
+        alert(
+          "ఆర్డర్ వివరాలు కాపీ చేయబడ్డాయి."
+        );
+
+      })
+      .catch(() => {
+
+        alert(
+          "Copy failed. Please use the WhatsApp button."
+        );
+
+      });
+
+  });
+
+
+/* ============================================================
+   NEW ORDER
+============================================================ */
+
+document
+  .getElementById("newOrder")
+  .addEventListener("click",() => {
+
+    document
+      .getElementById("confirm")
+      .classList.remove("on");
+
+  });
+
+
+/* ============================================================
+   DAILY ORDER NUMBER
+============================================================ */
+
+function generateDailyOrderNumber(prefix="SVR"){
+
+  const now =
+    new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(now.getMonth()+1)
+      .padStart(2,"0");
+
+  const day =
+    String(now.getDate())
+      .padStart(2,"0");
+
+  const dateKey =
+    `${year}${month}${day}`;
+
+
+  const storedDate =
+    localStorage.getItem(
+      "svr_order_date"
+    );
+
+
+  let currentCount =
+    parseInt(
+      localStorage.getItem(
+        "svr_order_count"
+      ) || "0",
+      10
+    );
+
+
+  if(storedDate !== dateKey){
+
+    currentCount = 1;
+
+    localStorage.setItem(
+      "svr_order_date",
+      dateKey
+    );
+
+  }else{
+
+    currentCount += 1;
+
   }
-  document.getElementById("cHelp").textContent = `Order No: #${orderId} | Total: ${CONFIG.currency}${subtotal}`;
-  document.getElementById("waBtn").href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
 
-  document.getElementById("checkout").classList.remove("on");
-  document.getElementById("confirm").classList.add("on");
 
-  state.cart = {};
-  renderProducts();
-  updateBottomBar();
-});
+  localStorage.setItem(
+    "svr_order_count",
+    currentCount
+  );
 
-document.getElementById("copyBtn").addEventListener("click", () => {
-  if (state.latestOrderMsg) {
-    navigator.clipboard.writeText(state.latestOrderMsg).then(() => {
-      alert("Order details copied to clipboard!");
-    });
-  }
-});
 
-document.getElementById("newOrder").addEventListener("click", () => {
-  document.getElementById("confirm").classList.remove("on");
-});
+  return `${prefix}-${dateKey}-${String(currentCount).padStart(3,"0")}`;
 
-// Role selection logic
-const whoModal = document.getElementById("who");
-const mainContent = document.getElementById("mainContent");
-const mainFoot = document.getElementById("mainFoot");
-
-function selectRole(selectedRole) {
-  state.role = selectedRole;
-  document.getElementById("whoLabel").textContent = state.role;
-  whoModal.classList.remove("on");
-  mainContent.classList.add("active");
-  mainFoot.classList.add("active");
-  renderProducts();
-  updateBottomBar();
 }
 
-document.getElementById("changeWho").addEventListener("click", () => {
-  whoModal.classList.add("on");
-});
 
-whoModal.querySelectorAll("button[data-t]").forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    selectRole(e.currentTarget.getAttribute("data-t"));
+/* ============================================================
+   ROLE SELECTION
+============================================================ */
+
+const whoModal =
+  document.getElementById("who");
+
+const mainContent =
+  document.getElementById("mainContent");
+
+const mainFoot =
+  document.getElementById("mainFoot");
+
+
+function selectRole(selectedRole){
+
+  state.role =
+    selectedRole;
+
+  document.getElementById("whoLabel").textContent =
+    state.role;
+
+  whoModal.classList.remove("on");
+
+  mainContent.classList.add("active");
+
+  mainFoot.classList.add("active");
+
+  renderProducts();
+
+  updateBottomBar();
+
+}
+
+
+document
+  .getElementById("changeWho")
+  .addEventListener("click",() => {
+
+    whoModal.classList.add("on");
+
   });
-});
+
+
+whoModal
+  .querySelectorAll("button[data-t]")
+  .forEach(btn => {
+
+    btn.addEventListener("click",e => {
+
+      selectRole(
+        e.currentTarget.getAttribute("data-t")
+      );
+
+    });
+
+  });
+
+
+/* ============================================================
+   LOAD EVERYTHING FROM GOOGLE SHEET
+============================================================ */
+
+async function loadGoogleSheetData(){
+
+  const status =
+    document.getElementById("sheetStatus");
+
+
+  status.textContent =
+    "Connecting to SVR Food Products control sheet...";
+
+
+  try{
+
+    /*
+      Load independently.
+
+      If one tab fails, other tabs can still load.
+    */
+
+    const results =
+      await Promise.allSettled([
+
+        loadSettings(),
+
+        loadProducts(),
+
+        loadRolePrices(),
+
+        loadPaymentDelivery(),
+
+        loadMessages(),
+
+        loadLocations()
+
+      ]);
+
+
+    const successCount =
+      results.filter(
+        r => r.status === "fulfilled"
+      ).length;
+
+
+    state.sheetLoaded =
+      successCount > 0;
+
+
+    applySettings();
+
+    applyMessages();
+
+    renderProducts();
+
+
+    if(state.sheetLoaded){
+
+      status.textContent =
+        `✓ Website connected to Google Sheet (${successCount}/6 sections loaded)`;
+
+    }else{
+
+      status.textContent =
+        "Using website backup data.";
+
+    }
+
+
+  }catch(error){
+
+    console.error(
+      "Google Sheet connection error:",
+      error
+    );
+
+
+    status.textContent =
+      "Using website backup data.";
+
+  }
+
+}
+
+
+/* ============================================================
+   START
+============================================================ */
+
+/*
+  Render fallback immediately.
+  Then load Google Sheet.
+*/
+
+applySettings();
+
+applyMessages();
+
+renderProducts();
+
+updateBottomBar();
+
+loadGoogleSheetData();
+
 </script>
+
 </body>
 </html>
