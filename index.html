@@ -505,6 +505,63 @@ select:focus,input:focus,textarea:focus{
 }
 
 /* =========================
+   SOCIAL MEDIA
+========================= */
+
+.social-section{
+  margin:18px auto 12px;
+  padding-top:12px;
+  border-top:1px solid rgba(212,175,55,.35);
+  max-width:520px;
+}
+
+.social-title{
+  color:#d4af37 !important;
+  font-size:.95rem !important;
+  font-weight:700;
+  margin:0 0 10px !important;
+}
+
+.social-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-width:105px;
+  padding:8px 12px;
+  border:1px solid rgba(212,175,55,.55);
+  border-radius:999px;
+  color:#f9e596;
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:600;
+  transition:.2s ease;
+}
+
+.social-link:hover{
+  background:rgba(212,175,55,.12);
+  transform:translateY(-1px);
+}
+
+.social-icon{
+  font-size:1rem;
+  line-height:1;
+}
+
+@media(max-width:520px){
+  .social-link{
+    min-width:calc(50% - 5px);
+  }
+}
+
+/* =========================
    ROLE MODAL
 ========================= */
 
@@ -674,6 +731,21 @@ select:focus,input:focus,textarea:focus{
     Duppalapudi (V), E.G. Dist, Andhra Pradesh
   </p>
 
+  <!-- SOCIAL MEDIA LINKS FROM GOOGLE SHEET -->
+
+  <div class="social-section">
+
+    <p class="social-title">
+      Follow Us
+    </p>
+
+    <div
+      id="socialLinks"
+      class="social-links"
+    ></div>
+
+  </div>
+
   <p>© SVR Food Products</p>
 
 </footer>
@@ -811,47 +883,53 @@ select:focus,input:focus,textarea:focus{
    GOOGLE SHEET CONFIGURATION
 ============================================================ */
 
-const GOOGLE_SHEET_ID =
-"19guYbtUvmOtY3FB_qlIVT-ftQUTqmvg_oOYTFymGovM";
-
 /*
-  Published Google Sheet:
-  https://docs.google.com/spreadsheets/d/e/2PACX-1vS96rGynHTVwgig54rKmbBl-Cl8eg6p-ueyKyg1ulff8aMhhAPQ6TFChQqeiKknHAotNX62GjY4MiC8/pubhtml
-
-  The normal Spreadsheet ID above is used for Google Visualization.
+  IMPORTANT:
+  This is the PUBLISHED Google Sheet ID.
 */
 
+const GOOGLE_SHEET_ID =
+"2PACX-1vS96rGynHTVwgig54rKmbBl-Cl8eg6p-ueyKyg1ulff8aMhhAPQ6TFChQqeiKknHAotNX62GjY4MiC8";
+
+
 const SHEET_NAMES = {
+
   SETTINGS: "SETTINGS",
+
   PRODUCTS: "PRODUCTS",
+
   ROLE_PRICES: "ROLE_PRICES",
+
   PAYMENT_DELIVERY: "PAYMENT_DELIVERY",
+
   MESSAGES: "MESSAGES",
+
   LOCATIONS: "LOCATIONS",
+
   SOCIAL_LINKS: "SOCIAL_LINKS"
+
 };
 
 
 /* ============================================================
    FALLBACK CONFIGURATION
-   If Sheet data cannot be loaded, website still works.
 ============================================================ */
 
 const CONFIG = {
 
-  shopName: "SVR Food Products",
+  shopName:"SVR Food Products",
 
-  brandName: "Sir Arthur Cotton",
+  brandName:"Sir Arthur Cotton",
 
-  whatsappNumber: "918985361991",
+  whatsappNumber:"918985361991",
 
-  phone: "+91 89853 61991",
+  phone:"+91 89853 61991",
 
-  email: "support@svrfoods.com",
+  email:"support@svrfoods.com",
 
-  address: "Duppalapudi (V), E.G. Dist, Andhra Pradesh",
+  address:"Duppalapudi (V), E.G. Dist, Andhra Pradesh",
 
-  tagline: "నాణ్యతకు నమ్మకం • రుచికి చిరునామా",
+  tagline:"నాణ్యతకు నమ్మకం • రుచికి చిరునామా",
 
   headerBanner:
     "https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH",
@@ -859,13 +937,13 @@ const CONFIG = {
   footerBanner:
     "https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0",
 
-  currency: "₹",
+  currency:"₹",
 
-  deliveryCharge: 0,
+  deliveryCharge:0,
 
-  freeDeliveryAbove: 0,
+  freeDeliveryAbove:0,
 
-  products: [
+  products:[
 
     {
       id:"idli1",
@@ -928,6 +1006,7 @@ const CONFIG = {
     }
 
   ]
+
 };
 
 
@@ -1122,6 +1201,13 @@ let PAYMENT_DATA = {
 
 
 /* ============================================================
+   SOCIAL LINKS FALLBACK
+============================================================ */
+
+let SOCIAL_LINKS = [];
+
+
+/* ============================================================
    STATE
 ============================================================ */
 
@@ -1144,7 +1230,7 @@ let state = {
 
 function sheetUrl(sheetName){
 
-  return `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
+  return `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
 }
 
 
@@ -1155,10 +1241,14 @@ function sheetUrl(sheetName){
 
 async function fetchSheet(sheetName){
 
-  const response = await fetch(sheetUrl(sheetName), {
-    method:"GET",
-    cache:"no-store"
-  });
+  const response =
+    await fetch(
+      sheetUrl(sheetName),
+      {
+        method:"GET",
+        cache:"no-store"
+      }
+    );
 
   if(!response.ok){
 
@@ -1168,11 +1258,13 @@ async function fetchSheet(sheetName){
 
   }
 
-  const text = await response.text();
+  const text =
+    await response.text();
 
-  const match = text.match(
-    /google\.visualization\.Query\.setResponse\(([\s\S]+)\);?/
-  );
+  const match =
+    text.match(
+      /google\.visualization\.Query\.setResponse\(([\s\S]+)\);?/
+    );
 
   if(!match){
 
@@ -1182,7 +1274,8 @@ async function fetchSheet(sheetName){
 
   }
 
-  const json = JSON.parse(match[1]);
+  const json =
+    JSON.parse(match[1]);
 
   return parseGvizTable(json);
 
@@ -1195,12 +1288,17 @@ async function fetchSheet(sheetName){
 
 function parseGvizTable(json){
 
-  const table = json.table;
+  const table =
+    json.table;
 
   const headers =
     table.cols.map(
       (col,index) =>
-        String(col.label || col.id || `Column${index+1}`).trim()
+        String(
+          col.label ||
+          col.id ||
+          `Column${index+1}`
+        ).trim()
     );
 
   const rows = [];
@@ -1211,10 +1309,14 @@ function parseGvizTable(json){
 
     headers.forEach((header,index) => {
 
-      const cell = row.c && row.c[index];
+      const cell =
+        row.c &&
+        row.c[index];
 
       obj[header] =
-        cell && cell.v !== null && cell.v !== undefined
+        cell &&
+        cell.v !== null &&
+        cell.v !== undefined
           ? String(cell.v)
           : "";
 
@@ -1241,27 +1343,38 @@ function isTrue(value){
 }
 
 
-function cleanNumber(value, fallback=0){
+function cleanNumber(value,fallback=0){
 
-  const n = Number(
-    String(value || "")
-      .replace(/₹/g,"")
-      .replace(/,/g,"")
-      .trim()
-  );
+  const n =
+    Number(
+      String(value || "")
+        .replace(/₹/g,"")
+        .replace(/,/g,"")
+        .trim()
+    );
 
-  return Number.isFinite(n) ? n : fallback;
+  return Number.isFinite(n)
+    ? n
+    : fallback;
 
 }
 
 
 function getSetting(rows,key,fallback=""){
 
-  const row = rows.find(
-    r => String(r.Setting || "").trim() === key
-  );
+  const row =
+    rows.find(
+      r =>
+        String(
+          r.Setting || ""
+        ).trim() === key
+    );
 
-  if(!row) return fallback;
+  if(!row){
+
+    return fallback;
+
+  }
 
   if(
     row.Active !== undefined &&
@@ -1273,7 +1386,30 @@ function getSetting(rows,key,fallback=""){
 
   }
 
-  return String(row.Value || fallback).trim();
+  return String(
+    row.Value || fallback
+  ).trim();
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
 
 }
 
@@ -1284,13 +1420,24 @@ function getSetting(rows,key,fallback=""){
 
 async function loadSettings(){
 
-  const rows = await fetchSheet(SHEET_NAMES.SETTINGS);
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.SETTINGS
+    );
 
   CONFIG.shopName =
-    getSetting(rows,"shop_name",CONFIG.shopName);
+    getSetting(
+      rows,
+      "shop_name",
+      CONFIG.shopName
+    );
 
   CONFIG.brandName =
-    getSetting(rows,"brand_name",CONFIG.brandName);
+    getSetting(
+      rows,
+      "brand_name",
+      CONFIG.brandName
+    );
 
   CONFIG.whatsappNumber =
     getSetting(
@@ -1300,16 +1447,32 @@ async function loadSettings(){
     ).replace(/\D/g,"");
 
   CONFIG.phone =
-    getSetting(rows,"phone",CONFIG.phone);
+    getSetting(
+      rows,
+      "phone",
+      CONFIG.phone
+    );
 
   CONFIG.email =
-    getSetting(rows,"email",CONFIG.email);
+    getSetting(
+      rows,
+      "email",
+      CONFIG.email
+    );
 
   CONFIG.address =
-    getSetting(rows,"address",CONFIG.address);
+    getSetting(
+      rows,
+      "address",
+      CONFIG.address
+    );
 
   CONFIG.tagline =
-    getSetting(rows,"tagline",CONFIG.tagline);
+    getSetting(
+      rows,
+      "tagline",
+      CONFIG.tagline
+    );
 
   CONFIG.headerBanner =
     getSetting(
@@ -1361,48 +1524,71 @@ async function loadSettings(){
 
 async function loadProducts(){
 
-  const rows = await fetchSheet(SHEET_NAMES.PRODUCTS);
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.PRODUCTS
+    );
 
-  const products = rows
-    .filter(row => {
+  const products =
+    rows
+      .filter(
+        row =>
+          row.ID &&
+          isTrue(row.Active)
+      )
+      .sort(
+        (a,b) =>
+          cleanNumber(a["Sort Order"]) -
+          cleanNumber(b["Sort Order"])
+      )
+      .map(row => {
 
-      return (
-        row.ID &&
-        isTrue(row.Active)
+        return {
+
+          id:
+            String(
+              row.ID
+            ).trim(),
+
+          name:
+            String(
+              row["Product Name"] || ""
+            ).trim(),
+
+          te:
+            String(
+              row["Telugu Name"] || ""
+            ).trim(),
+
+          size:
+            String(
+              row["Pack Size"] || ""
+            ).trim(),
+
+          price:
+            cleanNumber(row.Price),
+
+          mrp:
+            cleanNumber(row.MRP),
+
+          img:
+            String(
+              row["Image URL"] || ""
+            ).trim()
+
+        };
+
+      })
+      .filter(
+        p =>
+          p.id &&
+          p.name
       );
-
-    })
-    .sort(
-      (a,b) =>
-        cleanNumber(a["Sort Order"]) -
-        cleanNumber(b["Sort Order"])
-    )
-    .map(row => {
-
-      return {
-
-        id:String(row.ID).trim(),
-
-        name:String(row["Product Name"] || "").trim(),
-
-        te:String(row["Telugu Name"] || "").trim(),
-
-        size:String(row["Pack Size"] || "").trim(),
-
-        price:cleanNumber(row.Price),
-
-        mrp:cleanNumber(row.MRP),
-
-        img:String(row["Image URL"] || "").trim()
-
-      };
-
-    })
-    .filter(p => p.id && p.name);
 
   if(products.length){
 
-    CONFIG.products = products;
+    CONFIG.products =
+      products;
 
   }
 
@@ -1415,38 +1601,53 @@ async function loadProducts(){
 
 async function loadRolePrices(){
 
-  const rows = await fetchSheet(
-    SHEET_NAMES.ROLE_PRICES
-  );
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.ROLE_PRICES
+    );
 
   const prices = {};
 
   rows.forEach(row => {
 
-    const id = String(
-      row["Product ID"] || ""
-    ).trim();
+    const id =
+      String(
+        row["Product ID"] || ""
+      ).trim();
 
-    if(!id) return;
+    if(!id){
+
+      return;
+
+    }
 
     prices[id] = {
 
       Distributor:
-        cleanNumber(row["Distributor Price"]),
+        cleanNumber(
+          row["Distributor Price"]
+        ),
 
       Hotel:
-        cleanNumber(row["Hotel Price"]),
+        cleanNumber(
+          row["Hotel Price"]
+        ),
 
       User:
-        cleanNumber(row["Retail Price"])
+        cleanNumber(
+          row["Retail Price"]
+        )
 
     };
 
   });
 
-  if(Object.keys(prices).length){
+  if(
+    Object.keys(prices).length
+  ){
 
-    ROLE_PRICES = prices;
+    ROLE_PRICES =
+      prices;
 
   }
 
@@ -1459,36 +1660,58 @@ async function loadRolePrices(){
 
 async function loadPaymentDelivery(){
 
-  const rows = await fetchSheet(
-    SHEET_NAMES.PAYMENT_DELIVERY
-  );
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.PAYMENT_DELIVERY
+    );
 
   const data = {};
 
   rows
-    .filter(row => isTrue(row.Active))
+    .filter(
+      row =>
+        isTrue(row.Active)
+    )
     .forEach(row => {
 
       const role =
-        String(row.Role || "").trim();
+        String(
+          row.Role || ""
+        ).trim();
 
-      if(!role) return;
+      if(!role){
+
+        return;
+
+      }
 
       data[role] = {
 
-        mode:String(row["Payment Mode"] || "").trim(),
+        mode:
+          String(
+            row["Payment Mode"] || ""
+          ).trim(),
 
-        status:String(row["Delivery Status"] || "").trim(),
+        status:
+          String(
+            row["Delivery Status"] || ""
+          ).trim(),
 
-        note:String(row["Payment Note"] || "").trim()
+        note:
+          String(
+            row["Payment Note"] || ""
+          ).trim()
 
       };
 
     });
 
-  if(Object.keys(data).length){
+  if(
+    Object.keys(data).length
+  ){
 
-    PAYMENT_DATA = data;
+    PAYMENT_DATA =
+      data;
 
   }
 
@@ -1501,33 +1724,46 @@ async function loadPaymentDelivery(){
 
 async function loadMessages(){
 
-  const rows = await fetchSheet(
-    SHEET_NAMES.MESSAGES
-  );
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.MESSAGES
+    );
 
   const data = {};
 
   rows
-    .filter(row => isTrue(row.Active))
+    .filter(
+      row =>
+        isTrue(row.Active)
+    )
     .forEach(row => {
 
       const id =
-        String(row["Message ID"] || "").trim();
+        String(
+          row["Message ID"] || ""
+        ).trim();
 
       if(id){
 
         data[id] =
-          String(row.Message || "").trim();
+          String(
+            row.Message || ""
+          ).trim();
 
       }
 
     });
 
-  if(Object.keys(data).length){
+  if(
+    Object.keys(data).length
+  ){
 
     MESSAGES = {
+
       ...MESSAGES,
+
       ...data
+
     };
 
   }
@@ -1541,27 +1777,51 @@ async function loadMessages(){
 
 async function loadLocations(){
 
-  const rows = await fetchSheet(
-    SHEET_NAMES.LOCATIONS
-  );
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.LOCATIONS
+    );
 
   const data = {};
 
   rows
-    .filter(row => isTrue(row.Active))
+    .filter(
+      row =>
+        isTrue(row.Active)
+    )
     .forEach(row => {
 
       const countryState =
-        String(row.State || "").trim();
+        String(
+          row.State || ""
+        ).trim();
 
       const district =
-        String(row.District || "").trim();
+        String(
+          row.District || ""
+        ).trim();
 
-      if(!countryState || !district) return;
+      if(
+        !countryState ||
+        !district
+      ){
+
+        return;
+
+      }
 
       if(
         countryState === "Other State" ||
         countryState === "Other"
+      ){
+
+        return;
+
+      }
+
+      if(
+        countryState !== "Andhra Pradesh" &&
+        countryState !== "Telangana"
       ){
 
         return;
@@ -1585,9 +1845,12 @@ async function loadLocations(){
 
     });
 
-  if(Object.keys(data).length){
+  if(
+    Object.keys(data).length
+  ){
 
-    LOCATION_DATA = data;
+    LOCATION_DATA =
+      data;
 
   }
 
@@ -1595,7 +1858,174 @@ async function loadLocations(){
 
 
 /* ============================================================
-   APPLY SETTINGS TO WEBSITE
+   LOAD SOCIAL LINKS
+============================================================ */
+
+async function loadSocialLinks(){
+
+  const rows =
+    await fetchSheet(
+      SHEET_NAMES.SOCIAL_LINKS
+    );
+
+  const data = [];
+
+  rows
+    .filter(
+      row =>
+        isTrue(row.Active)
+    )
+    .forEach(row => {
+
+      const platform =
+        String(
+          row.Platform || ""
+        ).trim();
+
+      const url =
+        String(
+          row.URL || ""
+        ).trim();
+
+      if(
+        platform &&
+        url
+      ){
+
+        data.push({
+
+          platform:platform,
+
+          url:url
+
+        });
+
+      }
+
+    });
+
+  if(data.length){
+
+    SOCIAL_LINKS =
+      data;
+
+  }
+
+}
+
+
+/* ============================================================
+   SOCIAL ICON
+============================================================ */
+
+function getSocialIcon(platform){
+
+  const name =
+    String(
+      platform || ""
+    ).trim().toLowerCase();
+
+  if(
+    name === "instagram"
+  ){
+
+    return "◎";
+
+  }
+
+  if(
+    name === "facebook"
+  ){
+
+    return "f";
+
+  }
+
+  if(
+    name === "youtube"
+  ){
+
+    return "▶";
+
+  }
+
+  if(
+    name === "whatsapp"
+  ){
+
+    return "◉";
+
+  }
+
+  return "↗";
+
+}
+
+
+/* ============================================================
+   RENDER SOCIAL LINKS
+============================================================ */
+
+function renderSocialLinks(){
+
+  const container =
+    document.getElementById(
+      "socialLinks"
+    );
+
+  if(!container){
+
+    return;
+
+  }
+
+  if(!SOCIAL_LINKS.length){
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+  container.innerHTML =
+    SOCIAL_LINKS
+      .map(item => {
+
+        return `
+
+          <a
+            class="social-link"
+            href="${escapeHtml(item.url)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            <span class="social-icon">
+              ${escapeHtml(
+                getSocialIcon(
+                  item.platform
+                )
+              )}
+            </span>
+
+            <span>
+              ${escapeHtml(
+                item.platform
+              )}
+            </span>
+
+          </a>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* ============================================================
+   APPLY SETTINGS
 ============================================================ */
 
 function applySettings(){
@@ -1603,19 +2033,29 @@ function applySettings(){
   document.title =
     `${CONFIG.shopName} – ${CONFIG.brandName} | Order Online`;
 
-  document.getElementById("headerBanner").src =
+  document.getElementById(
+    "headerBanner"
+  ).src =
     CONFIG.headerBanner;
 
-  document.getElementById("footerBanner").src =
+  document.getElementById(
+    "footerBanner"
+  ).src =
     CONFIG.footerBanner;
 
-  document.getElementById("footerBrand").textContent =
+  document.getElementById(
+    "footerBrand"
+  ).textContent =
     `${CONFIG.shopName} – ${CONFIG.brandName}`;
 
-  document.getElementById("footerContact").textContent =
+  document.getElementById(
+    "footerContact"
+  ).textContent =
     `Contact: ${CONFIG.phone} | ${CONFIG.email}`;
 
-  document.getElementById("footerAddress").textContent =
+  document.getElementById(
+    "footerAddress"
+  ).textContent =
     CONFIG.address;
 
 }
@@ -1627,40 +2067,64 @@ function applySettings(){
 
 function applyMessages(){
 
-  document.getElementById("whoT").textContent =
+  document.getElementById(
+    "whoT"
+  ).textContent =
     MESSAGES.welcome_title;
 
-  document.getElementById("whoDescription").textContent =
+  document.getElementById(
+    "whoDescription"
+  ).textContent =
     MESSAGES.welcome_text;
 
-  document.getElementById("catalogNotice").textContent =
+  document.getElementById(
+    "catalogNotice"
+  ).textContent =
     MESSAGES.catalog_notice;
 
-  document.getElementById("orderingAsText").textContent =
+  document.getElementById(
+    "orderingAsText"
+  ).textContent =
     MESSAGES.ordering_as;
 
-  document.getElementById("changeWho").textContent =
+  document.getElementById(
+    "changeWho"
+  ).textContent =
     MESSAGES.change_role;
 
-  document.getElementById("yourOrderTitle").textContent =
+  document.getElementById(
+    "yourOrderTitle"
+  ).textContent =
     MESSAGES.your_order;
 
-  document.getElementById("detailsTitle").textContent =
+  document.getElementById(
+    "detailsTitle"
+  ).textContent =
     MESSAGES.delivery_details;
 
-  document.getElementById("notesLabel").textContent =
+  document.getElementById(
+    "notesLabel"
+  ).textContent =
     MESSAGES.notes;
 
-  document.getElementById("place").textContent =
+  document.getElementById(
+    "place"
+  ).textContent =
     MESSAGES.place_order;
 
-  document.getElementById("waBtn").textContent =
+  document.getElementById(
+    "waBtn"
+  ).textContent =
     MESSAGES.send_whatsapp;
 
-  document.getElementById("copyBtn").textContent =
+  document.getElementById(
+    "copyBtn"
+  ).textContent =
     MESSAGES.copy_details;
 
-  document.getElementById("newOrder").textContent =
+  document.getElementById(
+    "newOrder"
+  ).textContent =
     MESSAGES.new_order;
 
 }
@@ -1672,12 +2136,16 @@ function applyMessages(){
 
 function getProductPrice(product){
 
-  const role = state.role;
+  const role =
+    state.role;
 
   if(
     role &&
     ROLE_PRICES[product.id] &&
-    cleanNumber(ROLE_PRICES[product.id][role],0) > 0
+    cleanNumber(
+      ROLE_PRICES[product.id][role],
+      0
+    ) > 0
   ){
 
     return cleanNumber(
@@ -1686,7 +2154,9 @@ function getProductPrice(product){
 
   }
 
-  return cleanNumber(product.price);
+  return cleanNumber(
+    product.price
+  );
 
 }
 
@@ -1698,146 +2168,148 @@ function getProductPrice(product){
 function renderProducts(){
 
   const listEl =
-    document.getElementById("list");
+    document.getElementById(
+      "list"
+    );
 
   if(!CONFIG.products.length){
 
     listEl.innerHTML =
-      `<div class="loading">No products available.</div>`;
+      `<div class="loading">
+        No products available.
+      </div>`;
 
     return;
 
   }
 
   listEl.innerHTML =
-    CONFIG.products.map(product => {
+    CONFIG.products
+      .map(product => {
 
-      const qty =
-        state.cart[product.id] || 0;
+        const qty =
+          state.cart[
+            product.id
+          ] || 0;
 
-      const price =
-        getProductPrice(product);
+        const price =
+          getProductPrice(
+            product
+          );
 
-      const saving =
-        Math.max(
-          0,
-          cleanNumber(product.mrp) - price
-        );
+        const saving =
+          Math.max(
+            0,
+            cleanNumber(
+              product.mrp
+            ) - price
+          );
 
-      return `
+        return `
 
-        <div class="card">
+          <div class="card">
 
-          <div class="tile">
+            <div class="tile">
 
-            <img
-              src="${escapeHtml(product.img)}"
-              alt="${escapeHtml(product.name)}"
-              loading="lazy"
-              onerror="this.src='https://via.placeholder.com/150/eef2e8/1b7a3a?text=SVR+Foods'"
-            >
+              <img
+                src="${escapeHtml(product.img)}"
+                alt="${escapeHtml(product.name)}"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/150/eef2e8/1b7a3a?text=SVR+Foods'"
+              >
 
-          </div>
-
-          <div class="info">
-
-            <h3>
-              ${escapeHtml(product.name)}
-            </h3>
-
-            <div class="te">
-              ${escapeHtml(product.te)}
             </div>
 
-            <div class="sub">
-              Pack: <b>${escapeHtml(product.size)}</b>
-            </div>
+            <div class="info">
 
-            <div class="pr">
+              <h3>
+                ${escapeHtml(product.name)}
+              </h3>
 
-              <b>
-                ${CONFIG.currency}${price}
-              </b>
+              <div class="te">
+                ${escapeHtml(product.te)}
+              </div>
+
+              <div class="sub">
+                Pack:
+                <b>
+                  ${escapeHtml(product.size)}
+                </b>
+              </div>
+
+              <div class="pr">
+
+                <b>
+                  ${CONFIG.currency}${price}
+                </b>
+
+                ${
+                  product.mrp
+                  ? `<s>
+                      ${CONFIG.currency}${product.mrp}
+                    </s>`
+                  : ""
+                }
+
+                ${
+                  saving > 0
+                  ? `<em>
+                      Save ${CONFIG.currency}${saving}
+                    </em>`
+                  : ""
+                }
+
+              </div>
 
               ${
-                product.mrp
-                ? `<s>${CONFIG.currency}${product.mrp}</s>`
-                : ""
-              }
+                qty === 0
 
-              ${
-                saving > 0
-                ? `<em>Save ${CONFIG.currency}${saving}</em>`
-                : ""
-              }
-
-            </div>
-
-            ${
-              qty === 0
-
-              ? `
-                <button
-                  class="add"
-                  onclick="updateQty('${escapeJs(product.id)}',1)"
-                >
-                  ${escapeHtml(MESSAGES.add_button)}
-                </button>
-              `
-
-              : `
-                <div class="step">
+                ? `
 
                   <button
-                    onclick="updateQty('${escapeJs(product.id)}',-1)"
-                  >
-                    −
-                  </button>
-
-                  <span>${qty}</span>
-
-                  <button
+                    class="add"
                     onclick="updateQty('${escapeJs(product.id)}',1)"
                   >
-                    +
+                    ${escapeHtml(
+                      MESSAGES.add_button
+                    )}
                   </button>
 
-                </div>
-              `
-            }
+                `
+
+                : `
+
+                  <div class="step">
+
+                    <button
+                      onclick="updateQty('${escapeJs(product.id)}',-1)"
+                    >
+                      −
+                    </button>
+
+                    <span>
+                      ${qty}
+                    </span>
+
+                    <button
+                      onclick="updateQty('${escapeJs(product.id)}',1)"
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                `
+              }
+
+            </div>
 
           </div>
 
-        </div>
+        `;
 
-      `;
-
-    }).join("");
-
-}
-
-
-/* ============================================================
-   ESCAPE HELPERS
-============================================================ */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function escapeJs(value){
-
-  return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
+      })
+      .join("");
 
 }
 
@@ -1860,11 +2332,13 @@ function updateQty(id,delta){
 
   }else{
 
-    state.cart[id] = next;
+    state.cart[id] =
+      next;
 
   }
 
   renderProducts();
+
   updateBottomBar();
 
 }
@@ -1873,18 +2347,25 @@ function updateQty(id,delta){
 function updateBottomBar(){
 
   const bar =
-    document.getElementById("bar");
+    document.getElementById(
+      "bar"
+    );
 
   const totalItems =
-    Object.values(state.cart)
-      .reduce(
-        (sum,q) => sum + q,
-        0
-      );
+    Object.values(
+      state.cart
+    )
+    .reduce(
+      (sum,q) =>
+        sum + q,
+      0
+    );
 
   if(totalItems === 0){
 
-    bar.classList.remove("on");
+    bar.classList.remove(
+      "on"
+    );
 
     return;
 
@@ -1892,27 +2373,44 @@ function updateBottomBar(){
 
   let subtotal = 0;
 
-  CONFIG.products.forEach(product => {
+  CONFIG.products.forEach(
+    product => {
 
-    const qty =
-      state.cart[product.id] || 0;
+      const qty =
+        state.cart[
+          product.id
+        ] || 0;
 
-    if(qty){
+      if(qty){
 
-      subtotal +=
-        qty * getProductPrice(product);
+        subtotal +=
+          qty *
+          getProductPrice(
+            product
+          );
+
+      }
 
     }
+  );
 
-  });
+  document.getElementById(
+    "barCount"
+  ).textContent =
+    `${totalItems} item${
+      totalItems > 1
+      ? "s"
+      : ""
+    }`;
 
-  document.getElementById("barCount").textContent =
-    `${totalItems} item${totalItems > 1 ? "s" : ""}`;
-
-  document.getElementById("barTotal").textContent =
+  document.getElementById(
+    "barTotal"
+  ).textContent =
     `${CONFIG.currency}${subtotal} ➔ ${MESSAGES.checkout}`;
 
-  bar.classList.add("on");
+  bar.classList.add(
+    "on"
+  );
 
 }
 
@@ -1924,7 +2422,9 @@ function updateBottomBar(){
 function getStates(){
 
   return [
-    ...Object.keys(LOCATION_DATA),
+    ...Object.keys(
+      LOCATION_DATA
+    ),
     "Other State"
   ];
 
@@ -1934,47 +2434,88 @@ function getStates(){
 function handleStateChange(){
 
   const stateVal =
-    document.getElementById("custState").value;
+    document.getElementById(
+      "custState"
+    ).value;
 
   const distSelect =
-    document.getElementById("custDistrict");
+    document.getElementById(
+      "custDistrict"
+    );
 
   const manualState =
-    document.getElementById("manualStateWrap");
+    document.getElementById(
+      "manualStateWrap"
+    );
 
   const manualDistrict =
-    document.getElementById("manualDistrictWrap");
+    document.getElementById(
+      "manualDistrictWrap"
+    );
 
   distSelect.innerHTML =
-    `<option value="">Select District</option>`;
+    `<option value="">
+      Select District
+    </option>`;
 
-  if(stateVal === "Other State"){
+  if(
+    stateVal === "Other State"
+  ){
 
-    distSelect.classList.add("hidden");
-    manualState.classList.add("on");
-    manualDistrict.classList.add("on");
+    distSelect.classList.add(
+      "hidden"
+    );
+
+    manualState.classList.add(
+      "on"
+    );
+
+    manualDistrict.classList.add(
+      "on"
+    );
 
     return;
 
   }
 
-  distSelect.classList.remove("hidden");
-  manualState.classList.remove("on");
-  manualDistrict.classList.remove("on");
+  distSelect.classList.remove(
+    "hidden"
+  );
 
-  if(stateVal && LOCATION_DATA[stateVal]){
+  manualState.classList.remove(
+    "on"
+  );
 
-    LOCATION_DATA[stateVal].forEach(district => {
+  manualDistrict.classList.remove(
+    "on"
+  );
 
-      const opt =
-        document.createElement("option");
+  if(
+    stateVal &&
+    LOCATION_DATA[stateVal]
+  ){
 
-      opt.value = district;
-      opt.textContent = district;
+    LOCATION_DATA[stateVal]
+      .forEach(
+        district => {
 
-      distSelect.appendChild(opt);
+          const opt =
+            document.createElement(
+              "option"
+            );
 
-    });
+          opt.value =
+            district;
+
+          opt.textContent =
+            district;
+
+          distSelect.appendChild(
+            opt
+          );
+
+        }
+      );
 
   }
 
@@ -1988,7 +2529,9 @@ function handleStateChange(){
 function renderCheckoutFields(){
 
   const fields =
-    document.getElementById("fields");
+    document.getElementById(
+      "fields"
+    );
 
   const isFirm =
     state.role === "Distributor" ||
@@ -1997,7 +2540,8 @@ function renderCheckoutFields(){
   fields.innerHTML = `
 
     <label for="custName">
-      ${isFirm
+      ${
+        isFirm
         ? "సంస్థ పేరు / Firm Name *"
         : "మీ పేరు / Full Name *"
       }
@@ -2060,13 +2604,15 @@ function renderCheckoutFields(){
             Select State
           </option>
 
-          ${getStates()
-            .map(s =>
-              `<option value="${escapeHtml(s)}">
-                ${escapeHtml(s)}
-              </option>`
-            )
-            .join("")
+          ${
+            getStates()
+              .map(
+                s =>
+                  `<option value="${escapeHtml(s)}">
+                    ${escapeHtml(s)}
+                  </option>`
+              )
+              .join("")
           }
 
         </select>
@@ -2080,7 +2626,9 @@ function renderCheckoutFields(){
           జిల్లా / District *
         </label>
 
-        <select id="custDistrict">
+        <select
+          id="custDistrict"
+        >
 
           <option value="">
             Select District
@@ -2204,7 +2752,9 @@ function renderCheckoutFields(){
 function renderPaymentSection(){
 
   const payContainer =
-    document.getElementById("paymentInfo");
+    document.getElementById(
+      "paymentInfo"
+    );
 
   const role =
     state.role;
@@ -2238,22 +2788,27 @@ function renderPaymentSection(){
         <div>
 
           <b style="color:var(--ink);">
+
             Cash on Delivery (COD)
 
             <span class="pay-tag">
+
               ${escapeHtml(
                 payment.status ||
                 "FREE DOOR DELIVERY"
               )}
+
             </span>
 
           </b>
 
           <small>
+
             ${escapeHtml(
               payment.note ||
               "Payment upon delivery"
             )}
+
           </small>
 
         </div>
@@ -2283,22 +2838,27 @@ function renderPaymentSection(){
         <div>
 
           <b style="color:var(--ink);">
+
             WhatsApp QR / UPI Payment
 
             <span class="pay-tag upi">
+
               ${escapeHtml(
                 payment.status ||
                 "DISPATCH AFTER PAYMENT"
               )}
+
             </span>
 
           </b>
 
           <small>
+
             ${escapeHtml(
               payment.note ||
               "UPI payment required before dispatch"
             )}
+
           </small>
 
         </div>
@@ -2317,103 +2877,130 @@ function renderPaymentSection(){
 ============================================================ */
 
 document
-  .getElementById("openCart")
-  .addEventListener("click",() => {
+  .getElementById(
+    "openCart"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    const linesEl =
-      document.getElementById("cartLines");
+      const linesEl =
+        document.getElementById(
+          "cartLines"
+        );
 
-    let subtotal = 0;
+      let subtotal = 0;
 
-    let totalSaved = 0;
+      let totalSaved = 0;
 
-    let html = "";
+      let html = "";
 
-    CONFIG.products.forEach(product => {
+      CONFIG.products.forEach(
+        product => {
 
-      const qty =
-        state.cart[product.id];
+          const qty =
+            state.cart[
+              product.id
+            ];
 
-      if(qty){
+          if(qty){
 
-        const price =
-          getProductPrice(product);
+            const price =
+              getProductPrice(
+                product
+              );
 
-        const itemTotal =
-          qty * price;
+            const itemTotal =
+              qty * price;
 
-        subtotal += itemTotal;
+            subtotal +=
+              itemTotal;
 
-        totalSaved +=
-          qty *
-          Math.max(
-            0,
-            cleanNumber(product.mrp) - price
-          );
+            totalSaved +=
+              qty *
+              Math.max(
+                0,
+                cleanNumber(
+                  product.mrp
+                ) - price
+              );
 
-        html += `
+            html += `
 
-          <div class="line">
+              <div class="line">
 
-            <span>
-              ${escapeHtml(product.name)}
-              (${escapeHtml(product.size)})
-              ×${qty}
-            </span>
+                <span>
 
-            <b>
-              ${CONFIG.currency}${itemTotal}
-            </b>
+                  ${escapeHtml(
+                    product.name
+                  )}
 
-          </div>
+                  (${escapeHtml(
+                    product.size
+                  )})
 
-        `;
+                  ×${qty}
 
-      }
+                </span>
 
-    });
+                <b>
+                  ${CONFIG.currency}${itemTotal}
+                </b>
 
+              </div>
 
-    html += `
+            `;
 
-      <div class="line save">
+          }
 
-        <span>
-          డిస్కౌంట్ ఆదా (Savings)
-        </span>
-
-        <b>
-          -${CONFIG.currency}${totalSaved}
-        </b>
-
-      </div>
+        }
+      );
 
 
-      <div class="line total">
+      html += `
 
-        <span>
-          మొత్తం బిల్లు (Grand Total)
-        </span>
+        <div class="line save">
 
-        <span style="color:var(--brand);">
-          ${CONFIG.currency}${subtotal}
-        </span>
+          <span>
+            డిస్కౌంట్ ఆదా (Savings)
+          </span>
 
-      </div>
+          <b>
+            -${CONFIG.currency}${totalSaved}
+          </b>
 
-    `;
+        </div>
 
-    linesEl.innerHTML = html;
 
-    renderCheckoutFields();
+        <div class="line total">
 
-    renderPaymentSection();
+          <span>
+            మొత్తం బిల్లు (Grand Total)
+          </span>
 
-    document
-      .getElementById("checkout")
-      .classList.add("on");
+          <span style="color:var(--brand);">
+            ${CONFIG.currency}${subtotal}
+          </span>
 
-  });
+        </div>
+
+      `;
+
+      linesEl.innerHTML =
+        html;
+
+      renderCheckoutFields();
+
+      renderPaymentSection();
+
+      document
+        .getElementById(
+          "checkout"
+        )
+        .classList.add("on");
+
+    }
+  );
 
 
 /* ============================================================
@@ -2421,14 +3008,23 @@ document
 ============================================================ */
 
 document
-  .getElementById("closeCheckout")
-  .addEventListener("click",() => {
+  .getElementById(
+    "closeCheckout"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    document
-      .getElementById("checkout")
-      .classList.remove("on");
+      document
+        .getElementById(
+          "checkout"
+        )
+        .classList.remove(
+          "on"
+        );
 
-  });
+    }
+  );
 
 
 /* ============================================================
@@ -2436,247 +3032,303 @@ document
 ============================================================ */
 
 document
-  .getElementById("place")
-  .addEventListener("click",() => {
+  .getElementById(
+    "place"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    const name =
-      document
-        .getElementById("custName")
-        .value
-        .trim();
-
-
-    const contactPerson =
-      document
-        .getElementById("contactPerson")
-        ?.value
-        .trim() || "";
-
-
-    const phone =
-      document
-        .getElementById("custPhone")
-        .value
-        .trim();
+      const name =
+        document
+          .getElementById(
+            "custName"
+          )
+          .value
+          .trim();
 
 
-    const userState =
-      document
-        .getElementById("custState")
-        .value;
+      const contactPerson =
+        document
+          .getElementById(
+            "contactPerson"
+          )
+          ?.value
+          .trim() || "";
 
 
-    let district =
-      document
-        .getElementById("custDistrict")
-        .value;
+      const phone =
+        document
+          .getElementById(
+            "custPhone"
+          )
+          .value
+          .trim();
 
 
-    const manualStateEl =
-      document.getElementById("manualState");
+      const userState =
+        document
+          .getElementById(
+            "custState"
+          )
+          .value;
 
 
-    const manualDistrictEl =
-      document.getElementById("manualDistrict");
+      let district =
+        document
+          .getElementById(
+            "custDistrict"
+          )
+          .value;
 
 
-    const isOtherState =
-      userState === "Other State";
+      const manualStateEl =
+        document.getElementById(
+          "manualState"
+        );
 
 
-    const finalState =
-      isOtherState
-      ? (manualStateEl?.value.trim() || "")
-      : userState;
+      const manualDistrictEl =
+        document.getElementById(
+          "manualDistrict"
+        );
 
 
-    if(isOtherState){
-
-      district =
-        manualDistrictEl?.value.trim() || "";
-
-    }
+      const isOtherState =
+        userState === "Other State";
 
 
-    const mandal =
-      document
-        .getElementById("custMandal")
-        .value
-        .trim();
+      const finalState =
+        isOtherState
+        ? (
+            manualStateEl
+              ?.value
+              .trim() || ""
+          )
+        : userState;
 
 
-    const village =
-      document
-        .getElementById("custVillage")
-        .value
-        .trim();
+      if(isOtherState){
 
-
-    const address =
-      document
-        .getElementById("custAddress")
-        .value
-        .trim();
-
-
-    const landmark =
-      document
-        .getElementById("custLandmark")
-        .value
-        .trim();
-
-
-    const pincode =
-      document
-        .getElementById("custPincode")
-        .value
-        .trim();
-
-
-    const notes =
-      document
-        .getElementById("notes")
-        .value
-        .trim();
-
-
-    const isFirm =
-      state.role === "Distributor" ||
-      state.role === "Hotel";
-
-
-    const phoneValid =
-      /^\d{10}$/.test(phone);
-
-
-    const pinValid =
-      /^\d{6}$/.test(pincode);
-
-
-    if(
-      !name ||
-      (isFirm && !contactPerson) ||
-      !phoneValid ||
-      !finalState ||
-      !district ||
-      !mandal ||
-      !village ||
-      !address ||
-      !pinValid
-    ){
-
-      alert(
-        "దయచేసి అన్ని ముఖ్యమైన వివరాలను సరిగ్గా నమోదు చేయండి."
-      );
-
-      return;
-
-    }
-
-
-    const orderId =
-      generateDailyOrderNumber("SVR");
-
-
-    let subtotal = 0;
-
-    let summaryText = "";
-
-
-    CONFIG.products.forEach(product => {
-
-      const qty =
-        state.cart[product.id];
-
-      if(qty){
-
-        const price =
-          getProductPrice(product);
-
-        const itemTotal =
-          qty * price;
-
-        subtotal += itemTotal;
-
-        summaryText +=
-          `* ${product.name} (${product.size}) x${qty} = ${CONFIG.currency}${itemTotal}\n`;
+        district =
+          manualDistrictEl
+            ?.value
+            .trim() || "";
 
       }
 
-    });
+
+      const mandal =
+        document
+          .getElementById(
+            "custMandal"
+          )
+          .value
+          .trim();
 
 
-    let deliveryCharge = 0;
-
-    if(
-      CONFIG.freeDeliveryAbove > 0 &&
-      subtotal < CONFIG.freeDeliveryAbove
-    ){
-
-      deliveryCharge =
-        CONFIG.deliveryCharge;
-
-    }
+      const village =
+        document
+          .getElementById(
+            "custVillage"
+          )
+          .value
+          .trim();
 
 
-    const grandTotal =
-      subtotal + deliveryCharge;
+      const address =
+        document
+          .getElementById(
+            "custAddress"
+          )
+          .value
+          .trim();
 
 
-    const payment =
-      PAYMENT_DATA[state.role] ||
-      PAYMENT_DATA.User;
+      const landmark =
+        document
+          .getElementById(
+            "custLandmark"
+          )
+          .value
+          .trim();
 
 
-    const paymentMode =
-      payment.mode ||
-      (
-        isFirm
-        ? "COD"
-        : "UPI"
+      const pincode =
+        document
+          .getElementById(
+            "custPincode"
+          )
+          .value
+          .trim();
+
+
+      const notes =
+        document
+          .getElementById(
+            "notes"
+          )
+          .value
+          .trim();
+
+
+      const isFirm =
+        state.role === "Distributor" ||
+        state.role === "Hotel";
+
+
+      const phoneValid =
+        /^\d{10}$/.test(
+          phone
+        );
+
+
+      const pinValid =
+        /^\d{6}$/.test(
+          pincode
+        );
+
+
+      if(
+        !name ||
+        (isFirm && !contactPerson) ||
+        !phoneValid ||
+        !finalState ||
+        !district ||
+        !mandal ||
+        !village ||
+        !address ||
+        !pinValid
+      ){
+
+        alert(
+          "దయచేసి అన్ని ముఖ్యమైన వివరాలను సరిగ్గా నమోదు చేయండి."
+        );
+
+        return;
+
+      }
+
+
+      const orderId =
+        generateDailyOrderNumber(
+          "SVR"
+        );
+
+
+      let subtotal = 0;
+
+      let summaryText = "";
+
+
+      CONFIG.products.forEach(
+        product => {
+
+          const qty =
+            state.cart[
+              product.id
+            ];
+
+          if(qty){
+
+            const price =
+              getProductPrice(
+                product
+              );
+
+            const itemTotal =
+              qty * price;
+
+            subtotal +=
+              itemTotal;
+
+            summaryText +=
+              `* ${product.name} (${product.size}) x${qty} = ${CONFIG.currency}${itemTotal}\n`;
+
+          }
+
+        }
       );
 
 
-    const paymentStatus =
-      payment.status ||
-      (
-        isFirm
-        ? "Free Door Delivery"
-        : "Dispatch after Payment"
-      );
+      let deliveryCharge = 0;
+
+      if(
+        CONFIG.freeDeliveryAbove > 0 &&
+        subtotal <
+        CONFIG.freeDeliveryAbove
+      ){
+
+        deliveryCharge =
+          CONFIG.deliveryCharge;
+
+      }
 
 
-    const paymentNote =
-      payment.note ||
-      (
-        isFirm
-        ? "Payment upon delivery"
-        : "UPI payment required before dispatch"
-      );
+      const grandTotal =
+        subtotal +
+        deliveryCharge;
 
 
-    let paymentTerms = "";
+      const payment =
+        PAYMENT_DATA[
+          state.role
+        ] ||
+        PAYMENT_DATA.User;
 
-    if(paymentMode === "COD"){
 
-      paymentTerms =
+      const paymentMode =
+        payment.mode ||
+        (
+          isFirm
+          ? "COD"
+          : "UPI"
+        );
+
+
+      const paymentStatus =
+        payment.status ||
+        (
+          isFirm
+          ? "Free Door Delivery"
+          : "Dispatch after Payment"
+        );
+
+
+      const paymentNote =
+        payment.note ||
+        (
+          isFirm
+          ? "Payment upon delivery"
+          : "UPI payment required before dispatch"
+        );
+
+
+      let paymentTerms = "";
+
+
+      if(
+        paymentMode === "COD"
+      ){
+
+        paymentTerms =
 `[+] *Delivery Status:* ${paymentStatus}
 [+] *Payment Mode:* CASH ON DELIVERY (COD)
 
 [>] *Payment Note:* ${paymentNote}`;
 
-    }else{
+      }else{
 
-      paymentTerms =
+        paymentTerms =
 `[+] *Delivery Status:* ${paymentStatus}
 [+] *Payment Mode:* ONLINE / PREPAID (WhatsApp QR)
 
 [>] *Payment Note:* ${paymentNote}`;
 
-    }
+      }
 
 
-    const waMsg =
+      const waMsg =
 
 `*${CONFIG.shopName.toUpperCase()} (${CONFIG.brandName.toUpperCase()} BRAND)*
 *ORDER REQUEST / ఆర్డర్ వివరాలు*
@@ -2691,7 +3343,8 @@ ${summaryText}----------------------------------------
 *Delivery:* ${
   deliveryCharge === 0
   ? "Free (ఉచితం)"
-  : CONFIG.currency + deliveryCharge
+  : CONFIG.currency +
+    deliveryCharge
 }
 *TOTAL:* ${CONFIG.currency}${grandTotal}
 
@@ -2721,52 +3374,75 @@ _${CONFIG.shopName}_
 _"${CONFIG.tagline}"_`;
 
 
-    state.latestOrderMsg =
-      waMsg;
+      state.latestOrderMsg =
+        waMsg;
 
 
-    document.getElementById("cTitle").textContent =
-      `${MESSAGES.order_success} (#${orderId})`;
+      document.getElementById(
+        "cTitle"
+      ).textContent =
+        `${MESSAGES.order_success} (#${orderId})`;
 
 
-    if(isFirm){
+      if(isFirm){
 
-      document.getElementById("cText").textContent =
-        `ధన్యవాదాలు, ${name}. ${paymentMode === "COD" ? "Cash on Delivery and Door Delivery are selected." : ""} Click below to send your order on WhatsApp.`;
+        document.getElementById(
+          "cText"
+        ).textContent =
+          `ధన్యవాదాలు, ${name}. ${
+            paymentMode === "COD"
+            ? "Cash on Delivery and Door Delivery are selected."
+            : ""
+          } Click below to send your order on WhatsApp.`;
 
-    }else{
+      }else{
 
-      document.getElementById("cText").textContent =
-        `ధన్యవాదాలు, ${name}. Please click the button below to send your order to WhatsApp.`;
+        document.getElementById(
+          "cText"
+        ).textContent =
+          `ధన్యవాదాలు, ${name}. Please click the button below to send your order to WhatsApp.`;
+
+      }
+
+
+      document.getElementById(
+        "cHelp"
+      ).textContent =
+        `Order ID: #${orderId} | Total: ${CONFIG.currency}${grandTotal}`;
+
+
+      document.getElementById(
+        "waBtn"
+      ).href =
+        `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
+
+
+      document
+        .getElementById(
+          "checkout"
+        )
+        .classList.remove(
+          "on"
+        );
+
+
+      document
+        .getElementById(
+          "confirm"
+        )
+        .classList.add(
+          "on"
+        );
+
+
+      state.cart = {};
+
+      renderProducts();
+
+      updateBottomBar();
 
     }
-
-
-    document.getElementById("cHelp").textContent =
-      `Order ID: #${orderId} | Total: ${CONFIG.currency}${grandTotal}`;
-
-
-    document.getElementById("waBtn").href =
-      `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
-
-
-    document
-      .getElementById("checkout")
-      .classList.remove("on");
-
-
-    document
-      .getElementById("confirm")
-      .classList.add("on");
-
-
-    state.cart = {};
-
-    renderProducts();
-
-    updateBottomBar();
-
-  });
+  );
 
 
 /* ============================================================
@@ -2774,33 +3450,46 @@ _"${CONFIG.tagline}"_`;
 ============================================================ */
 
 document
-  .getElementById("copyBtn")
-  .addEventListener("click",() => {
+  .getElementById(
+    "copyBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    if(!state.latestOrderMsg){
+      if(
+        !state.latestOrderMsg
+      ){
 
-      return;
+        return;
+
+      }
+
+      navigator.clipboard
+        .writeText(
+          state.latestOrderMsg
+        )
+        .then(
+          () => {
+
+            alert(
+              "ఆర్డర్ వివరాలు కాపీ చేయబడ్డాయి."
+            );
+
+          }
+        )
+        .catch(
+          () => {
+
+            alert(
+              "Copy failed. Please use the WhatsApp button."
+            );
+
+          }
+        );
 
     }
-
-    navigator.clipboard
-      .writeText(state.latestOrderMsg)
-      .then(() => {
-
-        alert(
-          "ఆర్డర్ వివరాలు కాపీ చేయబడ్డాయి."
-        );
-
-      })
-      .catch(() => {
-
-        alert(
-          "Copy failed. Please use the WhatsApp button."
-        );
-
-      });
-
-  });
+  );
 
 
 /* ============================================================
@@ -2808,21 +3497,32 @@ document
 ============================================================ */
 
 document
-  .getElementById("newOrder")
-  .addEventListener("click",() => {
+  .getElementById(
+    "newOrder"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    document
-      .getElementById("confirm")
-      .classList.remove("on");
+      document
+        .getElementById(
+          "confirm"
+        )
+        .classList.remove(
+          "on"
+        );
 
-  });
+    }
+  );
 
 
 /* ============================================================
    DAILY ORDER NUMBER
 ============================================================ */
 
-function generateDailyOrderNumber(prefix="SVR"){
+function generateDailyOrderNumber(
+  prefix="SVR"
+){
 
   const now =
     new Date();
@@ -2831,12 +3531,20 @@ function generateDailyOrderNumber(prefix="SVR"){
     now.getFullYear();
 
   const month =
-    String(now.getMonth()+1)
-      .padStart(2,"0");
+    String(
+      now.getMonth()+1
+    ).padStart(
+      2,
+      "0"
+    );
 
   const day =
-    String(now.getDate())
-      .padStart(2,"0");
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
 
   const dateKey =
     `${year}${month}${day}`;
@@ -2857,7 +3565,9 @@ function generateDailyOrderNumber(prefix="SVR"){
     );
 
 
-  if(storedDate !== dateKey){
+  if(
+    storedDate !== dateKey
+  ){
 
     currentCount = 1;
 
@@ -2879,7 +3589,12 @@ function generateDailyOrderNumber(prefix="SVR"){
   );
 
 
-  return `${prefix}-${dateKey}-${String(currentCount).padStart(3,"0")}`;
+  return `${prefix}-${dateKey}-${String(
+    currentCount
+  ).padStart(
+    3,
+    "0"
+  )}`;
 
 }
 
@@ -2889,28 +3604,44 @@ function generateDailyOrderNumber(prefix="SVR"){
 ============================================================ */
 
 const whoModal =
-  document.getElementById("who");
+  document.getElementById(
+    "who"
+  );
 
 const mainContent =
-  document.getElementById("mainContent");
+  document.getElementById(
+    "mainContent"
+  );
 
 const mainFoot =
-  document.getElementById("mainFoot");
+  document.getElementById(
+    "mainFoot"
+  );
 
 
-function selectRole(selectedRole){
+function selectRole(
+  selectedRole
+){
 
   state.role =
     selectedRole;
 
-  document.getElementById("whoLabel").textContent =
+  document.getElementById(
+    "whoLabel"
+  ).textContent =
     state.role;
 
-  whoModal.classList.remove("on");
+  whoModal.classList.remove(
+    "on"
+  );
 
-  mainContent.classList.add("active");
+  mainContent.classList.add(
+    "active"
+  );
 
-  mainFoot.classList.add("active");
+  mainFoot.classList.add(
+    "active"
+  );
 
   renderProducts();
 
@@ -2920,27 +3651,44 @@ function selectRole(selectedRole){
 
 
 document
-  .getElementById("changeWho")
-  .addEventListener("click",() => {
+  .getElementById(
+    "changeWho"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-    whoModal.classList.add("on");
+      whoModal.classList.add(
+        "on"
+      );
 
-  });
+    }
+  );
 
 
 whoModal
-  .querySelectorAll("button[data-t]")
-  .forEach(btn => {
+  .querySelectorAll(
+    "button[data-t]"
+  )
+  .forEach(
+    btn => {
 
-    btn.addEventListener("click",e => {
+      btn.addEventListener(
+        "click",
+        e => {
 
-      selectRole(
-        e.currentTarget.getAttribute("data-t")
+          selectRole(
+            e.currentTarget
+              .getAttribute(
+                "data-t"
+              )
+          );
+
+        }
       );
 
-    });
-
-  });
+    }
+  );
 
 
 /* ============================================================
@@ -2950,7 +3698,9 @@ whoModal
 async function loadGoogleSheetData(){
 
   const status =
-    document.getElementById("sheetStatus");
+    document.getElementById(
+      "sheetStatus"
+    );
 
 
   status.textContent =
@@ -2958,12 +3708,6 @@ async function loadGoogleSheetData(){
 
 
   try{
-
-    /*
-      Load independently.
-
-      If one tab fails, other tabs can still load.
-    */
 
     const results =
       await Promise.allSettled([
@@ -2978,14 +3722,18 @@ async function loadGoogleSheetData(){
 
         loadMessages(),
 
-        loadLocations()
+        loadLocations(),
+
+        loadSocialLinks()
 
       ]);
 
 
     const successCount =
       results.filter(
-        r => r.status === "fulfilled"
+        r =>
+          r.status ===
+          "fulfilled"
       ).length;
 
 
@@ -2999,11 +3747,13 @@ async function loadGoogleSheetData(){
 
     renderProducts();
 
+    renderSocialLinks();
+
 
     if(state.sheetLoaded){
 
       status.textContent =
-        `✓ Website connected to Google Sheet (${successCount}/6 sections loaded)`;
+        `✓ Website connected to Google Sheet (${successCount}/7 sections loaded)`;
 
     }else{
 
@@ -3033,11 +3783,6 @@ async function loadGoogleSheetData(){
    START
 ============================================================ */
 
-/*
-  Render fallback immediately.
-  Then load Google Sheet.
-*/
-
 applySettings();
 
 applyMessages();
@@ -3045,6 +3790,8 @@ applyMessages();
 renderProducts();
 
 updateBottomBar();
+
+renderSocialLinks();
 
 loadGoogleSheetData();
 
