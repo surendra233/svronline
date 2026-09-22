@@ -510,23 +510,24 @@ select:focus,input:focus,textarea:focus{
 
 .social-section{
   margin:18px auto 12px;
-  padding-top:12px;
+  padding-top:14px;
   border-top:1px solid rgba(212,175,55,.35);
-  max-width:520px;
+  max-width:560px;
 }
 
 .social-title{
   color:#d4af37 !important;
   font-size:.95rem !important;
   font-weight:700;
-  margin:0 0 10px !important;
+  margin:0 0 12px !important;
 }
 
 .social-links{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:8px;
+  align-items:center;
+  gap:9px;
 }
 
 .social-link{
@@ -534,30 +535,54 @@ select:focus,input:focus,textarea:focus{
   align-items:center;
   justify-content:center;
   gap:7px;
-  min-width:105px;
-  padding:8px 12px;
+  min-width:108px;
+  padding:9px 13px;
   border:1px solid rgba(212,175,55,.55);
   border-radius:999px;
   color:#f9e596;
   text-decoration:none;
   font-size:.82rem;
   font-weight:600;
-  transition:.2s ease;
+  background:rgba(255,255,255,.03);
+  transition:all .2s ease;
 }
 
 .social-link:hover{
-  background:rgba(212,175,55,.12);
+  background:rgba(212,175,55,.14);
+  border-color:#d4af37;
   transform:translateY(-1px);
 }
 
 .social-icon{
+  width:18px;
+  height:18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   font-size:1rem;
   line-height:1;
+  font-weight:800;
 }
 
 @media(max-width:520px){
+
+  .social-links{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    width:100%;
+  }
+
   .social-link{
-    min-width:calc(50% - 5px);
+    width:100%;
+    min-width:0;
+    padding:9px 8px;
+  }
+
+  .social-link:last-child{
+    grid-column:1 / -1;
+    width:50%;
+    justify-self:center;
   }
 }
 
@@ -656,6 +681,7 @@ select:focus,input:focus,textarea:focus{
 }
 
 @media(max-width:520px){
+
   .card{
     align-items:flex-start
   }
@@ -679,6 +705,7 @@ select:focus,input:focus,textarea:focus{
 <body>
 
 <header>
+
   <img
     class="header-banner"
     id="headerBanner"
@@ -686,31 +713,66 @@ select:focus,input:focus,textarea:focus{
     alt="SVR Food Products – Sir Arthur Cotton Brand"
     onerror="this.src='https://via.placeholder.com/900x220/12100a/c8961a?text=SVR+FOOD+PRODUCTS'"
   >
+
 </header>
+
 
 <main id="mainContent">
 
   <div class="notice who">
+
     <span>
-      <span id="orderingAsText">Ordering as</span>
+
+      <span id="orderingAsText">
+        Ordering as
+      </span>
+
       <b id="whoLabel"></b>
+
     </span>
-    <button class="link" id="changeWho">Change</button>
+
+    <button
+      class="link"
+      id="changeWho"
+    >
+      Change
+    </button>
+
   </div>
 
-  <div class="notice" id="catalogNotice">
+
+  <div
+    class="notice"
+    id="catalogNotice"
+  >
     Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.
   </div>
 
-  <div class="list" id="list">
-    <div class="loading">Loading products...</div>
+
+  <div
+    class="list"
+    id="list"
+  >
+
+    <div class="loading">
+      Loading products...
+    </div>
+
   </div>
 
-  <div class="sheet-status" id="sheetStatus"></div>
+
+  <div
+    class="sheet-status"
+    id="sheetStatus"
+  ></div>
 
 </main>
 
-<footer class="foot" id="mainFoot">
+
+<footer
+  class="foot"
+  id="mainFoot"
+>
 
   <img
     id="footerBanner"
@@ -719,19 +781,28 @@ select:focus,input:focus,textarea:focus{
     onerror="this.style.display='none'"
   >
 
-  <p id="footerBrand" style="font-weight:700;font-size:1.05rem;color:#d4af37;">
+
+  <p
+    id="footerBrand"
+    style="font-weight:700;font-size:1.05rem;color:#d4af37;"
+  >
     SVR Food Products – Sir Arthur Cotton
   </p>
+
 
   <p id="footerContact">
     Contact: +91 89853 61991 | support@svrfoods.com
   </p>
 
+
   <p id="footerAddress">
     Duppalapudi (V), E.G. Dist, Andhra Pradesh
   </p>
 
-  <!-- SOCIAL MEDIA LINKS FROM GOOGLE SHEET -->
+
+  <!-- =========================
+       SOCIAL MEDIA
+  ========================== -->
 
   <div class="social-section">
 
@@ -746,33 +817,63 @@ select:focus,input:focus,textarea:focus{
 
   </div>
 
-  <p>© SVR Food Products</p>
+
+  <p>
+    © SVR Food Products
+  </p>
 
 </footer>
 
-<!-- ROLE MODAL -->
 
-<div class="modal on" id="who">
+<!-- =========================
+     ROLE MODAL
+========================= -->
 
-  <div class="box" role="dialog" aria-modal="true" aria-labelledby="whoT">
+<div
+  class="modal on"
+  id="who"
+>
 
-    <h2 id="whoT" style="color:var(--ink)">
+  <div
+    class="box"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="whoT"
+  >
+
+    <h2
+      id="whoT"
+      style="color:var(--ink)"
+    >
       Welcome to SVR Foods
     </h2>
+
 
     <p id="whoDescription">
       Please select who you are to view the product catalog &amp; prices:
     </p>
 
-    <button class="cta pri" data-t="Distributor">
+
+    <button
+      class="cta pri"
+      data-t="Distributor"
+    >
       I am a Distributor
     </button>
 
-    <button class="cta sec" data-t="Hotel">
+
+    <button
+      class="cta sec"
+      data-t="Hotel"
+    >
       I am a Hotel / Restaurant
     </button>
 
-    <button class="cta sec" data-t="User">
+
+    <button
+      class="cta sec"
+      data-t="User"
+    >
       I am a Retail Customer
     </button>
 
@@ -780,53 +881,98 @@ select:focus,input:focus,textarea:focus{
 
 </div>
 
-<!-- CART BAR -->
 
-<div class="bar" id="bar">
+<!-- =========================
+     CART BAR
+========================= -->
+
+<div
+  class="bar"
+  id="bar"
+>
 
   <button id="openCart">
-    <span id="barCount">0 items</span>
-    <span id="barTotal">₹0</span>
+
+    <span id="barCount">
+      0 items
+    </span>
+
+    <span id="barTotal">
+      ₹0
+    </span>
+
   </button>
 
 </div>
 
-<!-- CHECKOUT -->
 
-<div class="sheet" id="checkout">
+<!-- =========================
+     CHECKOUT
+========================= -->
+
+<div
+  class="sheet"
+  id="checkout"
+>
 
   <div class="in">
 
-    <button class="back" id="closeCheckout">
+    <button
+      class="back"
+      id="closeCheckout"
+    >
       &larr; Back to products
     </button>
 
-    <h2 id="yourOrderTitle">Your order</h2>
+
+    <h2 id="yourOrderTitle">
+      Your order
+    </h2>
+
 
     <div id="cartLines"></div>
 
-    <h2 style="margin-top:26px" id="detailsTitle">
+
+    <h2
+      style="margin-top:26px"
+      id="detailsTitle"
+    >
       Delivery details
     </h2>
 
+
     <div id="fields"></div>
 
-    <label for="notes" id="notesLabel">
+
+    <label
+      for="notes"
+      id="notesLabel"
+    >
       Notes (optional)
     </label>
+
 
     <input
       id="notes"
       placeholder="Preferred delivery time, landmark, etc."
     >
 
+
     <h2 style="margin-top:26px">
       Payment &amp; Delivery Terms
     </h2>
 
-    <div class="pay" id="paymentInfo"></div>
 
-    <button class="cta pri" id="place">
+    <div
+      class="pay"
+      id="paymentInfo"
+    ></div>
+
+
+    <button
+      class="cta pri"
+      id="place"
+    >
       Place order
     </button>
 
@@ -834,21 +980,32 @@ select:focus,input:focus,textarea:focus{
 
 </div>
 
-<!-- CONFIRMATION -->
 
-<div class="sheet" id="confirm">
+<!-- =========================
+     CONFIRMATION
+========================= -->
+
+<div
+  class="sheet"
+  id="confirm"
+>
 
   <div class="in done">
 
-    <div class="big">✓</div>
+    <div class="big">
+      ✓
+    </div>
+
 
     <h2 id="cTitle">
       Order Created
     </h2>
 
+
     <p id="cText">
       Click below to send your order directly to our WhatsApp number.
     </p>
+
 
     <a
       class="cta wa"
@@ -859,11 +1016,21 @@ select:focus,input:focus,textarea:focus{
       Send order on WhatsApp
     </a>
 
-    <button class="cta sec" id="copyBtn">
+
+    <button
+      class="cta sec"
+      id="copyBtn"
+    >
       Copy order details
     </button>
 
-    <p class="small" id="cHelp" style="margin-top:14px;"></p>
+
+    <p
+      class="small"
+      id="cHelp"
+      style="margin-top:14px;"
+    ></p>
+
 
     <button
       class="back"
@@ -877,16 +1044,12 @@ select:focus,input:focus,textarea:focus{
 
 </div>
 
+
 <script>
 
 /* ============================================================
    GOOGLE SHEET CONFIGURATION
 ============================================================ */
-
-/*
-  IMPORTANT:
-  This is the PUBLISHED Google Sheet ID.
-*/
 
 const GOOGLE_SHEET_ID =
 "2PACX-1vS96rGynHTVwgig54rKmbBl-Cl8eg6p-ueyKyg1ulff8aMhhAPQ6TFChQqeiKknHAotNX62GjY4MiC8";
@@ -1204,7 +1367,45 @@ let PAYMENT_DATA = {
    SOCIAL LINKS FALLBACK
 ============================================================ */
 
-let SOCIAL_LINKS = [];
+/*
+  IMPORTANT:
+  These links are always available.
+
+  If Google Sheet SOCIAL_LINKS works,
+  Sheet links will replace these.
+
+  If Google Sheet fails,
+  these links will still appear.
+*/
+
+let SOCIAL_LINKS = [
+
+  {
+    platform:"WhatsApp",
+    url:"https://wa.me/qr/US6MI2ROWBV3A1"
+  },
+
+  {
+    platform:"Instagram",
+    url:"https://www.instagram.com/svrfoodproducts?utm_source=qr&stkn=aDczbW0wdGdxa2Jh"
+  },
+
+  {
+    platform:"Facebook",
+    url:"https://www.facebook.com/share/19UEBoLrBz/"
+  },
+
+  {
+    platform:"YouTube",
+    url:"https://youtube.com/@svrfoodproducts?si=OcpSSxvYuYADTeKy"
+  },
+
+  {
+    platform:"Website",
+    url:"https://www.svrfoodproducts.com/"
+  }
+
+];
 
 
 /* ============================================================
@@ -1231,13 +1432,9 @@ let state = {
 function sheetUrl(sheetName){
 
   return `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
+
 }
 
-
-/*
-  Google returns:
-  google.visualization.Query.setResponse(...)
-*/
 
 async function fetchSheet(sheetName){
 
@@ -1863,51 +2060,77 @@ async function loadLocations(){
 
 async function loadSocialLinks(){
 
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.SOCIAL_LINKS
+  try{
+
+    const rows =
+      await fetchSheet(
+        SHEET_NAMES.SOCIAL_LINKS
+      );
+
+    const data = [];
+
+    rows
+      .filter(
+        row =>
+          isTrue(row.Active)
+      )
+      .forEach(row => {
+
+        const platform =
+          String(
+            row.Platform || ""
+          ).trim();
+
+        const url =
+          String(
+            row.URL || ""
+          ).trim();
+
+        if(
+          platform &&
+          url
+        ){
+
+          data.push({
+
+            platform:platform,
+
+            url:url
+
+          });
+
+        }
+
+      });
+
+
+    /*
+      Only replace fallback links if
+      Google Sheet returned valid links.
+    */
+
+    if(data.length){
+
+      SOCIAL_LINKS =
+        data;
+
+    }
+
+  }catch(error){
+
+    /*
+      IMPORTANT:
+      Keep fallback social links.
+
+      This prevents the footer from
+      becoming empty if Google Sheet
+      SOCIAL_LINKS fails.
+    */
+
+    console.warn(
+      "SOCIAL_LINKS sheet could not be loaded. Using fallback links.",
+      error
     );
-
-  const data = [];
-
-  rows
-    .filter(
-      row =>
-        isTrue(row.Active)
-    )
-    .forEach(row => {
-
-      const platform =
-        String(
-          row.Platform || ""
-        ).trim();
-
-      const url =
-        String(
-          row.URL || ""
-        ).trim();
-
-      if(
-        platform &&
-        url
-      ){
-
-        data.push({
-
-          platform:platform,
-
-          url:url
-
-        });
-
-      }
-
-    });
-
-  if(data.length){
-
-    SOCIAL_LINKS =
-      data;
 
   }
 
@@ -1925,6 +2148,7 @@ function getSocialIcon(platform){
       platform || ""
     ).trim().toLowerCase();
 
+
   if(
     name === "instagram"
   ){
@@ -1932,6 +2156,7 @@ function getSocialIcon(platform){
     return "◎";
 
   }
+
 
   if(
     name === "facebook"
@@ -1941,6 +2166,7 @@ function getSocialIcon(platform){
 
   }
 
+
   if(
     name === "youtube"
   ){
@@ -1949,6 +2175,7 @@ function getSocialIcon(platform){
 
   }
 
+
   if(
     name === "whatsapp"
   ){
@@ -1956,6 +2183,16 @@ function getSocialIcon(platform){
     return "◉";
 
   }
+
+
+  if(
+    name === "website"
+  ){
+
+    return "🌐";
+
+  }
+
 
   return "↗";
 
@@ -1973,45 +2210,153 @@ function renderSocialLinks(){
       "socialLinks"
     );
 
+
   if(!container){
 
     return;
 
   }
 
-  if(!SOCIAL_LINKS.length){
 
-    container.innerHTML = "";
+  /*
+    Always use fallback if somehow
+    SOCIAL_LINKS becomes empty.
+  */
 
-    return;
+  if(
+    !Array.isArray(SOCIAL_LINKS) ||
+    !SOCIAL_LINKS.length
+  ){
+
+    SOCIAL_LINKS = [
+
+      {
+        platform:"WhatsApp",
+        url:"https://wa.me/qr/US6MI2ROWBV3A1"
+      },
+
+      {
+        platform:"Instagram",
+        url:"https://www.instagram.com/svrfoodproducts?utm_source=qr&stkn=aDczbW0wdGdxa2Jh"
+      },
+
+      {
+        platform:"Facebook",
+        url:"https://www.facebook.com/share/19UEBoLrBz/"
+      },
+
+      {
+        platform:"YouTube",
+        url:"https://youtube.com/@svrfoodproducts?si=OcpSSxvYuYADTeKy"
+      },
+
+      {
+        platform:"Website",
+        url:"https://www.svrfoodproducts.com/"
+      }
+
+    ];
 
   }
 
+
+  /*
+    Preferred display order.
+  */
+
+  const preferredOrder = [
+
+    "whatsapp",
+
+    "instagram",
+
+    "facebook",
+
+    "youtube",
+
+    "website"
+
+  ];
+
+
+  const orderedLinks =
+    [...SOCIAL_LINKS].sort(
+      (a,b) => {
+
+        const aIndex =
+          preferredOrder.indexOf(
+            String(
+              a.platform || ""
+            )
+            .trim()
+            .toLowerCase()
+          );
+
+        const bIndex =
+          preferredOrder.indexOf(
+            String(
+              b.platform || ""
+            )
+            .trim()
+            .toLowerCase()
+          );
+
+        return (
+          (aIndex === -1 ? 999 : aIndex) -
+          (bIndex === -1 ? 999 : bIndex)
+        );
+
+      }
+    );
+
+
   container.innerHTML =
-    SOCIAL_LINKS
+    orderedLinks
       .map(item => {
+
+        const platform =
+          String(
+            item.platform || ""
+          ).trim();
+
+        const url =
+          String(
+            item.url || ""
+          ).trim();
+
+
+        if(
+          !platform ||
+          !url
+        ){
+
+          return "";
+
+        }
+
 
         return `
 
           <a
             class="social-link"
-            href="${escapeHtml(item.url)}"
+            href="${escapeHtml(url)}"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="${escapeHtml(platform)}"
           >
 
             <span class="social-icon">
+
               ${escapeHtml(
                 getSocialIcon(
-                  item.platform
+                  platform
                 )
               )}
+
             </span>
 
             <span>
-              ${escapeHtml(
-                item.platform
-              )}
+              ${escapeHtml(platform)}
             </span>
 
           </a>
@@ -2033,25 +2378,30 @@ function applySettings(){
   document.title =
     `${CONFIG.shopName} – ${CONFIG.brandName} | Order Online`;
 
+
   document.getElementById(
     "headerBanner"
   ).src =
     CONFIG.headerBanner;
+
 
   document.getElementById(
     "footerBanner"
   ).src =
     CONFIG.footerBanner;
 
+
   document.getElementById(
     "footerBrand"
   ).textContent =
     `${CONFIG.shopName} – ${CONFIG.brandName}`;
 
+
   document.getElementById(
     "footerContact"
   ).textContent =
     `Contact: ${CONFIG.phone} | ${CONFIG.email}`;
+
 
   document.getElementById(
     "footerAddress"
@@ -2072,55 +2422,66 @@ function applyMessages(){
   ).textContent =
     MESSAGES.welcome_title;
 
+
   document.getElementById(
     "whoDescription"
   ).textContent =
     MESSAGES.welcome_text;
+
 
   document.getElementById(
     "catalogNotice"
   ).textContent =
     MESSAGES.catalog_notice;
 
+
   document.getElementById(
     "orderingAsText"
   ).textContent =
     MESSAGES.ordering_as;
+
 
   document.getElementById(
     "changeWho"
   ).textContent =
     MESSAGES.change_role;
 
+
   document.getElementById(
     "yourOrderTitle"
   ).textContent =
     MESSAGES.your_order;
+
 
   document.getElementById(
     "detailsTitle"
   ).textContent =
     MESSAGES.delivery_details;
 
+
   document.getElementById(
     "notesLabel"
   ).textContent =
     MESSAGES.notes;
+
 
   document.getElementById(
     "place"
   ).textContent =
     MESSAGES.place_order;
 
+
   document.getElementById(
     "waBtn"
   ).textContent =
     MESSAGES.send_whatsapp;
 
+
   document.getElementById(
     "copyBtn"
   ).textContent =
     MESSAGES.copy_details;
+
 
   document.getElementById(
     "newOrder"
@@ -2139,6 +2500,7 @@ function getProductPrice(product){
   const role =
     state.role;
 
+
   if(
     role &&
     ROLE_PRICES[product.id] &&
@@ -2153,6 +2515,7 @@ function getProductPrice(product){
     );
 
   }
+
 
   return cleanNumber(
     product.price
@@ -2172,6 +2535,7 @@ function renderProducts(){
       "list"
     );
 
+
   if(!CONFIG.products.length){
 
     listEl.innerHTML =
@@ -2183,6 +2547,7 @@ function renderProducts(){
 
   }
 
+
   listEl.innerHTML =
     CONFIG.products
       .map(product => {
@@ -2192,10 +2557,12 @@ function renderProducts(){
             product.id
           ] || 0;
 
+
         const price =
           getProductPrice(
             product
           );
+
 
         const saving =
           Math.max(
@@ -2204,6 +2571,7 @@ function renderProducts(){
               product.mrp
             ) - price
           );
+
 
         return `
 
@@ -2220,15 +2588,18 @@ function renderProducts(){
 
             </div>
 
+
             <div class="info">
 
               <h3>
                 ${escapeHtml(product.name)}
               </h3>
 
+
               <div class="te">
                 ${escapeHtml(product.te)}
               </div>
+
 
               <div class="sub">
                 Pack:
@@ -2237,11 +2608,13 @@ function renderProducts(){
                 </b>
               </div>
 
+
               <div class="pr">
 
                 <b>
                   ${CONFIG.currency}${price}
                 </b>
+
 
                 ${
                   product.mrp
@@ -2250,6 +2623,7 @@ function renderProducts(){
                     </s>`
                   : ""
                 }
+
 
                 ${
                   saving > 0
@@ -2260,6 +2634,7 @@ function renderProducts(){
                 }
 
               </div>
+
 
               ${
                 qty === 0
@@ -2323,8 +2698,10 @@ function updateQty(id,delta){
   const current =
     state.cart[id] || 0;
 
+
   const next =
     current + delta;
+
 
   if(next <= 0){
 
@@ -2336,6 +2713,7 @@ function updateQty(id,delta){
       next;
 
   }
+
 
   renderProducts();
 
@@ -2351,6 +2729,7 @@ function updateBottomBar(){
       "bar"
     );
 
+
   const totalItems =
     Object.values(
       state.cart
@@ -2360,6 +2739,7 @@ function updateBottomBar(){
         sum + q,
       0
     );
+
 
   if(totalItems === 0){
 
@@ -2371,7 +2751,9 @@ function updateBottomBar(){
 
   }
 
+
   let subtotal = 0;
+
 
   CONFIG.products.forEach(
     product => {
@@ -2380,6 +2762,7 @@ function updateBottomBar(){
         state.cart[
           product.id
         ] || 0;
+
 
       if(qty){
 
@@ -2394,6 +2777,7 @@ function updateBottomBar(){
     }
   );
 
+
   document.getElementById(
     "barCount"
   ).textContent =
@@ -2403,10 +2787,12 @@ function updateBottomBar(){
       : ""
     }`;
 
+
   document.getElementById(
     "barTotal"
   ).textContent =
     `${CONFIG.currency}${subtotal} ➔ ${MESSAGES.checkout}`;
+
 
   bar.classList.add(
     "on"
@@ -2438,25 +2824,30 @@ function handleStateChange(){
       "custState"
     ).value;
 
+
   const distSelect =
     document.getElementById(
       "custDistrict"
     );
+
 
   const manualState =
     document.getElementById(
       "manualStateWrap"
     );
 
+
   const manualDistrict =
     document.getElementById(
       "manualDistrictWrap"
     );
 
+
   distSelect.innerHTML =
     `<option value="">
       Select District
     </option>`;
+
 
   if(
     stateVal === "Other State"
@@ -2466,29 +2857,36 @@ function handleStateChange(){
       "hidden"
     );
 
+
     manualState.classList.add(
       "on"
     );
+
 
     manualDistrict.classList.add(
       "on"
     );
 
+
     return;
 
   }
+
 
   distSelect.classList.remove(
     "hidden"
   );
 
+
   manualState.classList.remove(
     "on"
   );
 
+
   manualDistrict.classList.remove(
     "on"
   );
+
 
   if(
     stateVal &&
@@ -2504,11 +2902,14 @@ function handleStateChange(){
               "option"
             );
 
+
           opt.value =
             district;
 
+
           opt.textContent =
             district;
+
 
           distSelect.appendChild(
             opt
@@ -2533,19 +2934,24 @@ function renderCheckoutFields(){
       "fields"
     );
 
+
   const isFirm =
     state.role === "Distributor" ||
     state.role === "Hotel";
 
+
   fields.innerHTML = `
 
     <label for="custName">
+
       ${
         isFirm
         ? "సంస్థ పేరు / Firm Name *"
         : "మీ పేరు / Full Name *"
       }
+
     </label>
+
 
     <input
       id="custName"
@@ -2559,12 +2965,15 @@ function renderCheckoutFields(){
 
 
     <label for="contactPerson">
+
       ${
         isFirm
         ? "కాంటాక్ట్ పర్సన్ / Contact Person *"
         : "ప్రత్యామ్నాయ పేరు (Optional)"
       }
+
     </label>
+
 
     <input
       id="contactPerson"
@@ -2576,6 +2985,7 @@ function renderCheckoutFields(){
     <label for="custPhone">
       WhatsApp / మొబైల్ నెంబర్ *
     </label>
+
 
     <input
       id="custPhone"
@@ -2595,6 +3005,7 @@ function renderCheckoutFields(){
           రాష్ట్రం / State *
         </label>
 
+
         <select
           id="custState"
           onchange="handleStateChange()"
@@ -2603,6 +3014,7 @@ function renderCheckoutFields(){
           <option value="">
             Select State
           </option>
+
 
           ${
             getStates()
@@ -2626,6 +3038,7 @@ function renderCheckoutFields(){
           జిల్లా / District *
         </label>
 
+
         <select
           id="custDistrict"
         >
@@ -2635,6 +3048,7 @@ function renderCheckoutFields(){
           </option>
 
         </select>
+
 
         <div
           id="manualDistrictWrap"
@@ -2662,6 +3076,7 @@ function renderCheckoutFields(){
         State Name *
       </label>
 
+
       <input
         id="manualState"
         placeholder="Enter your State"
@@ -2678,6 +3093,7 @@ function renderCheckoutFields(){
           మండలం / Mandal / City / Town *
         </label>
 
+
         <input
           id="custMandal"
           placeholder="e.g. Mandapeta"
@@ -2686,11 +3102,13 @@ function renderCheckoutFields(){
 
       </div>
 
+
       <div>
 
         <label for="custVillage">
           గ్రామం / Village / Area *
         </label>
+
 
         <input
           id="custVillage"
@@ -2707,6 +3125,7 @@ function renderCheckoutFields(){
       ఇంటి / వీధి నెం. / Door No / Street *
     </label>
 
+
     <textarea
       id="custAddress"
       rows="2"
@@ -2719,6 +3138,7 @@ function renderCheckoutFields(){
       Landmark
     </label>
 
+
     <input
       id="custLandmark"
       placeholder="Near SBI Bank, Temple, etc."
@@ -2728,6 +3148,7 @@ function renderCheckoutFields(){
     <label for="custPincode">
       పిన్ కోడ్ / PIN Code *
     </label>
+
 
     <input
       id="custPincode"
@@ -2739,6 +3160,7 @@ function renderCheckoutFields(){
     >
 
   `;
+
 
   handleStateChange();
 
@@ -2756,12 +3178,15 @@ function renderPaymentSection(){
       "paymentInfo"
     );
 
+
   const role =
     state.role;
+
 
   const payment =
     PAYMENT_DATA[role] ||
     PAYMENT_DATA.User;
+
 
   if(
     payment.mode === "COD" ||
@@ -2785,6 +3210,7 @@ function renderPaymentSection(){
           checked
         >
 
+
         <div>
 
           <b style="color:var(--ink);">
@@ -2801,6 +3227,7 @@ function renderPaymentSection(){
             </span>
 
           </b>
+
 
           <small>
 
@@ -2835,6 +3262,7 @@ function renderPaymentSection(){
           checked
         >
 
+
         <div>
 
           <b style="color:var(--ink);">
@@ -2851,6 +3279,7 @@ function renderPaymentSection(){
             </span>
 
           </b>
+
 
           <small>
 
@@ -2889,11 +3318,13 @@ document
           "cartLines"
         );
 
+
       let subtotal = 0;
 
       let totalSaved = 0;
 
       let html = "";
+
 
       CONFIG.products.forEach(
         product => {
@@ -2903,6 +3334,7 @@ document
               product.id
             ];
 
+
           if(qty){
 
             const price =
@@ -2910,11 +3342,14 @@ document
                 product
               );
 
+
             const itemTotal =
               qty * price;
 
+
             subtotal +=
               itemTotal;
+
 
             totalSaved +=
               qty *
@@ -2924,6 +3359,7 @@ document
                   product.mrp
                 ) - price
               );
+
 
             html += `
 
@@ -2942,6 +3378,7 @@ document
                   ×${qty}
 
                 </span>
+
 
                 <b>
                   ${CONFIG.currency}${itemTotal}
@@ -2965,6 +3402,7 @@ document
             డిస్కౌంట్ ఆదా (Savings)
           </span>
 
+
           <b>
             -${CONFIG.currency}${totalSaved}
           </b>
@@ -2978,6 +3416,7 @@ document
             మొత్తం బిల్లు (Grand Total)
           </span>
 
+
           <span style="color:var(--brand);">
             ${CONFIG.currency}${subtotal}
           </span>
@@ -2986,12 +3425,15 @@ document
 
       `;
 
+
       linesEl.innerHTML =
         html;
+
 
       renderCheckoutFields();
 
       renderPaymentSection();
+
 
       document
         .getElementById(
@@ -3229,6 +3671,7 @@ document
               product.id
             ];
 
+
           if(qty){
 
             const price =
@@ -3236,11 +3679,14 @@ document
                 product
               );
 
+
             const itemTotal =
               qty * price;
 
+
             subtotal +=
               itemTotal;
+
 
             summaryText +=
               `* ${product.name} (${product.size}) x${qty} = ${CONFIG.currency}${itemTotal}\n`;
@@ -3252,6 +3698,7 @@ document
 
 
       let deliveryCharge = 0;
+
 
       if(
         CONFIG.freeDeliveryAbove > 0 &&
@@ -3437,6 +3884,7 @@ _"${CONFIG.tagline}"_`;
 
       state.cart = {};
 
+
       renderProducts();
 
       updateBottomBar();
@@ -3464,6 +3912,7 @@ document
         return;
 
       }
+
 
       navigator.clipboard
         .writeText(
@@ -3527,8 +3976,10 @@ function generateDailyOrderNumber(
   const now =
     new Date();
 
+
   const year =
     now.getFullYear();
+
 
   const month =
     String(
@@ -3538,6 +3989,7 @@ function generateDailyOrderNumber(
       "0"
     );
 
+
   const day =
     String(
       now.getDate()
@@ -3545,6 +3997,7 @@ function generateDailyOrderNumber(
       2,
       "0"
     );
+
 
   const dateKey =
     `${year}${month}${day}`;
@@ -3570,6 +4023,7 @@ function generateDailyOrderNumber(
   ){
 
     currentCount = 1;
+
 
     localStorage.setItem(
       "svr_order_date",
@@ -3608,10 +4062,12 @@ const whoModal =
     "who"
   );
 
+
 const mainContent =
   document.getElementById(
     "mainContent"
   );
+
 
 const mainFoot =
   document.getElementById(
@@ -3626,22 +4082,27 @@ function selectRole(
   state.role =
     selectedRole;
 
+
   document.getElementById(
     "whoLabel"
   ).textContent =
     state.role;
 
+
   whoModal.classList.remove(
     "on"
   );
+
 
   mainContent.classList.add(
     "active"
   );
 
+
   mainFoot.classList.add(
     "active"
   );
+
 
   renderProducts();
 
@@ -3773,6 +4234,14 @@ async function loadGoogleSheetData(){
 
     status.textContent =
       "Using website backup data.";
+
+
+    /*
+      Make sure social buttons
+      are still visible.
+    */
+
+    renderSocialLinks();
 
   }
 
