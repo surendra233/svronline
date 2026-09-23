@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,14 @@
 <!-- PWA -->
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0a0905">
+
+<!-- FAVICON - Google Sheet controlled -->
+<link
+  id="siteFavicon"
+  rel="icon"
+  type="image/png"
+  href="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg"
+>
 
 <title>SVR Food Products – Sir Arthur Cotton | Order Online</title>
 
@@ -1080,6 +1087,10 @@ const CONFIG = {
   footerBanner:
     "https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0",
 
+  /* NEW: FAVICON */
+  favicon:
+    "https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg",
+
   currency:"₹",
 
   deliveryCharge:0,
@@ -1502,9 +1513,17 @@ function parseGvizTable(json){
 
 function isTrue(value){
 
-  return String(value || "")
-    .trim()
-    .toLowerCase() === "true";
+  const v =
+    String(value || "")
+      .trim()
+      .toLowerCase();
+
+  return [
+    "true",
+    "yes",
+    "1",
+    "active"
+  ].includes(v);
 
 }
 
@@ -1532,8 +1551,15 @@ function getSetting(rows,key,fallback=""){
     rows.find(
       r =>
         String(
-          r.Setting || ""
-        ).trim() === key
+          r.Setting ||
+          r.Key ||
+          ""
+        )
+        .trim()
+        .toLowerCase() ===
+        String(key)
+          .trim()
+          .toLowerCase()
     );
 
   if(!row){
@@ -1555,6 +1581,55 @@ function getSetting(rows,key,fallback=""){
   return String(
     row.Value || fallback
   ).trim();
+
+}
+
+
+function normalizeImageUrl(url){
+
+  let value =
+    String(url || "")
+      .trim();
+
+  if(!value){
+
+    return "";
+
+  }
+
+  /*
+    Google Drive:
+    https://drive.google.com/file/d/FILE_ID/view
+  */
+
+  const fileMatch =
+    value.match(
+      /drive\.google\.com\/file\/d\/([^/]+)/
+    );
+
+  if(fileMatch){
+
+    return `https://lh3.googleusercontent.com/d/${fileMatch[1]}`;
+
+  }
+
+  /*
+    Google Drive:
+    https://drive.google.com/uc?id=FILE_ID
+  */
+
+  const idMatch =
+    value.match(
+      /drive\.google\.com\/.*[?&]id=([^&]+)/
+    );
+
+  if(idMatch){
+
+    return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+
+  }
+
+  return value;
 
 }
 
@@ -1641,17 +1716,32 @@ async function loadSettings(){
     );
 
   CONFIG.headerBanner =
-    getSetting(
-      rows,
-      "header_banner",
-      CONFIG.headerBanner
+    normalizeImageUrl(
+      getSetting(
+        rows,
+        "header_banner",
+        CONFIG.headerBanner
+      )
     );
 
   CONFIG.footerBanner =
-    getSetting(
-      rows,
-      "footer_banner",
-      CONFIG.footerBanner
+    normalizeImageUrl(
+      getSetting(
+        rows,
+        "footer_banner",
+        CONFIG.footerBanner
+      )
+    );
+
+  /* NEW: LOAD FAVICON FROM GOOGLE SHEET */
+
+  CONFIG.favicon =
+    normalizeImageUrl(
+      getSetting(
+        rows,
+        "favicon",
+        CONFIG.favicon
+      )
     );
 
   CONFIG.currency =
@@ -1738,9 +1828,11 @@ async function loadProducts(){
             cleanNumber(row.MRP),
 
           img:
-            String(
-              row["Image URL"] || ""
-            ).trim()
+            normalizeImageUrl(
+              String(
+                row["Image URL"] || ""
+              ).trim()
+            )
 
         };
 
@@ -2296,30 +2388,79 @@ function applySettings(){
   document.title =
     `${CONFIG.shopName} – ${CONFIG.brandName} | Order Online`;
 
+
   document.getElementById(
     "headerBanner"
   ).src =
     CONFIG.headerBanner;
+
 
   document.getElementById(
     "footerBanner"
   ).src =
     CONFIG.footerBanner;
 
+
   document.getElementById(
     "footerBrand"
   ).textContent =
     `${CONFIG.shopName} – ${CONFIG.brandName}`;
+
 
   document.getElementById(
     "footerContact"
   ).textContent =
     `Contact: ${CONFIG.phone} | ${CONFIG.email}`;
 
+
   document.getElementById(
     "footerAddress"
   ).textContent =
     CONFIG.address;
+
+
+  /* ==========================================================
+     NEW: APPLY GOOGLE SHEET FAVICON
+  ========================================================== */
+
+  if(CONFIG.favicon){
+
+    const favicon =
+      document.getElementById(
+        "siteFavicon"
+      );
+
+    if(favicon){
+
+      favicon.href =
+        CONFIG.favicon;
+
+    }else{
+
+      const link =
+        document.createElement(
+          "link"
+        );
+
+      link.id =
+        "siteFavicon";
+
+      link.rel =
+        "icon";
+
+      link.type =
+        "image/png";
+
+      link.href =
+        CONFIG.favicon;
+
+      document.head.appendChild(
+        link
+      );
+
+    }
+
+  }
 
 }
 
@@ -4126,4 +4267,3 @@ if("serviceWorker" in navigator){
 
 </body>
 </html>
-```
