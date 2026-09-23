@@ -1,8 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0a0905">
+
 <title>SVR Food Products – Sir Arthur Cotton | Order Online</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -800,10 +806,6 @@ select:focus,input:focus,textarea:focus{
   </p>
 
 
-  <!-- =========================
-       SOCIAL MEDIA
-  ========================== -->
-
   <div class="social-section">
 
     <p class="social-title">
@@ -824,10 +826,6 @@ select:focus,input:focus,textarea:focus{
 
 </footer>
 
-
-<!-- =========================
-     ROLE MODAL
-========================= -->
 
 <div
   class="modal on"
@@ -882,10 +880,6 @@ select:focus,input:focus,textarea:focus{
 </div>
 
 
-<!-- =========================
-     CART BAR
-========================= -->
-
 <div
   class="bar"
   id="bar"
@@ -905,10 +899,6 @@ select:focus,input:focus,textarea:focus{
 
 </div>
 
-
-<!-- =========================
-     CHECKOUT
-========================= -->
 
 <div
   class="sheet"
@@ -980,10 +970,6 @@ select:focus,input:focus,textarea:focus{
 
 </div>
 
-
-<!-- =========================
-     CONFIRMATION
-========================= -->
 
 <div
   class="sheet"
@@ -1058,17 +1044,11 @@ const GOOGLE_SHEET_ID =
 const SHEET_NAMES = {
 
   SETTINGS: "SETTINGS",
-
   PRODUCTS: "PRODUCTS",
-
   ROLE_PRICES: "ROLE_PRICES",
-
   PAYMENT_DELIVERY: "PAYMENT_DELIVERY",
-
   MESSAGES: "MESSAGES",
-
   LOCATIONS: "LOCATIONS",
-
   SOCIAL_LINKS: "SOCIAL_LINKS"
 
 };
@@ -1366,17 +1346,6 @@ let PAYMENT_DATA = {
 /* ============================================================
    SOCIAL LINKS FALLBACK
 ============================================================ */
-
-/*
-  IMPORTANT:
-  These links are always available.
-
-  If Google Sheet SOCIAL_LINKS works,
-  Sheet links will replace these.
-
-  If Google Sheet fails,
-  these links will still appear.
-*/
 
 let SOCIAL_LINKS = [
 
@@ -2103,12 +2072,6 @@ async function loadSocialLinks(){
 
       });
 
-
-    /*
-      Only replace fallback links if
-      Google Sheet returned valid links.
-    */
-
     if(data.length){
 
       SOCIAL_LINKS =
@@ -2117,15 +2080,6 @@ async function loadSocialLinks(){
     }
 
   }catch(error){
-
-    /*
-      IMPORTANT:
-      Keep fallback social links.
-
-      This prevents the footer from
-      becoming empty if Google Sheet
-      SOCIAL_LINKS fails.
-    */
 
     console.warn(
       "SOCIAL_LINKS sheet could not be loaded. Using fallback links.",
@@ -2148,51 +2102,35 @@ function getSocialIcon(platform){
       platform || ""
     ).trim().toLowerCase();
 
-
-  if(
-    name === "instagram"
-  ){
+  if(name === "instagram"){
 
     return "◎";
 
   }
 
-
-  if(
-    name === "facebook"
-  ){
+  if(name === "facebook"){
 
     return "f";
 
   }
 
-
-  if(
-    name === "youtube"
-  ){
+  if(name === "youtube"){
 
     return "▶";
 
   }
 
-
-  if(
-    name === "whatsapp"
-  ){
+  if(name === "whatsapp"){
 
     return "◉";
 
   }
 
-
-  if(
-    name === "website"
-  ){
+  if(name === "website"){
 
     return "🌐";
 
   }
-
 
   return "↗";
 
@@ -2210,18 +2148,11 @@ function renderSocialLinks(){
       "socialLinks"
     );
 
-
   if(!container){
 
     return;
 
   }
-
-
-  /*
-    Always use fallback if somehow
-    SOCIAL_LINKS becomes empty.
-  */
 
   if(
     !Array.isArray(SOCIAL_LINKS) ||
@@ -2259,25 +2190,15 @@ function renderSocialLinks(){
 
   }
 
-
-  /*
-    Preferred display order.
-  */
-
   const preferredOrder = [
 
     "whatsapp",
-
     "instagram",
-
     "facebook",
-
     "youtube",
-
     "website"
 
   ];
-
 
   const orderedLinks =
     [...SOCIAL_LINKS].sort(
@@ -2309,7 +2230,6 @@ function renderSocialLinks(){
       }
     );
 
-
   container.innerHTML =
     orderedLinks
       .map(item => {
@@ -2324,7 +2244,6 @@ function renderSocialLinks(){
             item.url || ""
           ).trim();
 
-
         if(
           !platform ||
           !url
@@ -2333,7 +2252,6 @@ function renderSocialLinks(){
           return "";
 
         }
-
 
         return `
 
@@ -2378,30 +2296,25 @@ function applySettings(){
   document.title =
     `${CONFIG.shopName} – ${CONFIG.brandName} | Order Online`;
 
-
   document.getElementById(
     "headerBanner"
   ).src =
     CONFIG.headerBanner;
-
 
   document.getElementById(
     "footerBanner"
   ).src =
     CONFIG.footerBanner;
 
-
   document.getElementById(
     "footerBrand"
   ).textContent =
     `${CONFIG.shopName} – ${CONFIG.brandName}`;
 
-
   document.getElementById(
     "footerContact"
   ).textContent =
     `Contact: ${CONFIG.phone} | ${CONFIG.email}`;
-
 
   document.getElementById(
     "footerAddress"
@@ -2422,66 +2335,55 @@ function applyMessages(){
   ).textContent =
     MESSAGES.welcome_title;
 
-
   document.getElementById(
     "whoDescription"
   ).textContent =
     MESSAGES.welcome_text;
-
 
   document.getElementById(
     "catalogNotice"
   ).textContent =
     MESSAGES.catalog_notice;
 
-
   document.getElementById(
     "orderingAsText"
   ).textContent =
     MESSAGES.ordering_as;
-
 
   document.getElementById(
     "changeWho"
   ).textContent =
     MESSAGES.change_role;
 
-
   document.getElementById(
     "yourOrderTitle"
   ).textContent =
     MESSAGES.your_order;
-
 
   document.getElementById(
     "detailsTitle"
   ).textContent =
     MESSAGES.delivery_details;
 
-
   document.getElementById(
     "notesLabel"
   ).textContent =
     MESSAGES.notes;
-
 
   document.getElementById(
     "place"
   ).textContent =
     MESSAGES.place_order;
 
-
   document.getElementById(
     "waBtn"
   ).textContent =
     MESSAGES.send_whatsapp;
 
-
   document.getElementById(
     "copyBtn"
   ).textContent =
     MESSAGES.copy_details;
-
 
   document.getElementById(
     "newOrder"
@@ -2500,7 +2402,6 @@ function getProductPrice(product){
   const role =
     state.role;
 
-
   if(
     role &&
     ROLE_PRICES[product.id] &&
@@ -2515,7 +2416,6 @@ function getProductPrice(product){
     );
 
   }
-
 
   return cleanNumber(
     product.price
@@ -2535,7 +2435,6 @@ function renderProducts(){
       "list"
     );
 
-
   if(!CONFIG.products.length){
 
     listEl.innerHTML =
@@ -2547,7 +2446,6 @@ function renderProducts(){
 
   }
 
-
   listEl.innerHTML =
     CONFIG.products
       .map(product => {
@@ -2557,12 +2455,10 @@ function renderProducts(){
             product.id
           ] || 0;
 
-
         const price =
           getProductPrice(
             product
           );
-
 
         const saving =
           Math.max(
@@ -2571,7 +2467,6 @@ function renderProducts(){
               product.mrp
             ) - price
           );
-
 
         return `
 
@@ -2615,7 +2510,6 @@ function renderProducts(){
                   ${CONFIG.currency}${price}
                 </b>
 
-
                 ${
                   product.mrp
                   ? `<s>
@@ -2623,7 +2517,6 @@ function renderProducts(){
                     </s>`
                   : ""
                 }
-
 
                 ${
                   saving > 0
@@ -2698,10 +2591,8 @@ function updateQty(id,delta){
   const current =
     state.cart[id] || 0;
 
-
   const next =
     current + delta;
-
 
   if(next <= 0){
 
@@ -2713,7 +2604,6 @@ function updateQty(id,delta){
       next;
 
   }
-
 
   renderProducts();
 
@@ -2729,7 +2619,6 @@ function updateBottomBar(){
       "bar"
     );
 
-
   const totalItems =
     Object.values(
       state.cart
@@ -2739,7 +2628,6 @@ function updateBottomBar(){
         sum + q,
       0
     );
-
 
   if(totalItems === 0){
 
@@ -2751,9 +2639,7 @@ function updateBottomBar(){
 
   }
 
-
   let subtotal = 0;
-
 
   CONFIG.products.forEach(
     product => {
@@ -2762,7 +2648,6 @@ function updateBottomBar(){
         state.cart[
           product.id
         ] || 0;
-
 
       if(qty){
 
@@ -2777,7 +2662,6 @@ function updateBottomBar(){
     }
   );
 
-
   document.getElementById(
     "barCount"
   ).textContent =
@@ -2787,12 +2671,10 @@ function updateBottomBar(){
       : ""
     }`;
 
-
   document.getElementById(
     "barTotal"
   ).textContent =
     `${CONFIG.currency}${subtotal} ➔ ${MESSAGES.checkout}`;
-
 
   bar.classList.add(
     "on"
@@ -2824,30 +2706,25 @@ function handleStateChange(){
       "custState"
     ).value;
 
-
   const distSelect =
     document.getElementById(
       "custDistrict"
     );
-
 
   const manualState =
     document.getElementById(
       "manualStateWrap"
     );
 
-
   const manualDistrict =
     document.getElementById(
       "manualDistrictWrap"
     );
 
-
   distSelect.innerHTML =
     `<option value="">
       Select District
     </option>`;
-
 
   if(
     stateVal === "Other State"
@@ -2857,36 +2734,29 @@ function handleStateChange(){
       "hidden"
     );
 
-
     manualState.classList.add(
       "on"
     );
-
 
     manualDistrict.classList.add(
       "on"
     );
 
-
     return;
 
   }
-
 
   distSelect.classList.remove(
     "hidden"
   );
 
-
   manualState.classList.remove(
     "on"
   );
 
-
   manualDistrict.classList.remove(
     "on"
   );
-
 
   if(
     stateVal &&
@@ -2902,14 +2772,11 @@ function handleStateChange(){
               "option"
             );
 
-
           opt.value =
             district;
 
-
           opt.textContent =
             district;
-
 
           distSelect.appendChild(
             opt
@@ -2934,11 +2801,9 @@ function renderCheckoutFields(){
       "fields"
     );
 
-
   const isFirm =
     state.role === "Distributor" ||
     state.role === "Hotel";
-
 
   fields.innerHTML = `
 
@@ -3161,7 +3026,6 @@ function renderCheckoutFields(){
 
   `;
 
-
   handleStateChange();
 
 }
@@ -3178,15 +3042,12 @@ function renderPaymentSection(){
       "paymentInfo"
     );
 
-
   const role =
     state.role;
-
 
   const payment =
     PAYMENT_DATA[role] ||
     PAYMENT_DATA.User;
-
 
   if(
     payment.mode === "COD" ||
@@ -3209,7 +3070,6 @@ function renderPaymentSection(){
           value="COD"
           checked
         >
-
 
         <div>
 
@@ -3318,13 +3178,11 @@ document
           "cartLines"
         );
 
-
       let subtotal = 0;
 
       let totalSaved = 0;
 
       let html = "";
-
 
       CONFIG.products.forEach(
         product => {
@@ -3334,7 +3192,6 @@ document
               product.id
             ];
 
-
           if(qty){
 
             const price =
@@ -3342,14 +3199,11 @@ document
                 product
               );
 
-
             const itemTotal =
               qty * price;
 
-
             subtotal +=
               itemTotal;
-
 
             totalSaved +=
               qty *
@@ -3359,7 +3213,6 @@ document
                   product.mrp
                 ) - price
               );
-
 
             html += `
 
@@ -3671,7 +3524,6 @@ document
               product.id
             ];
 
-
           if(qty){
 
             const price =
@@ -3679,14 +3531,11 @@ document
                 product
               );
 
-
             const itemTotal =
               qty * price;
 
-
             subtotal +=
               itemTotal;
-
 
             summaryText +=
               `* ${product.name} (${product.size}) x${qty} = ${CONFIG.currency}${itemTotal}\n`;
@@ -3976,10 +3825,8 @@ function generateDailyOrderNumber(
   const now =
     new Date();
 
-
   const year =
     now.getFullYear();
-
 
   const month =
     String(
@@ -3989,7 +3836,6 @@ function generateDailyOrderNumber(
       "0"
     );
 
-
   const day =
     String(
       now.getDate()
@@ -3998,16 +3844,13 @@ function generateDailyOrderNumber(
       "0"
     );
 
-
   const dateKey =
     `${year}${month}${day}`;
-
 
   const storedDate =
     localStorage.getItem(
       "svr_order_date"
     );
-
 
   let currentCount =
     parseInt(
@@ -4017,13 +3860,11 @@ function generateDailyOrderNumber(
       10
     );
 
-
   if(
     storedDate !== dateKey
   ){
 
     currentCount = 1;
-
 
     localStorage.setItem(
       "svr_order_date",
@@ -4036,12 +3877,10 @@ function generateDailyOrderNumber(
 
   }
 
-
   localStorage.setItem(
     "svr_order_count",
     currentCount
   );
-
 
   return `${prefix}-${dateKey}-${String(
     currentCount
@@ -4082,27 +3921,22 @@ function selectRole(
   state.role =
     selectedRole;
 
-
   document.getElementById(
     "whoLabel"
   ).textContent =
     state.role;
 
-
   whoModal.classList.remove(
     "on"
   );
-
 
   mainContent.classList.add(
     "active"
   );
 
-
   mainFoot.classList.add(
     "active"
   );
-
 
   renderProducts();
 
@@ -4163,10 +3997,8 @@ async function loadGoogleSheetData(){
       "sheetStatus"
     );
 
-
   status.textContent =
     "Connecting to SVR Food Products control sheet...";
-
 
   try{
 
@@ -4189,7 +4021,6 @@ async function loadGoogleSheetData(){
 
       ]);
 
-
     const successCount =
       results.filter(
         r =>
@@ -4197,10 +4028,8 @@ async function loadGoogleSheetData(){
           "fulfilled"
       ).length;
 
-
     state.sheetLoaded =
       successCount > 0;
-
 
     applySettings();
 
@@ -4209,7 +4038,6 @@ async function loadGoogleSheetData(){
     renderProducts();
 
     renderSocialLinks();
-
 
     if(state.sheetLoaded){
 
@@ -4223,7 +4051,6 @@ async function loadGoogleSheetData(){
 
     }
 
-
   }catch(error){
 
     console.error(
@@ -4231,15 +4058,8 @@ async function loadGoogleSheetData(){
       error
     );
 
-
     status.textContent =
       "Using website backup data.";
-
-
-    /*
-      Make sure social buttons
-      are still visible.
-    */
 
     renderSocialLinks();
 
@@ -4264,7 +4084,46 @@ renderSocialLinks();
 
 loadGoogleSheetData();
 
+
+/* ============================================================
+   PWA SERVICE WORKER
+============================================================ */
+
+if("serviceWorker" in navigator){
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then(
+          () => {
+
+            console.log(
+              "SVR Food Service Worker Registered"
+            );
+
+          }
+        )
+        .catch(
+          error => {
+
+            console.error(
+              "Service Worker Error:",
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
 </script>
 
 </body>
 </html>
+```
