@@ -1,2595 +1,2832 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-<!-- PWA -->
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#0a0905">
-
-<!-- FAVICON - Google Sheet controlled -->
-<link
-  id="siteFavicon"
-  rel="icon"
-  type="image/png"
-  href="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg"
->
-
-<title>SVR Food Products – Sir Arthur Cotton | Order Online</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Bricolage+Grotesque:wght@600;800&family=Hind:wght@400;500;600&family=Noto+Sans+Telugu:wght@400;600&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
-
-  --bg:#f2f5ee;
-  --surface:#ffffff;
-  --ink:#1d2a1f;
-  --muted:#66756a;
-  --line:#dde5d6;
-  --brand:#1b7a3a;
-  --brand-ink:#ffffff;
-  --gold:#d4af37;
-  --gold-light:#f9e596;
-  --tile:#eef2e8;
-  --off:#1b7a3a;
-  --head:#0a0905;
-}
-
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0f1511;
-    --surface:#18211b;
-    --ink:#eaf1e6;
-    --muted:#9db0a2;
-    --line:#2a382e;
-    --brand:#3fae5f;
-    --brand-ink:#08130b;
-    --gold:#e0b03c;
-    --gold-light:#faea9f;
-    --tile:#223027;
-    --off:#5cc46c;
-    --head:#080704;
-  }
-}
-
-:root[data-theme="dark"]{
-  --bg:#0f1511;
-  --surface:#18211b;
-  --ink:#eaf1e6;
-  --muted:#9db0a2;
-  --line:#2a382e;
-  --brand:#3fae5f;
-  --brand-ink:#08130b;
-  --gold:#e0b03c;
-  --gold-light:#faea9f;
-  --tile:#223027;
-  --off:#5cc46c;
-  --head:#080704;
-}
-
-html{
-  scroll-padding-top:env(safe-area-inset-top,0px)
-}
-
-*,*::before,*::after{
-  box-sizing:border-box
-}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:'Hind','Noto Sans Telugu',system-ui,sans-serif;
-  font-size:16px;
-  line-height:1.5;
-  padding-bottom:96px
-}
-
-h1,h2,h3{
-  margin:0;
-  line-height:1.2
-}
-
-button,input,select,textarea{
-  font:inherit;
-  color:inherit
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-  background:var(--head);
-  border-bottom:3px solid var(--gold);
-  padding:8px 12px;
-  text-align:center;
-  box-shadow:0 4px 18px rgba(0,0,0,.5);
-}
-
-.header-banner{
-  display:block;
-  margin:0 auto;
-  width:100%;
-  max-width:900px;
-  height:auto;
-  max-height:220px;
-  border-radius:8px;
-  object-fit:contain;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-  max-width:720px;
-  margin:0 auto;
-  padding:16px 16px 8px;
-  display:none
-}
-
-main.active{
-  display:block
-}
-
-.notice{
-  background:var(--tile);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:10px 12px;
-  font-size:.92rem;
-  color:var(--muted);
-  margin-bottom:14px
-}
-
-.list{
-  display:grid;
-  gap:12px
-}
-
-.card{
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:10px;
-  display:flex;
-  gap:12px;
-  align-items:center
-}
-
-.tile{
-  flex:0 0 104px;
-  height:120px;
-  border-radius:10px;
-  background:var(--tile);
-  display:grid;
-  place-items:center;
-  overflow:hidden
-}
-
-.tile img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:cover;
-  display:block;
-  border-radius:8px
-}
-
-.info{
-  flex:1;
-  min-width:0
-}
-
-.info h3{
-  font-size:1.05rem;
-  font-weight:800
-}
-
-.te{
-  font-family:'Noto Sans Telugu',sans-serif;
-  color:var(--muted);
-  font-size:.95rem
-}
-
-.sub{
-  color:var(--muted);
-  font-size:.88rem
-}
-
-.pr{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:baseline;
-  gap:6px;
-  margin:4px 0 8px
-}
-
-.pr b{
-  font-size:1.15rem
-}
-
-.pr s{
-  color:var(--muted);
-  font-size:.92rem
-}
-
-.pr em{
-  font-style:normal;
-  color:var(--off);
-  font-weight:600;
-  font-size:.88rem
-}
-
-.add{
-  border:0;
-  background:var(--brand);
-  color:var(--brand-ink);
-  border-radius:999px;
-  padding:8px 22px;
-  font-weight:600;
-  cursor:pointer
-}
-
-.step{
-  display:inline-flex;
-  align-items:center;
-  border:1.5px solid var(--brand);
-  border-radius:999px;
-  overflow:hidden
-}
-
-.step button{
-  width:36px;
-  height:34px;
-  border:0;
-  background:transparent;
-  color:var(--brand);
-  font-size:1.25rem;
-  cursor:pointer
-}
-
-.step span{
-  min-width:28px;
-  text-align:center;
-  font-weight:600
-}
-
-:focus-visible{
-  outline:3px solid var(--gold);
-  outline-offset:2px
-}
-
-/* =========================
-   CART BAR
-========================= */
-
-.bar{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
-  background:var(--surface);
-  border-top:1px solid var(--line);
-  display:none;
-  z-index:5
-}
-
-.bar.on{
-  display:block
-}
-
-.bar button{
-  width:100%;
-  max-width:720px;
-  display:flex;
-  justify-content:space-between;
-  margin:0 auto;
-  border:0;
-  background:var(--brand);
-  color:var(--brand-ink);
-  border-radius:12px;
-  padding:14px 18px;
-  font-weight:600;
-  cursor:pointer
-}
-
-/* =========================
-   SHEETS
-========================= */
-
-.sheet{
-  position:fixed;
-  inset:0;
-  background:var(--bg);
-  z-index:10;
-  overflow-y:auto;
-  display:none;
-  padding-top:env(safe-area-inset-top,0px)
-}
-
-.sheet.on{
-  display:block
-}
-
-.sheet .in{
-  max-width:720px;
-  margin:0 auto;
-  padding:16px 18px calc(40px + env(safe-area-inset-bottom,0px))
-}
-
-.back{
-  border:0;
-  background:none;
-  color:var(--brand);
-  font-weight:600;
-  padding:6px 0;
-  cursor:pointer
-}
-
-h2{
-  font-size:1.35rem;
-  margin:8px 0 10px
-}
-
-.line{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:7px 0;
-  border-bottom:1px dashed var(--line)
-}
-
-.line.save{
-  color:var(--off)
-}
-
-.total{
-  font-weight:600;
-  font-size:1.1rem;
-  border-bottom:0
-}
-
-/* =========================
-   FORMS
-========================= */
-
-label{
-  display:block;
-  font-weight:600;
-  font-size:.92rem;
-  margin:14px 0 4px
-}
-
-input,select,textarea{
-  width:100%;
-  padding:11px 12px;
-  border:1.5px solid var(--line);
-  border-radius:10px;
-  background:var(--surface);
-  color:var(--ink)
-}
-
-select:focus,input:focus,textarea:focus{
-  border-color:var(--brand);
-  outline:none
-}
-
-.row2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.pay{
-  display:grid;
-  gap:8px;
-  margin-top:6px
-}
-
-.pay label{
-  display:flex;
-  align-items:flex-start;
-  gap:12px;
-  margin:0;
-  padding:14px;
-  border:1.5px solid var(--line);
-  border-radius:12px;
-  background:var(--surface);
-  font-weight:500;
-  cursor:pointer
-}
-
-.pay input{
-  width:auto;
-  margin-top:5px
-}
-
-.pay small{
-  display:block;
-  color:var(--muted);
-  font-weight:400;
-  margin-top:4px
-}
-
-.pay-tag{
-  display:inline-block;
-  background:var(--brand);
-  color:#fff;
-  padding:2px 8px;
-  border-radius:6px;
-  font-size:.75rem;
-  font-weight:700;
-  margin-left:6px
-}
-
-.pay-tag.upi{
-  background:#0066cc
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.cta{
-  display:block;
-  width:100%;
-  text-align:center;
-  text-decoration:none;
-  border:0;
-  border-radius:12px;
-  padding:14px;
-  font-weight:600;
-  cursor:pointer;
-  margin-top:12px;
-  font-size:1rem
-}
-
-.wa{
-  background:#1fa855;
-  color:#fff
-}
-
-.sec{
-  background:var(--surface);
-  color:var(--brand);
-  border:1.5px solid var(--brand)
-}
-
-.pri{
-  background:var(--brand);
-  color:var(--brand-ink)
-}
-
-/* =========================
-   CONFIRMATION
-========================= */
-
-.done{
-  text-align:center;
-  padding-top:24px
-}
-
-.done .big{
-  font-size:3rem
-}
-
-.small{
-  color:var(--muted);
-  font-size:.9rem
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.foot{
-  background:var(--head);
-  border-top:4px solid var(--gold);
-  margin-top:24px;
-  padding:20px 12px calc(110px + env(safe-area-inset-bottom,0px));
-  text-align:center;
-  display:none
-}
-
-.foot.active{
-  display:block
-}
-
-.foot img{
-  display:block;
-  margin:0 auto 12px;
-  width:min(500px,88%);
-  height:auto;
-  border-radius:8px
-}
-
-.foot p{
-  color:#e9d9a6;
-  font-size:.85rem;
-  margin:4px 0
-}
-
-/* =========================
-   SOCIAL MEDIA
-========================= */
-
-.social-section{
-  margin:18px auto 12px;
-  padding-top:14px;
-  border-top:1px solid rgba(212,175,55,.35);
-  max-width:560px;
-}
-
-.social-title{
-  color:#d4af37 !important;
-  font-size:.95rem !important;
-  font-weight:700;
-  margin:0 0 12px !important;
-}
-
-.social-links{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:9px;
-}
-
-.social-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  min-width:108px;
-  padding:9px 13px;
-  border:1px solid rgba(212,175,55,.55);
-  border-radius:999px;
-  color:#f9e596;
-  text-decoration:none;
-  font-size:.82rem;
-  font-weight:600;
-  background:rgba(255,255,255,.03);
-  transition:all .2s ease;
-}
-
-.social-link:hover{
-  background:rgba(212,175,55,.14);
-  border-color:#d4af37;
-  transform:translateY(-1px);
-}
-
-.social-icon{
-  width:18px;
-  height:18px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1rem;
-  line-height:1;
-  font-weight:800;
-}
-
-@media(max-width:520px){
-
-  .social-links{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    width:100%;
-  }
-
-  .social-link{
-    width:100%;
-    min-width:0;
-    padding:9px 8px;
-  }
-
-  .social-link:last-child{
-    grid-column:1 / -1;
-    width:50%;
-    justify-self:center;
-  }
-}
-
-/* =========================
-   ROLE MODAL
-========================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(4px);
-  z-index:20;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px
-}
-
-.modal.on{
-  display:flex
-}
-
-.modal .box{
-  background:var(--surface);
-  border-radius:18px;
-  padding:26px 22px;
-  max-width:400px;
-  width:100%;
-  text-align:center;
-  box-shadow:0 12px 36px rgba(0,0,0,.35)
-}
-
-.modal .box p{
-  color:var(--muted);
-  margin:0 0 10px
-}
-
-.who{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px
-}
-
-.modal .box .cta{
-  margin-top:10px
-}
-
-.modal .box .cta:first-of-type{
-  margin-top:16px
-}
-
-.link{
-  border:0;
-  background:none;
-  color:var(--brand);
-  font-weight:600;
-  text-decoration:underline;
-  cursor:pointer;
-  padding:0
-}
-
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-  text-align:center;
-  padding:30px 10px;
-  color:var(--muted)
-}
-
-.sheet-status{
-  font-size:.78rem;
-  text-align:center;
-  color:var(--muted);
-  margin-top:8px
-}
-
-/* =========================
-   OTHER STATE MANUAL INPUT
-========================= */
-
-.manual-location{
-  display:none;
-  margin-top:8px
-}
-
-.manual-location.on{
-  display:block
-}
-
-.hidden{
-  display:none !important
-}
-
-@media(max-width:520px){
-
-  .card{
-    align-items:flex-start
-  }
-
-  .tile{
-    flex:0 0 90px;
-    height:105px
-  }
-
-  .row2{
-    grid-template-columns:1fr
-  }
-
-  .header-banner{
-    max-height:180px
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <title>SVR Food Products – Sir Arthur Cotton | Order Online</title>
+
+  <meta
+    name="description"
+    content="SVR Food Products – Sir Arthur Cotton. Quality Idli Ravva, Urad Gota and Vari Nuka."
+  />
+
+  <meta name="theme-color" content="#0a0905" />
+
+  <!-- =========================================================
+       FAVICON
+       ========================================================= -->
+
+  <link
+    id="siteFavicon"
+    rel="icon"
+    type="image/png"
+    href="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2"
+  />
+
+  <link
+    rel="shortcut icon"
+    type="image/png"
+    href="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2"
+  />
+
+  <link
+    rel="apple-touch-icon"
+    href="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2"
+  />
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Cinzel:wght@500;600;700&family=Hind:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =========================================================
+       ROOT
+       ========================================================= */
+
+    :root {
+      --bg: #f7f3ea;
+      --card: #fffdf8;
+      --text: #17130d;
+      --muted: #766d60;
+      --border: #ddd4c5;
+      --gold: #b88732;
+      --gold-dark: #8b641d;
+      --green: #28613f;
+      --red: #a52b24;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+      --radius: 20px;
+    }
+
+    body.dark {
+      --bg: #0a0905;
+      --card: #15130e;
+      --text: #f6f0e3;
+      --muted: #aaa091;
+      --border: #332d22;
+      --gold: #d3a94e;
+      --gold-dark: #b9892f;
+      --green: #4c986a;
+      --red: #d75c53;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        "Bricolage Grotesque",
+        "Noto Sans Telugu",
+        Arial,
+        sans-serif;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .telugu {
+      font-family:
+        "Noto Sans Telugu",
+        "Hind",
+        sans-serif;
+    }
+
+    /* =========================================================
+       LOADING
+       ========================================================= */
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      transition: opacity 0.3s ease;
+    }
+
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-box {
+      text-align: center;
+    }
+
+    .loading-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 15px auto;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 243, 234, 0.94);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    body.dark header {
+      background: rgba(10, 9, 5, 0.94);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .brand-title {
+      min-width: 0;
+    }
+
+    .brand-title h1 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .brand-title p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 0 18px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      aspect-ratio: 3 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--card);
+    }
+
+    /* =========================================================
+       MAIN
+       ========================================================= */
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 22px 18px 130px;
+    }
+
+    .catalog-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .catalog-title h2 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      font-size: 25px;
+    }
+
+    .catalog-title p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 13px;
+    }
+
+    .role-pill strong {
+      color: var(--gold-dark);
+    }
+
+    .role-pill button {
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-weight: 700;
+      padding: 0;
+    }
+
+    /* =========================================================
+       NOTICE
+       ========================================================= */
+
+    .notice {
+      padding: 14px 16px;
+      border-radius: 15px;
+      background: rgba(184, 135, 50, 0.08);
+      border: 1px solid rgba(184, 135, 50, 0.25);
+      margin-bottom: 22px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       PRODUCTS
+       ========================================================= */
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      background: #eee8dc;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-body {
+      padding: 15px;
+    }
+
+    .product-name {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .product-telugu {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .product-size {
+      margin-top: 7px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .price-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gold-dark);
+    }
+
+    .mrp {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .add-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 16px;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
+      min-width: 82px;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .qty-control button {
+      width: 34px;
+      height: 38px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    .qty-value {
+      min-width: 32px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       BOTTOM CART
+       ========================================================= */
+
+    .cart-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 150;
+      padding: 10px 15px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(10, 9, 5, 0.94);
+      backdrop-filter: blur(16px);
+      transform: translateY(110%);
+      transition: transform 0.25s ease;
+    }
+
+    .cart-bar.show {
+      transform: translateY(0);
+    }
+
+    .cart-bar-inner {
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: white;
+    }
+
+    .cart-info {
+      min-width: 0;
+    }
+
+    .cart-info strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .cart-info span {
+      font-size: 12px;
+      opacity: 0.75;
+    }
+
+    .checkout-btn {
+      border: 0;
+      background: var(--gold);
+      color: #15100a;
+      padding: 12px 20px;
+      border-radius: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       SHEETS / MODALS
+       ========================================================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0, 0, 0, 0.58);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .overlay.show {
+      display: flex;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 760px;
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-radius: 25px 25px 0 0;
+      padding: 22px;
+      animation: slideUp 0.25s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .sheet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .sheet-head h3 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      font-size: 21px;
+    }
+
+    .close-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    /* =========================================================
+       ROLE MODAL
+       ========================================================= */
+
+    .role-modal {
+      align-items: center;
+      padding: 18px;
+    }
+
+    .role-modal .sheet {
+      border-radius: 25px;
+      max-width: 480px;
+      max-height: 90vh;
+    }
+
+    .welcome {
+      text-align: center;
+      padding: 10px 0 20px;
+    }
+
+    .welcome-logo {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 22px;
+      margin: 0 auto 18px;
+    }
+
+    .welcome h2 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      font-size: 25px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 10px 0 0;
+    }
+
+    .role-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .role-option {
+      width: 100%;
+      text-align: left;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .role-option strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .role-option span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .role-arrow {
+      font-size: 20px;
+      color: var(--gold-dark);
+    }
+
+    /* =========================================================
+       CHECKOUT
+       ========================================================= */
+
+    .checkout-section {
+      margin-top: 22px;
+    }
+
+    .checkout-section h4 {
+      margin: 0 0 12px;
+      font-size: 16px;
+    }
+
+    .order-list {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      padding: 13px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .order-item:last-child {
+      border-bottom: 0;
+    }
+
+    .order-item-name {
+      font-weight: 600;
+    }
+
+    .order-item-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .order-item-total {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .payment-box {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(40, 97, 63, 0.08);
+      border: 1px solid rgba(40, 97, 63, 0.2);
+      margin-bottom: 15px;
+    }
+
+    .payment-title {
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .payment-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .summary {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .summary-row.total {
+      margin-top: 13px;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--gold-dark);
+    }
+
+    .place-btn {
+      width: 100%;
+      border: 0;
+      background: var(--green);
+      color: white;
+      border-radius: 14px;
+      padding: 14px;
+      font-weight: 800;
+      margin-top: 16px;
+    }
+
+    .back-btn {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 14px;
+      padding: 13px;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       CONFIRMATION
+       ========================================================= */
+
+    .confirmation {
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(40, 97, 63, 0.12);
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-size: 36px;
+      margin: 0 auto 15px;
+    }
+
+    .confirmation h2 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+    }
+
+    .confirmation p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .order-number {
+      display: inline-block;
+      margin: 10px 0 20px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-weight: 800;
+    }
+
+    .whatsapp-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px;
+      background: #25d366;
+      color: white;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .copy-btn {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 14px;
+      padding: 13px;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 18px 35px;
+    }
+
+    .footer-banner {
+      width: 100%;
+      aspect-ratio: 4 / 1;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 25px;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-content h3 {
+      margin: 0;
+      font-family: "Cinzel", serif;
+    }
+
+    .footer-content p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 15px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       MANUAL OTHER STATE
+       ========================================================= */
+
+    #otherStateWrap {
+      display: none;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 900px) {
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        padding: 10px 13px;
+      }
+
+      .brand-logo {
+        width: 43px;
+        height: 43px;
+      }
+
+      .brand-title h1 {
+        font-size: 15px;
+      }
+
+      .brand-title p {
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 0 12px;
+        margin-top: 12px;
+      }
+
+      .hero-banner {
+        aspect-ratio: 2 / 1;
+        border-radius: 18px;
+      }
+
+      main {
+        padding: 18px 12px 125px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 11px;
+      }
+
+      .product-card {
+        border-radius: 15px;
+      }
+
+      .product-body {
+        padding: 11px;
+      }
+
+      .product-name {
+        font-size: 14px;
+      }
+
+      .product-telugu {
+        font-size: 12px;
+      }
+
+      .product-size {
+        font-size: 11px;
+      }
+
+      .price {
+        font-size: 17px;
+      }
+
+      .add-btn {
+        padding: 8px 10px;
+        min-width: 62px;
+        font-size: 12px;
+      }
+
+      .qty-control button {
+        width: 29px;
+      }
+
+      .qty-value {
+        min-width: 26px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .sheet {
+        padding: 18px;
+      }
+
+      .order-item {
+        grid-template-columns: 1fr auto;
+      }
+
+      .order-item-total {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+
+      .footer-banner {
+        aspect-ratio: 2 / 1;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <!-- =========================================================
+       LOADING
+       ========================================================= -->
 
-  <img
-    class="header-banner"
-    id="headerBanner"
-    src="https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH"
-    alt="SVR Food Products – Sir Arthur Cotton Brand"
-    onerror="this.src='https://via.placeholder.com/900x220/12100a/c8961a?text=SVR+FOOD+PRODUCTS'"
-  >
+  <div id="loading">
+    <div class="loading-box">
+      <img
+        class="loading-logo"
+        src="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2"
+        alt="SVR Food Products"
+      />
+      <div class="spinner"></div>
+      <div>Loading...</div>
+    </div>
+  </div>
 
-</header>
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
 
+  <header>
+    <div class="header-inner">
 
-<main id="mainContent">
+      <div class="brand">
+        <img
+          id="brandLogo"
+          class="brand-logo"
+          src="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2"
+          alt="SVR Food Products"
+        />
 
-  <div class="notice who">
+        <div class="brand-title">
+          <h1 id="shopName">SVR Food Products</h1>
+          <p id="brandName">Sir Arthur Cotton</p>
+        </div>
+      </div>
 
-    <span>
+      <div class="header-actions">
 
-      <span id="orderingAsText">
-        Ordering as
-      </span>
+        <button
+          class="icon-btn"
+          onclick="toggleTheme()"
+          aria-label="Toggle theme"
+        >
+          🌓
+        </button>
 
-      <b id="whoLabel"></b>
+      </div>
 
-    </span>
+    </div>
+  </header>
 
-    <button
-      class="link"
-      id="changeWho"
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+
+  <section class="hero">
+
+    <img
+      id="headerBanner"
+      class="hero-banner"
+      src="https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH"
+      alt="SVR Food Products"
+    />
+
+  </section>
+
+  <!-- =========================================================
+       MAIN
+       ========================================================= -->
+
+  <main>
+
+    <div class="catalog-top">
+
+      <div class="catalog-title">
+        <h2>Product Catalog</h2>
+        <p id="tagline" class="telugu">
+          నాణ్యతకు నమ్మకం • రుచికి చిరునామా
+        </p>
+      </div>
+
+      <div class="role-pill">
+        <span id="orderingAsLabel">Ordering as</span>
+        <strong id="currentRole">User</strong>
+        <button onclick="openRoleModal()">Change</button>
+      </div>
+
+    </div>
+
+    <div
+      id="catalogNotice"
+      class="notice telugu"
     >
-      Change
-    </button>
+      Pick your products, enter your delivery address and place the order.
+      We confirm it with you on WhatsApp.
+    </div>
 
-  </div>
+    <div
+      id="productsGrid"
+      class="products-grid"
+    ></div>
 
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer>
+
+    <img
+      id="footerBanner"
+      class="footer-banner"
+      src="https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0"
+      alt="SVR Food Products"
+    />
+
+    <div class="footer-content">
+
+      <h3 id="footerShopName">
+        SVR Food Products
+      </h3>
+
+      <p id="footerAddress">
+        Duppalapudi (V), E.G. Dist, Andhra Pradesh
+      </p>
+
+      <div
+        id="socialLinks"
+        class="social-links"
+      ></div>
+
+      <div class="copyright">
+        © <span id="year"></span> SVR Food Products. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- =========================================================
+       CART BAR
+       ========================================================= -->
 
   <div
-    class="notice"
-    id="catalogNotice"
-  >
-    Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.
-  </div>
-
-
-  <div
-    class="list"
-    id="list"
+    id="cartBar"
+    class="cart-bar"
   >
 
-    <div class="loading">
-      Loading products...
+    <div class="cart-bar-inner">
+
+      <div class="cart-info">
+        <strong id="cartCount">0 items</strong>
+        <span id="cartTotal">₹0</span>
+      </div>
+
+      <button
+        class="checkout-btn"
+        onclick="openCheckout()"
+        id="checkoutButton"
+      >
+        Checkout
+      </button>
+
     </div>
 
   </div>
 
+  <!-- =========================================================
+       ROLE MODAL
+       ========================================================= -->
 
   <div
-    class="sheet-status"
-    id="sheetStatus"
-  ></div>
-
-</main>
-
-
-<footer
-  class="foot"
-  id="mainFoot"
->
-
-  <img
-    id="footerBanner"
-    src="https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0"
-    alt="SVR Foods Footer Banner"
-    onerror="this.style.display='none'"
+    id="roleModal"
+    class="overlay role-modal"
   >
 
+    <div class="sheet">
 
-  <p
-    id="footerBrand"
-    style="font-weight:700;font-size:1.05rem;color:#d4af37;"
-  >
-    SVR Food Products – Sir Arthur Cotton
-  </p>
+      <div class="welcome">
 
+        <img
+          class="welcome-logo"
+          src="https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2"
+          alt="SVR Food Products"
+        />
 
-  <p id="footerContact">
-    Contact: +91 89853 61991 | support@svrfoods.com
-  </p>
+        <h2 id="welcomeTitle">
+          Welcome to SVR Foods
+        </h2>
 
+        <p
+          id="welcomeText"
+          class="telugu"
+        >
+          Please select who you are to view the product catalog & prices
+        </p>
 
-  <p id="footerAddress">
-    Duppalapudi (V), E.G. Dist, Andhra Pradesh
-  </p>
+      </div>
 
+      <div
+        id="roleGrid"
+        class="role-grid"
+      >
 
-  <div class="social-section">
+        <button
+          class="role-option"
+          onclick="selectRole('Distributor')"
+        >
+          <div>
+            <strong>Distributor</strong>
+            <span>Wholesale pricing</span>
+          </div>
+          <div class="role-arrow">›</div>
+        </button>
 
-    <p class="social-title">
-      Follow Us
-    </p>
+        <button
+          class="role-option"
+          onclick="selectRole('Hotel')"
+        >
+          <div>
+            <strong>Hotel</strong>
+            <span>Hotel / bulk pricing</span>
+          </div>
+          <div class="role-arrow">›</div>
+        </button>
 
-    <div
-      id="socialLinks"
-      class="social-links"
-    ></div>
+        <button
+          class="role-option"
+          onclick="selectRole('User')"
+        >
+          <div>
+            <strong>User</strong>
+            <span>Retail pricing</span>
+          </div>
+          <div class="role-arrow">›</div>
+        </button>
 
-  </div>
+      </div>
 
-
-  <p>
-    © SVR Food Products
-  </p>
-
-</footer>
-
-
-<div
-  class="modal on"
-  id="who"
->
-
-  <div
-    class="box"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="whoT"
-  >
-
-    <h2
-      id="whoT"
-      style="color:var(--ink)"
-    >
-      Welcome to SVR Foods
-    </h2>
-
-
-    <p id="whoDescription">
-      Please select who you are to view the product catalog &amp; prices:
-    </p>
-
-
-    <button
-      class="cta pri"
-      data-t="Distributor"
-    >
-      I am a Distributor
-    </button>
-
-
-    <button
-      class="cta sec"
-      data-t="Hotel"
-    >
-      I am a Hotel / Restaurant
-    </button>
-
-
-    <button
-      class="cta sec"
-      data-t="User"
-    >
-      I am a Retail Customer
-    </button>
-
-  </div>
-
-</div>
-
-
-<div
-  class="bar"
-  id="bar"
->
-
-  <button id="openCart">
-
-    <span id="barCount">
-      0 items
-    </span>
-
-    <span id="barTotal">
-      ₹0
-    </span>
-
-  </button>
-
-</div>
-
-
-<div
-  class="sheet"
-  id="checkout"
->
-
-  <div class="in">
-
-    <button
-      class="back"
-      id="closeCheckout"
-    >
-      &larr; Back to products
-    </button>
-
-
-    <h2 id="yourOrderTitle">
-      Your order
-    </h2>
-
-
-    <div id="cartLines"></div>
-
-
-    <h2
-      style="margin-top:26px"
-      id="detailsTitle"
-    >
-      Delivery details
-    </h2>
-
-
-    <div id="fields"></div>
-
-
-    <label
-      for="notes"
-      id="notesLabel"
-    >
-      Notes (optional)
-    </label>
-
-
-    <input
-      id="notes"
-      placeholder="Preferred delivery time, landmark, etc."
-    >
-
-
-    <h2 style="margin-top:26px">
-      Payment &amp; Delivery Terms
-    </h2>
-
-
-    <div
-      class="pay"
-      id="paymentInfo"
-    ></div>
-
-
-    <button
-      class="cta pri"
-      id="place"
-    >
-      Place order
-    </button>
-
-  </div>
-
-</div>
-
-
-<div
-  class="sheet"
-  id="confirm"
->
-
-  <div class="in done">
-
-    <div class="big">
-      ✓
     </div>
 
+  </div>
 
-    <h2 id="cTitle">
-      Order Created
-    </h2>
+  <!-- =========================================================
+       CHECKOUT
+       ========================================================= -->
 
+  <div
+    id="checkoutModal"
+    class="overlay"
+  >
 
-    <p id="cText">
-      Click below to send your order directly to our WhatsApp number.
-    </p>
+    <div class="sheet">
 
+      <div class="sheet-head">
 
-    <a
-      class="cta wa"
-      id="waBtn"
-      target="_blank"
-      rel="noopener"
-    >
-      Send order on WhatsApp
-    </a>
+        <h3 id="checkoutTitle">
+          Checkout
+        </h3>
 
+        <button
+          class="close-btn"
+          onclick="closeCheckout()"
+        >
+          ×
+        </button>
 
-    <button
-      class="cta sec"
-      id="copyBtn"
-    >
-      Copy order details
-    </button>
+      </div>
 
+      <div class="checkout-section">
 
-    <p
-      class="small"
-      id="cHelp"
-      style="margin-top:14px;"
-    ></p>
+        <h4 id="yourOrderTitle">
+          Your order
+        </h4>
 
+        <div
+          id="checkoutOrderList"
+          class="order-list"
+        ></div>
 
-    <button
-      class="back"
-      id="newOrder"
-      style="margin-top:16px;"
-    >
-      Start a new order
-    </button>
+      </div>
+
+      <div class="checkout-section">
+
+        <h4 id="deliveryDetailsTitle">
+          Delivery details
+        </h4>
+
+        <div id="checkoutFields"></div>
+
+      </div>
+
+      <div class="checkout-section">
+
+        <div id="paymentSection"></div>
+
+      </div>
+
+      <div class="checkout-section">
+
+        <div class="field">
+
+          <label
+            for="notes"
+            id="notesLabel"
+          >
+            Notes (optional)
+          </label>
+
+          <textarea
+            id="notes"
+            placeholder="Any special instructions?"
+          ></textarea>
+
+        </div>
+
+      </div>
+
+      <div
+        id="checkoutSummary"
+        class="summary"
+      ></div>
+
+      <button
+        id="placeOrderButton"
+        class="place-btn"
+        onclick="placeOrder()"
+      >
+        Place order
+      </button>
+
+      <button
+        id="backProductsButton"
+        class="back-btn"
+        onclick="closeCheckout()"
+      >
+        Back to products
+      </button>
+
+    </div>
 
   </div>
 
-</div>
+  <!-- =========================================================
+       CONFIRMATION
+       ========================================================= -->
 
+  <div
+    id="confirmationModal"
+    class="overlay"
+  >
 
-<script>
+    <div class="sheet">
 
-/* ============================================================
-   GOOGLE SHEET CONFIGURATION
-============================================================ */
+      <div class="confirmation">
 
-const GOOGLE_SHEET_ID =
-"2PACX-1vS96rGynHTVwgig54rKmbBl-Cl8eg6p-ueyKyg1ulff8aMhhAPQ6TFChQqeiKknHAotNX62GjY4MiC8";
+        <div class="success-icon">
+          ✓
+        </div>
 
+        <h2 id="orderSuccessTitle">
+          Order Placed!
+        </h2>
 
-const SHEET_NAMES = {
+        <p id="orderSuccessText">
+          Your order has been created successfully.
+        </p>
 
-  SETTINGS: "SETTINGS",
-  PRODUCTS: "PRODUCTS",
-  ROLE_PRICES: "ROLE_PRICES",
-  PAYMENT_DELIVERY: "PAYMENT_DELIVERY",
-  MESSAGES: "MESSAGES",
-  LOCATIONS: "LOCATIONS",
-  SOCIAL_LINKS: "SOCIAL_LINKS"
+        <div
+          id="orderNumber"
+          class="order-number"
+        >
+          SVR-00000000-001
+        </div>
 
-};
+        <button
+          class="whatsapp-btn"
+          onclick="sendWhatsApp()"
+          id="whatsappButton"
+        >
+          Send order on WhatsApp
+        </button>
 
+        <button
+          class="copy-btn"
+          onclick="copyOrderDetails()"
+          id="copyButton"
+        >
+          Copy order details
+        </button>
 
-/* ============================================================
-   FALLBACK CONFIGURATION
-============================================================ */
+        <button
+          class="back-btn"
+          onclick="newOrder()"
+          id="newOrderButton"
+        >
+          Start a new order
+        </button>
 
-const CONFIG = {
+      </div>
 
-  shopName:"SVR Food Products",
+    </div>
 
-  brandName:"Sir Arthur Cotton",
+  </div>
 
-  whatsappNumber:"918985361991",
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
 
-  phone:"+91 89853 61991",
+  <script>
 
-  email:"support@svrfoods.com",
+    /* =========================================================
+       CONFIG
+       ========================================================= */
 
-  address:"Duppalapudi (V), E.G. Dist, Andhra Pradesh",
+    const CONFIG = {
 
-  tagline:"నాణ్యతకు నమ్మకం • రుచికి చిరునామా",
+      shopName: "SVR Food Products",
 
-  headerBanner:
-    "https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH",
+      brandName: "Sir Arthur Cotton",
 
-  footerBanner:
-    "https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0",
+      whatsappNumber: "918985361991",
 
-  /* NEW: FAVICON */
-  favicon:
-    "https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg",
+      phone: "+91 89853 61991",
 
-  currency:"₹",
+      email: "support@svrfoods.com",
 
-  deliveryCharge:0,
+      address: "Duppalapudi (V), E.G. Dist, Andhra Pradesh",
 
-  freeDeliveryAbove:0,
+      tagline: "నాణ్యతకు నమ్మకం • రుచికి చిరునామా",
 
-  products:[
+      currency: "₹",
 
-    {
-      id:"idli1",
-      name:"Idli Ravva – Sir Arthur Cotton",
-      te:"ఇడ్లీ రవ్వ",
-      size:"1 Kg",
-      price:55,
-      mrp:60,
-      img:"https://lh3.googleusercontent.com/d/1EleI0ac2vmVrc7A_UbNfIAxPtq7JTDXA"
-    },
+      deliveryCharge: 0,
 
-    {
-      id:"idli5",
-      name:"Idli Ravva – Sir Arthur Cotton",
-      te:"ఇడ్లీ రవ్వ",
-      size:"5 Kg",
-      price:265,
-      mrp:320,
-      img:"https://lh3.googleusercontent.com/d/1tBwWFevtSKOg8OrL5YQnGE1ExqtCVKXj"
-    },
+      freeDeliveryAbove: 0,
 
-    {
-      id:"idli30",
-      name:"Idli Ravva – Bulk Bag",
-      te:"ఇడ్లీ రవ్వ (బల్క్)",
-      size:"30 Kg",
-      price:1300,
-      mrp:1450,
-      img:"https://lh3.googleusercontent.com/d/1BgVtVHGvSy4Q08WTRol3FvriPEmF1S3S"
-    },
+      favicon:
+        "https://lh3.googleusercontent.com/d/1QQo2VzDHKCQmdL_YEIvh7uoLVktnMZAg?v=2",
 
-    {
-      id:"urad1",
-      name:"Urad Gota – Premium",
-      te:"మినపగుళ్ళు",
-      size:"1 Kg",
-      price:135,
-      mrp:155,
-      img:"https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
-    },
+      headerBanner:
+        "https://lh3.googleusercontent.com/d/1eIjCOH046SOz31LsdFa3OZZO-ebVQRyH",
 
-    {
-      id:"urad5",
-      name:"Urad Gota – Premium",
-      te:"మినపగుళ్ళు",
-      size:"5 Kg",
-      price:660,
-      mrp:750,
-      img:"https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
-    },
-
-    {
-      id:"vari_nuka",
-      name:"Vari Nuka",
-      te:"వరి నూక",
-      size:"1 Kg",
-      price:30,
-      mrp:40,
-      img:"https://lh3.googleusercontent.com/d/12bD7-8CLAjRa9AM-69dP1jxToCNEj1jg"
-    }
-
-  ]
-
-};
-
-
-/* ============================================================
-   ROLE PRICES FALLBACK
-============================================================ */
-
-let ROLE_PRICES = {
-
-  idli1:{
-    Distributor:50,
-    Hotel:52,
-    User:55
-  },
-
-  idli5:{
-    Distributor:250,
-    Hotel:255,
-    User:265
-  },
-
-  idli30:{
-    Distributor:1250,
-    Hotel:1275,
-    User:1300
-  },
-
-  urad1:{
-    Distributor:125,
-    Hotel:130,
-    User:135
-  },
-
-  urad5:{
-    Distributor:630,
-    Hotel:645,
-    User:660
-  },
-
-  vari_nuka:{
-    Distributor:27,
-    Hotel:28,
-    User:30
-  }
-
-};
-
-
-/* ============================================================
-   LOCATION FALLBACK
-============================================================ */
-
-let LOCATION_DATA = {
-
-  "Andhra Pradesh":[
-    "Alluri Sitharama Raju",
-    "Anakapalli",
-    "Ananthapuramu",
-    "Annamayya",
-    "Bapatla",
-    "Chittoor",
-    "Dr. B.R. Ambedkar Konaseema",
-    "East Godavari",
-    "Eluru",
-    "Guntur",
-    "Kakinada",
-    "Krishna",
-    "Kurnool",
-    "Nandyal",
-    "NTR",
-    "Palnadu",
-    "Prakasam",
-    "Sri Potti Sriramulu Nellore",
-    "Sri Sathya Sai",
-    "Srikakulam",
-    "Tirupati",
-    "Visakhapatnam",
-    "Vizianagaram",
-    "West Godavari",
-    "YSR Kadapa"
-  ],
-
-  "Telangana":[
-    "Adilabad",
-    "Bhadradri Kothagudem",
-    "Hyderabad",
-    "Jagtial",
-    "Jangaon",
-    "Jayashankar Bhupalpally",
-    "Jogulamba Gadwal",
-    "Kamareddy",
-    "Karimnagar",
-    "Khammam",
-    "Kumuram Bheem Asifabad",
-    "Mahabubabad",
-    "Mahabubnagar",
-    "Mancherial",
-    "Medak",
-    "Medchal–Malkajgiri",
-    "Mulugu",
-    "Nagarkurnool",
-    "Nalgonda",
-    "Narayanpet",
-    "Nirmal",
-    "Nizamabad",
-    "Peddapalli",
-    "Rajanna Sircilla",
-    "Rangareddy",
-    "Sangareddy",
-    "Siddipet",
-    "Suryapet",
-    "Vikarabad",
-    "Wanaparthy",
-    "Warangal",
-    "Hanamkonda",
-    "Yadadri Bhuvanagiri"
-  ]
-
-};
-
-
-/* ============================================================
-   MESSAGES FALLBACK
-============================================================ */
-
-let MESSAGES = {
-
-  welcome_title:"Welcome to SVR Foods",
-
-  welcome_text:
-    "Please select who you are to view the product catalog & prices",
-
-  catalog_notice:
-    "Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.",
-
-  ordering_as:"Ordering as",
-
-  change_role:"Change",
-
-  add_button:"ADD",
-
-  checkout:"Checkout",
-
-  back_products:"Back to products",
-
-  your_order:"Your order",
-
-  delivery_details:"Delivery details",
-
-  notes:"Notes (optional)",
-
-  place_order:"Place order",
-
-  order_created:"Order Created",
-
-  order_success:"Order Placed!",
-
-  send_whatsapp:"Send order on WhatsApp",
-
-  copy_details:"Copy order details",
-
-  new_order:"Start a new order"
-
-};
-
-
-/* ============================================================
-   PAYMENT FALLBACK
-============================================================ */
-
-let PAYMENT_DATA = {
-
-  Distributor:{
-    mode:"COD",
-    status:"Free Door Delivery",
-    note:"Payment upon delivery"
-  },
-
-  Hotel:{
-    mode:"COD",
-    status:"Free Door Delivery",
-    note:"Payment upon delivery"
-  },
-
-  User:{
-    mode:"UPI",
-    status:"Dispatch after Payment",
-    note:"UPI payment required before dispatch"
-  }
-
-};
-
-
-/* ============================================================
-   SOCIAL LINKS FALLBACK
-============================================================ */
-
-let SOCIAL_LINKS = [
-
-  {
-    platform:"WhatsApp",
-    url:"https://wa.me/qr/US6MI2ROWBV3A1"
-  },
-
-  {
-    platform:"Instagram",
-    url:"https://www.instagram.com/svrfoodproducts?utm_source=qr&stkn=aDczbW0wdGdxa2Jh"
-  },
-
-  {
-    platform:"Facebook",
-    url:"https://www.facebook.com/share/19UEBoLrBz/"
-  },
-
-  {
-    platform:"YouTube",
-    url:"https://youtube.com/@svrfoodproducts?si=OcpSSxvYuYADTeKy"
-  },
-
-  {
-    platform:"Website",
-    url:"https://www.svrfoodproducts.com/"
-  }
-
-];
-
-
-/* ============================================================
-   STATE
-============================================================ */
-
-let state = {
-
-  role:null,
-
-  cart:{},
-
-  latestOrderMsg:"",
-
-  sheetLoaded:false
-
-};
-
-
-/* ============================================================
-   GOOGLE SHEET FETCH
-============================================================ */
-
-function sheetUrl(sheetName){
-
-  return `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
-
-}
-
-
-async function fetchSheet(sheetName){
-
-  const response =
-    await fetch(
-      sheetUrl(sheetName),
-      {
-        method:"GET",
-        cache:"no-store"
-      }
-    );
-
-  if(!response.ok){
-
-    throw new Error(
-      `Could not load ${sheetName}: HTTP ${response.status}`
-    );
-
-  }
-
-  const text =
-    await response.text();
-
-  const match =
-    text.match(
-      /google\.visualization\.Query\.setResponse\(([\s\S]+)\);?/
-    );
-
-  if(!match){
-
-    throw new Error(
-      `Invalid Google Sheet response for ${sheetName}`
-    );
-
-  }
-
-  const json =
-    JSON.parse(match[1]);
-
-  return parseGvizTable(json);
-
-}
-
-
-/* ============================================================
-   GVIZ TABLE PARSER
-============================================================ */
-
-function parseGvizTable(json){
-
-  const table =
-    json.table;
-
-  const headers =
-    table.cols.map(
-      (col,index) =>
-        String(
-          col.label ||
-          col.id ||
-          `Column${index+1}`
-        ).trim()
-    );
-
-  const rows = [];
-
-  (table.rows || []).forEach(row => {
-
-    const obj = {};
-
-    headers.forEach((header,index) => {
-
-      const cell =
-        row.c &&
-        row.c[index];
-
-      obj[header] =
-        cell &&
-        cell.v !== null &&
-        cell.v !== undefined
-          ? String(cell.v)
-          : "";
-
-    });
-
-    rows.push(obj);
-
-  });
-
-  return rows;
-}
-
-
-/* ============================================================
-   HELPERS
-============================================================ */
-
-function isTrue(value){
-
-  const v =
-    String(value || "")
-      .trim()
-      .toLowerCase();
-
-  return [
-    "true",
-    "yes",
-    "1",
-    "active"
-  ].includes(v);
-
-}
-
-
-function cleanNumber(value,fallback=0){
-
-  const n =
-    Number(
-      String(value || "")
-        .replace(/₹/g,"")
-        .replace(/,/g,"")
-        .trim()
-    );
-
-  return Number.isFinite(n)
-    ? n
-    : fallback;
-
-}
-
-
-function getSetting(rows,key,fallback=""){
-
-  const row =
-    rows.find(
-      r =>
-        String(
-          r.Setting ||
-          r.Key ||
-          ""
-        )
-        .trim()
-        .toLowerCase() ===
-        String(key)
-          .trim()
-          .toLowerCase()
-    );
-
-  if(!row){
-
-    return fallback;
-
-  }
-
-  if(
-    row.Active !== undefined &&
-    row.Active !== "" &&
-    !isTrue(row.Active)
-  ){
-
-    return fallback;
-
-  }
-
-  return String(
-    row.Value || fallback
-  ).trim();
-
-}
-
-
-function normalizeImageUrl(url){
-
-  let value =
-    String(url || "")
-      .trim();
-
-  if(!value){
-
-    return "";
-
-  }
-
-  /*
-    Google Drive:
-    https://drive.google.com/file/d/FILE_ID/view
-  */
-
-  const fileMatch =
-    value.match(
-      /drive\.google\.com\/file\/d\/([^/]+)/
-    );
-
-  if(fileMatch){
-
-    return `https://lh3.googleusercontent.com/d/${fileMatch[1]}`;
-
-  }
-
-  /*
-    Google Drive:
-    https://drive.google.com/uc?id=FILE_ID
-  */
-
-  const idMatch =
-    value.match(
-      /drive\.google\.com\/.*[?&]id=([^&]+)/
-    );
-
-  if(idMatch){
-
-    return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
-
-  }
-
-  return value;
-
-}
-
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function escapeJs(value){
-
-  return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-
-}
-
-
-/* ============================================================
-   LOAD SETTINGS
-============================================================ */
-
-async function loadSettings(){
-
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.SETTINGS
-    );
-
-  CONFIG.shopName =
-    getSetting(
-      rows,
-      "shop_name",
-      CONFIG.shopName
-    );
-
-  CONFIG.brandName =
-    getSetting(
-      rows,
-      "brand_name",
-      CONFIG.brandName
-    );
-
-  CONFIG.whatsappNumber =
-    getSetting(
-      rows,
-      "whatsapp_number",
-      CONFIG.whatsappNumber
-    ).replace(/\D/g,"");
-
-  CONFIG.phone =
-    getSetting(
-      rows,
-      "phone",
-      CONFIG.phone
-    );
-
-  CONFIG.email =
-    getSetting(
-      rows,
-      "email",
-      CONFIG.email
-    );
-
-  CONFIG.address =
-    getSetting(
-      rows,
-      "address",
-      CONFIG.address
-    );
-
-  CONFIG.tagline =
-    getSetting(
-      rows,
-      "tagline",
-      CONFIG.tagline
-    );
-
-  CONFIG.headerBanner =
-    normalizeImageUrl(
-      getSetting(
-        rows,
-        "header_banner",
-        CONFIG.headerBanner
-      )
-    );
-
-  CONFIG.footerBanner =
-    normalizeImageUrl(
-      getSetting(
-        rows,
-        "footer_banner",
-        CONFIG.footerBanner
-      )
-    );
-
-  /* NEW: LOAD FAVICON FROM GOOGLE SHEET */
-
-  CONFIG.favicon =
-    normalizeImageUrl(
-      getSetting(
-        rows,
-        "favicon",
-        CONFIG.favicon
-      )
-    );
-
-  CONFIG.currency =
-    getSetting(
-      rows,
-      "currency",
-      CONFIG.currency
-    );
-
-  CONFIG.deliveryCharge =
-    cleanNumber(
-      getSetting(
-        rows,
-        "delivery_charge",
-        CONFIG.deliveryCharge
-      ),
-      0
-    );
-
-  CONFIG.freeDeliveryAbove =
-    cleanNumber(
-      getSetting(
-        rows,
-        "free_delivery_above",
-        CONFIG.freeDeliveryAbove
-      ),
-      0
-    );
-
-}
-
-
-/* ============================================================
-   LOAD PRODUCTS
-============================================================ */
-
-async function loadProducts(){
-
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.PRODUCTS
-    );
-
-  const products =
-    rows
-      .filter(
-        row =>
-          row.ID &&
-          isTrue(row.Active)
-      )
-      .sort(
-        (a,b) =>
-          cleanNumber(a["Sort Order"]) -
-          cleanNumber(b["Sort Order"])
-      )
-      .map(row => {
-
-        return {
-
-          id:
-            String(
-              row.ID
-            ).trim(),
-
-          name:
-            String(
-              row["Product Name"] || ""
-            ).trim(),
-
-          te:
-            String(
-              row["Telugu Name"] || ""
-            ).trim(),
-
-          size:
-            String(
-              row["Pack Size"] || ""
-            ).trim(),
-
-          price:
-            cleanNumber(row.Price),
-
-          mrp:
-            cleanNumber(row.MRP),
-
-          img:
-            normalizeImageUrl(
-              String(
-                row["Image URL"] || ""
-              ).trim()
-            )
-
-        };
-
-      })
-      .filter(
-        p =>
-          p.id &&
-          p.name
-      );
-
-  if(products.length){
-
-    CONFIG.products =
-      products;
-
-  }
-
-}
-
-
-/* ============================================================
-   LOAD ROLE PRICES
-============================================================ */
-
-async function loadRolePrices(){
-
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.ROLE_PRICES
-    );
-
-  const prices = {};
-
-  rows.forEach(row => {
-
-    const id =
-      String(
-        row["Product ID"] || ""
-      ).trim();
-
-    if(!id){
-
-      return;
-
-    }
-
-    prices[id] = {
-
-      Distributor:
-        cleanNumber(
-          row["Distributor Price"]
-        ),
-
-      Hotel:
-        cleanNumber(
-          row["Hotel Price"]
-        ),
-
-      User:
-        cleanNumber(
-          row["Retail Price"]
-        )
+      footerBanner:
+        "https://lh3.googleusercontent.com/d/1TZiQlxMhoHjtSSUqiNzpokO7bumQG6w0"
 
     };
 
-  });
 
-  if(
-    Object.keys(prices).length
-  ){
+    /* =========================================================
+       GOOGLE PUBLISHED SHEET
+       ========================================================= */
 
-    ROLE_PRICES =
-      prices;
+    const PUBLISHED_SHEET_ID =
+      "2PACX-1vS96rGynHTVwgig54rKmbBl-Cl8eg6p-ueyKyg1ulff8aMhhAPQ6TFChQqeiKknHAotNX62GjY4MiC8";
 
-  }
 
-}
+    /* =========================================================
+       FALLBACK PRODUCTS
+       ========================================================= */
 
-
-/* ============================================================
-   LOAD PAYMENT DELIVERY
-============================================================ */
-
-async function loadPaymentDelivery(){
-
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.PAYMENT_DELIVERY
-    );
-
-  const data = {};
-
-  rows
-    .filter(
-      row =>
-        isTrue(row.Active)
-    )
-    .forEach(row => {
-
-      const role =
-        String(
-          row.Role || ""
-        ).trim();
-
-      if(!role){
-
-        return;
-
-      }
-
-      data[role] = {
-
-        mode:
-          String(
-            row["Payment Mode"] || ""
-          ).trim(),
-
-        status:
-          String(
-            row["Delivery Status"] || ""
-          ).trim(),
-
-        note:
-          String(
-            row["Payment Note"] || ""
-          ).trim()
-
-      };
-
-    });
-
-  if(
-    Object.keys(data).length
-  ){
-
-    PAYMENT_DATA =
-      data;
-
-  }
-
-}
-
-
-/* ============================================================
-   LOAD MESSAGES
-============================================================ */
-
-async function loadMessages(){
-
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.MESSAGES
-    );
-
-  const data = {};
-
-  rows
-    .filter(
-      row =>
-        isTrue(row.Active)
-    )
-    .forEach(row => {
-
-      const id =
-        String(
-          row["Message ID"] || ""
-        ).trim();
-
-      if(id){
-
-        data[id] =
-          String(
-            row.Message || ""
-          ).trim();
-
-      }
-
-    });
-
-  if(
-    Object.keys(data).length
-  ){
-
-    MESSAGES = {
-
-      ...MESSAGES,
-
-      ...data
-
-    };
-
-  }
-
-}
-
-
-/* ============================================================
-   LOAD LOCATIONS
-============================================================ */
-
-async function loadLocations(){
-
-  const rows =
-    await fetchSheet(
-      SHEET_NAMES.LOCATIONS
-    );
-
-  const data = {};
-
-  rows
-    .filter(
-      row =>
-        isTrue(row.Active)
-    )
-    .forEach(row => {
-
-      const countryState =
-        String(
-          row.State || ""
-        ).trim();
-
-      const district =
-        String(
-          row.District || ""
-        ).trim();
-
-      if(
-        !countryState ||
-        !district
-      ){
-
-        return;
-
-      }
-
-      if(
-        countryState === "Other State" ||
-        countryState === "Other"
-      ){
-
-        return;
-
-      }
-
-      if(
-        countryState !== "Andhra Pradesh" &&
-        countryState !== "Telangana"
-      ){
-
-        return;
-
-      }
-
-      if(!data[countryState]){
-
-        data[countryState] = [];
-
-      }
-
-      if(
-        district &&
-        !data[countryState].includes(district)
-      ){
-
-        data[countryState].push(district);
-
-      }
-
-    });
-
-  if(
-    Object.keys(data).length
-  ){
-
-    LOCATION_DATA =
-      data;
-
-  }
-
-}
-
-
-/* ============================================================
-   LOAD SOCIAL LINKS
-============================================================ */
-
-async function loadSocialLinks(){
-
-  try{
-
-    const rows =
-      await fetchSheet(
-        SHEET_NAMES.SOCIAL_LINKS
-      );
-
-    const data = [];
-
-    rows
-      .filter(
-        row =>
-          isTrue(row.Active)
-      )
-      .forEach(row => {
-
-        const platform =
-          String(
-            row.Platform || ""
-          ).trim();
-
-        const url =
-          String(
-            row.URL || ""
-          ).trim();
-
-        if(
-          platform &&
-          url
-        ){
-
-          data.push({
-
-            platform:platform,
-
-            url:url
-
-          });
-
-        }
-
-      });
-
-    if(data.length){
-
-      SOCIAL_LINKS =
-        data;
-
-    }
-
-  }catch(error){
-
-    console.warn(
-      "SOCIAL_LINKS sheet could not be loaded. Using fallback links.",
-      error
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   SOCIAL ICON
-============================================================ */
-
-function getSocialIcon(platform){
-
-  const name =
-    String(
-      platform || ""
-    ).trim().toLowerCase();
-
-  if(name === "instagram"){
-
-    return "◎";
-
-  }
-
-  if(name === "facebook"){
-
-    return "f";
-
-  }
-
-  if(name === "youtube"){
-
-    return "▶";
-
-  }
-
-  if(name === "whatsapp"){
-
-    return "◉";
-
-  }
-
-  if(name === "website"){
-
-    return "🌐";
-
-  }
-
-  return "↗";
-
-}
-
-
-/* ============================================================
-   RENDER SOCIAL LINKS
-============================================================ */
-
-function renderSocialLinks(){
-
-  const container =
-    document.getElementById(
-      "socialLinks"
-    );
-
-  if(!container){
-
-    return;
-
-  }
-
-  if(
-    !Array.isArray(SOCIAL_LINKS) ||
-    !SOCIAL_LINKS.length
-  ){
-
-    SOCIAL_LINKS = [
+    let PRODUCTS = [
 
       {
-        platform:"WhatsApp",
-        url:"https://wa.me/qr/US6MI2ROWBV3A1"
+        id: "idli1",
+        name: "Idli Ravva – Sir Arthur Cotton",
+        telugu: "ఇడ్లీ రవ్వ",
+        size: "1 Kg",
+        price: 55,
+        mrp: 60,
+        image:
+          "https://lh3.googleusercontent.com/d/1EleI0ac2vmVrc7A_UbNfIAxPtq7JTDXA"
       },
 
       {
-        platform:"Instagram",
-        url:"https://www.instagram.com/svrfoodproducts?utm_source=qr&stkn=aDczbW0wdGdxa2Jh"
+        id: "idli5",
+        name: "Idli Ravva – Sir Arthur Cotton",
+        telugu: "ఇడ్లీ రవ్వ",
+        size: "5 Kg",
+        price: 265,
+        mrp: 320,
+        image:
+          "https://lh3.googleusercontent.com/d/1tBwWFevtSKOg8OrL5YQnGE1ExqtCVKXj"
       },
 
       {
-        platform:"Facebook",
-        url:"https://www.facebook.com/share/19UEBoLrBz/"
+        id: "idli30",
+        name: "Idli Ravva – Bulk Bag",
+        telugu: "ఇడ్లీ రవ్వ (బల్క్)",
+        size: "30 Kg",
+        price: 1300,
+        mrp: 1450,
+        image:
+          "https://lh3.googleusercontent.com/d/1BgVtVHGvSy4Q08WTRol3FvriPEmF1S3S"
       },
 
       {
-        platform:"YouTube",
-        url:"https://youtube.com/@svrfoodproducts?si=OcpSSxvYuYADTeKy"
+        id: "urad1",
+        name: "Urad Gota – Premium",
+        telugu: "మినపగుళ్ళు",
+        size: "1 Kg",
+        price: 135,
+        mrp: 155,
+        image:
+          "https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
       },
 
       {
-        platform:"Website",
-        url:"https://www.svrfoodproducts.com/"
+        id: "urad5",
+        name: "Urad Gota – Premium",
+        telugu: "మినపగుళ్ళు",
+        size: "5 Kg",
+        price: 660,
+        mrp: 750,
+        image:
+          "https://lh3.googleusercontent.com/d/1d5mPoJXgNsHiOeZ-uMFz1w3FdbAjiCUd"
+      },
+
+      {
+        id: "vari_nuka",
+        name: "Vari Nuka",
+        telugu: "వరి నూక",
+        size: "1 Kg",
+        price: 30,
+        mrp: 40,
+        image:
+          "https://lh3.googleusercontent.com/d/12bD7-8CLAjRa9AM-69dP1jxToCNEj1jg"
       }
 
     ];
 
-  }
 
-  const preferredOrder = [
+    /* =========================================================
+       ROLE PRICES
+       ========================================================= */
 
-    "whatsapp",
-    "instagram",
-    "facebook",
-    "youtube",
-    "website"
+    let ROLE_PRICES = {
 
-  ];
+      idli1: {
+        Distributor: 50,
+        Hotel: 52,
+        User: 55
+      },
 
-  const orderedLinks =
-    [...SOCIAL_LINKS].sort(
-      (a,b) => {
+      idli5: {
+        Distributor: 250,
+        Hotel: 255,
+        User: 265
+      },
 
-        const aIndex =
-          preferredOrder.indexOf(
-            String(
-              a.platform || ""
-            )
-            .trim()
-            .toLowerCase()
-          );
+      idli30: {
+        Distributor: 1250,
+        Hotel: 1275,
+        User: 1300
+      },
 
-        const bIndex =
-          preferredOrder.indexOf(
-            String(
-              b.platform || ""
-            )
-            .trim()
-            .toLowerCase()
-          );
+      urad1: {
+        Distributor: 125,
+        Hotel: 130,
+        User: 135
+      },
+
+      urad5: {
+        Distributor: 630,
+        Hotel: 645,
+        User: 660
+      },
+
+      vari_nuka: {
+        Distributor: 27,
+        Hotel: 28,
+        User: 30
+      }
+
+    };
+
+
+    /* =========================================================
+       LOCATION DATA
+       ========================================================= */
+
+    let LOCATION_DATA = {
+
+      "Andhra Pradesh": [
+
+        "Alluri Sitharama Raju",
+        "Anakapalli",
+        "Ananthapuramu",
+        "Annamayya",
+        "Bapatla",
+        "Chittoor",
+        "Dr. B.R. Ambedkar Konaseema",
+        "East Godavari",
+        "Eluru",
+        "Guntur",
+        "Kakinada",
+        "Krishna",
+        "Kurnool",
+        "Nandyal",
+        "NTR",
+        "Palnadu",
+        "Prakasam",
+        "Sri Potti Sriramulu Nellore",
+        "Sri Sathya Sai",
+        "Srikakulam",
+        "Tirupati",
+        "Visakhapatnam",
+        "Vizianagaram",
+        "West Godavari",
+        "YSR Kadapa"
+
+      ],
+
+      "Telangana": [
+
+        "Adilabad",
+        "Bhadradri Kothagudem",
+        "Hyderabad",
+        "Jagtial",
+        "Jangaon",
+        "Jayashankar Bhupalpally",
+        "Jogulamba Gadwal",
+        "Kamareddy",
+        "Karimnagar",
+        "Khammam",
+        "Kumuram Bheem Asifabad",
+        "Mahabubabad",
+        "Mahabubnagar",
+        "Mancherial",
+        "Medak",
+        "Medchal–Malkajgiri",
+        "Mulugu",
+        "Nagarkurnool",
+        "Nalgonda",
+        "Narayanpet",
+        "Nirmal",
+        "Nizamabad",
+        "Peddapalli",
+        "Rajanna Sircilla",
+        "Rangareddy",
+        "Sangareddy",
+        "Siddipet",
+        "Suryapet",
+        "Vikarabad",
+        "Wanaparthy",
+        "Warangal",
+        "Hanamkonda",
+        "Yadadri Bhuvanagiri"
+
+      ]
+
+    };
+
+
+    /* =========================================================
+       MESSAGES
+       ========================================================= */
+
+    let MESSAGES = {
+
+      welcome_title: "Welcome to SVR Foods",
+
+      welcome_text:
+        "Please select who you are to view the product catalog & prices",
+
+      catalog_notice:
+        "Pick your products, enter your delivery address and place the order. We confirm it with you on WhatsApp.",
+
+      ordering_as: "Ordering as",
+
+      change_role: "Change",
+
+      add_button: "ADD",
+
+      checkout: "Checkout",
+
+      back_products: "Back to products",
+
+      your_order: "Your order",
+
+      delivery_details: "Delivery details",
+
+      notes: "Notes (optional)",
+
+      place_order: "Place order",
+
+      order_created: "Order Created",
+
+      order_success: "Order Placed!",
+
+      send_whatsapp: "Send order on WhatsApp",
+
+      copy_details: "Copy order details",
+
+      new_order: "Start a new order"
+
+    };
+
+
+    /* =========================================================
+       PAYMENT
+       ========================================================= */
+
+    let PAYMENT_DATA = {
+
+      Distributor: {
+        method: "COD",
+        delivery: "Free Door Delivery",
+        note: "Payment upon delivery"
+      },
+
+      Hotel: {
+        method: "COD",
+        delivery: "Free Door Delivery",
+        note: "Payment upon delivery"
+      },
+
+      User: {
+        method: "UPI",
+        delivery: "Dispatch after Payment",
+        note: "UPI payment required before dispatch"
+      }
+
+    };
+
+
+    /* =========================================================
+       SOCIAL LINKS
+       ========================================================= */
+
+    let SOCIAL_LINKS = {
+
+      WhatsApp:
+        "https://wa.me/qr/US6MI2ROWBV3A1",
+
+      Instagram:
+        "https://www.instagram.com/svrfoodproducts?utm_source=qr&stkn=aDczbW0wdGdxa2Jh",
+
+      Facebook:
+        "https://www.facebook.com/share/19UEBoLrBz/",
+
+      YouTube:
+        "https://youtube.com/@svrfoodproducts?si=OcpSSxvYuYADTeKy",
+
+      Website:
+        "https://www.svrfoodproducts.com/"
+
+    };
+
+
+    /* =========================================================
+       STATE
+       ========================================================= */
+
+    const state = {
+
+      role: "User",
+
+      cart: {},
+
+      checkoutData: {},
+
+      orderNumber: "",
+
+      orderMessage: ""
+
+    };
+
+
+    /* =========================================================
+       HELPERS
+       ========================================================= */
+
+    function isTrue(value) {
+
+      if (value === true) return true;
+
+      const v = String(value || "")
+        .trim()
+        .toLowerCase();
+
+      return [
+        "true",
+        "yes",
+        "1",
+        "active",
+        "on"
+      ].includes(v);
+
+    }
+
+
+    function cleanNumber(value) {
+
+      if (value === null || value === undefined || value === "") {
+        return 0;
+      }
+
+      const n = Number(
+        String(value)
+          .replace(/[₹,\s]/g, "")
+          .trim()
+      );
+
+      return Number.isFinite(n) ? n : 0;
+
+    }
+
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    function escapeJs(value) {
+
+      return String(value ?? "")
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+
+    }
+
+
+    function normalizeImageUrl(url) {
+
+      if (!url) return "";
+
+      const value = String(url).trim();
+
+      const driveMatch =
+        value.match(
+          /drive\.google\.com\/file\/d\/([^/]+)/
+        );
+
+      if (driveMatch) {
 
         return (
-          (aIndex === -1 ? 999 : aIndex) -
-          (bIndex === -1 ? 999 : bIndex)
+          "https://lh3.googleusercontent.com/d/" +
+          driveMatch[1]
         );
 
       }
-    );
 
-  container.innerHTML =
-    orderedLinks
-      .map(item => {
+      return value;
 
-        const platform =
-          String(
-            item.platform || ""
-          ).trim();
-
-        const url =
-          String(
-            item.url || ""
-          ).trim();
-
-        if(
-          !platform ||
-          !url
-        ){
-
-          return "";
-
-        }
-
-        return `
-
-          <a
-            class="social-link"
-            href="${escapeHtml(url)}"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="${escapeHtml(platform)}"
-          >
-
-            <span class="social-icon">
-
-              ${escapeHtml(
-                getSocialIcon(
-                  platform
-                )
-              )}
-
-            </span>
-
-            <span>
-              ${escapeHtml(platform)}
-            </span>
-
-          </a>
-
-        `;
-
-      })
-      .join("");
-
-}
+    }
 
 
-/* ============================================================
-   APPLY SETTINGS
-============================================================ */
+    function formatMoney(value) {
 
-function applySettings(){
-
-  document.title =
-    `${CONFIG.shopName} – ${CONFIG.brandName} | Order Online`;
-
-
-  document.getElementById(
-    "headerBanner"
-  ).src =
-    CONFIG.headerBanner;
-
-
-  document.getElementById(
-    "footerBanner"
-  ).src =
-    CONFIG.footerBanner;
-
-
-  document.getElementById(
-    "footerBrand"
-  ).textContent =
-    `${CONFIG.shopName} – ${CONFIG.brandName}`;
-
-
-  document.getElementById(
-    "footerContact"
-  ).textContent =
-    `Contact: ${CONFIG.phone} | ${CONFIG.email}`;
-
-
-  document.getElementById(
-    "footerAddress"
-  ).textContent =
-    CONFIG.address;
-
-
-  /* ==========================================================
-     NEW: APPLY GOOGLE SHEET FAVICON
-  ========================================================== */
-
-  if(CONFIG.favicon){
-
-    const favicon =
-      document.getElementById(
-        "siteFavicon"
-      );
-
-    if(favicon){
-
-      favicon.href =
-        CONFIG.favicon;
-
-    }else{
-
-      const link =
-        document.createElement(
-          "link"
-        );
-
-      link.id =
-        "siteFavicon";
-
-      link.rel =
-        "icon";
-
-      link.type =
-        "image/png";
-
-      link.href =
-        CONFIG.favicon;
-
-      document.head.appendChild(
-        link
+      return (
+        CONFIG.currency +
+        Number(value || 0).toLocaleString("en-IN")
       );
 
     }
 
-  }
 
-}
+    /* =========================================================
+       GOOGLE SHEET URL
+       ========================================================= */
 
+    function sheetUrl(sheetName) {
 
-/* ============================================================
-   APPLY MESSAGES
-============================================================ */
+      return (
+        "https://docs.google.com/spreadsheets/d/e/" +
+        PUBLISHED_SHEET_ID +
+        "/gviz/tq?tqx=out:json&sheet=" +
+        encodeURIComponent(sheetName)
+      );
 
-function applyMessages(){
-
-  document.getElementById(
-    "whoT"
-  ).textContent =
-    MESSAGES.welcome_title;
-
-  document.getElementById(
-    "whoDescription"
-  ).textContent =
-    MESSAGES.welcome_text;
-
-  document.getElementById(
-    "catalogNotice"
-  ).textContent =
-    MESSAGES.catalog_notice;
-
-  document.getElementById(
-    "orderingAsText"
-  ).textContent =
-    MESSAGES.ordering_as;
-
-  document.getElementById(
-    "changeWho"
-  ).textContent =
-    MESSAGES.change_role;
-
-  document.getElementById(
-    "yourOrderTitle"
-  ).textContent =
-    MESSAGES.your_order;
-
-  document.getElementById(
-    "detailsTitle"
-  ).textContent =
-    MESSAGES.delivery_details;
-
-  document.getElementById(
-    "notesLabel"
-  ).textContent =
-    MESSAGES.notes;
-
-  document.getElementById(
-    "place"
-  ).textContent =
-    MESSAGES.place_order;
-
-  document.getElementById(
-    "waBtn"
-  ).textContent =
-    MESSAGES.send_whatsapp;
-
-  document.getElementById(
-    "copyBtn"
-  ).textContent =
-    MESSAGES.copy_details;
-
-  document.getElementById(
-    "newOrder"
-  ).textContent =
-    MESSAGES.new_order;
-
-}
+    }
 
 
-/* ============================================================
-   GET ROLE PRICE
-============================================================ */
+    async function fetchSheet(sheetName) {
 
-function getProductPrice(product){
+      const response =
+        await fetch(sheetUrl(sheetName), {
+          cache: "no-store"
+        });
 
-  const role =
-    state.role;
+      if (!response.ok) {
+        throw new Error(
+          "Unable to load " + sheetName
+        );
+      }
 
-  if(
-    role &&
-    ROLE_PRICES[product.id] &&
-    cleanNumber(
-      ROLE_PRICES[product.id][role],
-      0
-    ) > 0
-  ){
+      return await response.text();
 
-    return cleanNumber(
-      ROLE_PRICES[product.id][role]
-    );
-
-  }
-
-  return cleanNumber(
-    product.price
-  );
-
-}
+    }
 
 
-/* ============================================================
-   RENDER PRODUCTS
-============================================================ */
+    function parseGvizTable(text) {
 
-function renderProducts(){
+      const start = text.indexOf("{");
+      const end = text.lastIndexOf("}");
 
-  const listEl =
-    document.getElementById(
-      "list"
-    );
+      if (start === -1 || end === -1) {
+        throw new Error("Invalid Google Sheet response");
+      }
 
-  if(!CONFIG.products.length){
+      const json = JSON.parse(
+        text.substring(start, end + 1)
+      );
 
-    listEl.innerHTML =
-      `<div class="loading">
-        No products available.
-      </div>`;
+      const table = json.table;
 
-    return;
+      const cols =
+        table.cols.map(
+          c => String(c.label || "").trim()
+        );
 
-  }
+      const rows =
+        table.rows.map(row => {
 
-  listEl.innerHTML =
-    CONFIG.products
-      .map(product => {
+          const obj = {};
+
+          cols.forEach((col, index) => {
+
+            if (!col) return;
+
+            const cell =
+              row.c &&
+              row.c[index];
+
+            obj[col] =
+              cell && cell.v !== undefined
+                ? cell.v
+                : "";
+
+          });
+
+          return obj;
+
+        });
+
+      return rows;
+
+    }
+
+
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    function getSetting(rows, key) {
+
+      const wanted =
+        String(key || "")
+          .trim()
+          .toLowerCase();
+
+      const row =
+        rows.find(r => {
+
+          const setting =
+            r.Setting ??
+            r.setting ??
+            r.Key ??
+            r.key ??
+            "";
+
+          return (
+            String(setting)
+              .trim()
+              .toLowerCase() === wanted
+          );
+
+        });
+
+      return row
+        ? (
+            row.Value ??
+            row.value ??
+            ""
+          )
+        : "";
+
+    }
+
+
+    async function loadSettings() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("SETTINGS")
+          );
+
+        const map = {
+
+          shopName: "shopName",
+
+          brandName: "brandName",
+
+          whatsappNumber: "whatsappNumber",
+
+          phone: "phone",
+
+          email: "email",
+
+          address: "address",
+
+          tagline: "tagline",
+
+          currency: "currency",
+
+          deliveryCharge: "deliveryCharge",
+
+          freeDeliveryAbove: "freeDeliveryAbove",
+
+          favicon: "favicon",
+
+          headerBanner: "headerBanner",
+
+          footerBanner: "footerBanner"
+
+        };
+
+        Object.keys(map).forEach(key => {
+
+          const value =
+            getSetting(
+              rows,
+              map[key]
+            );
+
+          if (value !== "") {
+
+            if (
+              key === "deliveryCharge" ||
+              key === "freeDeliveryAbove"
+            ) {
+
+              CONFIG[key] =
+                cleanNumber(value);
+
+            } else {
+
+              CONFIG[key] =
+                String(value).trim();
+
+            }
+
+          }
+
+        });
+
+      } catch (error) {
+
+        console.warn(
+          "SETTINGS sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       PRODUCTS
+       ========================================================= */
+
+    async function loadProducts() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("PRODUCTS")
+          );
+
+        const loaded = [];
+
+        rows.forEach(row => {
+
+          const active =
+            row.Active ??
+            row.active ??
+            true;
+
+          if (!isTrue(active)) return;
+
+          const id =
+            row.ID ??
+            row.id ??
+            "";
+
+          if (!id) return;
+
+          loaded.push({
+
+            id: String(id),
+
+            name:
+              row.Name ??
+              row.name ??
+              "",
+
+            telugu:
+              row.Telugu ??
+              row.telugu ??
+              "",
+
+            size:
+              row.Size ??
+              row.size ??
+              "",
+
+            price:
+              cleanNumber(
+                row.Price ??
+                row.price
+              ),
+
+            mrp:
+              cleanNumber(
+                row.MRP ??
+                row.mrp
+              ),
+
+            image:
+              normalizeImageUrl(
+                row.Image ??
+                row.image ??
+                ""
+              )
+
+          });
+
+        });
+
+        if (loaded.length) {
+
+          PRODUCTS = loaded;
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "PRODUCTS sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       ROLE PRICES
+       ========================================================= */
+
+    async function loadRolePrices() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("ROLE_PRICES")
+          );
+
+        const prices = {};
+
+        rows.forEach(row => {
+
+          const id =
+            row.ID ??
+            row.id ??
+            "";
+
+          if (!id) return;
+
+          prices[id] = {
+
+            Distributor:
+              cleanNumber(
+                row.Distributor ??
+                row.distributor
+              ),
+
+            Hotel:
+              cleanNumber(
+                row.Hotel ??
+                row.hotel
+              ),
+
+            User:
+              cleanNumber(
+                row.User ??
+                row.user
+              )
+
+          };
+
+        });
+
+        if (Object.keys(prices).length) {
+
+          ROLE_PRICES = prices;
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "ROLE_PRICES sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       PAYMENT
+       ========================================================= */
+
+    async function loadPaymentDelivery() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("PAYMENT_DELIVERY")
+          );
+
+        const data = {};
+
+        rows.forEach(row => {
+
+          const role =
+            row.Role ??
+            row.role ??
+            "";
+
+          if (!role) return;
+
+          data[role] = {
+
+            method:
+              row.Method ??
+              row.method ??
+              "",
+
+            delivery:
+              row.Delivery ??
+              row.delivery ??
+              "",
+
+            note:
+              row.Note ??
+              row.note ??
+              ""
+
+          };
+
+        });
+
+        if (Object.keys(data).length) {
+
+          PAYMENT_DATA = data;
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "PAYMENT_DELIVERY sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       MESSAGES
+       ========================================================= */
+
+    async function loadMessages() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("MESSAGES")
+          );
+
+        rows.forEach(row => {
+
+          const key =
+            row.Key ??
+            row.key ??
+            row.Message ??
+            row.message ??
+            "";
+
+          const value =
+            row.Value ??
+            row.value ??
+            row.Text ??
+            row.text ??
+            "";
+
+          if (key && value !== "") {
+
+            MESSAGES[String(key)] =
+              String(value);
+
+          }
+
+        });
+
+      } catch (error) {
+
+        console.warn(
+          "MESSAGES sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       LOCATIONS
+       ========================================================= */
+
+    async function loadLocations() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("LOCATIONS")
+          );
+
+        const data = {};
+
+        rows.forEach(row => {
+
+          const stateName =
+            row.State ??
+            row.state ??
+            "";
+
+          const district =
+            row.District ??
+            row.district ??
+            "";
+
+          if (!stateName || !district) return;
+
+          if (!data[stateName]) {
+            data[stateName] = [];
+          }
+
+          data[stateName].push(
+            String(district)
+          );
+
+        });
+
+        if (Object.keys(data).length) {
+
+          LOCATION_DATA = data;
+
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "LOCATIONS sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       SOCIAL LINKS
+       ========================================================= */
+
+    async function loadSocialLinks() {
+
+      try {
+
+        const rows =
+          parseGvizTable(
+            await fetchSheet("SOCIAL_LINKS")
+          );
+
+        rows.forEach(row => {
+
+          const platform =
+            row.Platform ??
+            row.platform ??
+            row.Name ??
+            row.name ??
+            "";
+
+          const url =
+            row.URL ??
+            row.Url ??
+            row.url ??
+            "";
+
+          if (platform && url) {
+
+            SOCIAL_LINKS[
+              String(platform)
+            ] = String(url);
+
+          }
+
+        });
+
+      } catch (error) {
+
+        console.warn(
+          "SOCIAL_LINKS sheet fallback:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       FAVICON
+       ========================================================= */
+
+    function updateFavicon() {
+
+      const favicon =
+        normalizeImageUrl(
+          CONFIG.favicon
+        );
+
+      if (!favicon) return;
+
+      let icon =
+        document.getElementById(
+          "siteFavicon"
+        );
+
+      if (!icon) {
+
+        icon =
+          document.createElement("link");
+
+        icon.id =
+          "siteFavicon";
+
+        icon.rel =
+          "icon";
+
+        document.head.appendChild(icon);
+
+      }
+
+      icon.href =
+        favicon +
+        (
+          favicon.includes("?")
+            ? "&v=" + Date.now()
+            : "?v=" + Date.now()
+        );
+
+      icon.type =
+        "image/png";
+
+      let shortcut =
+        document.querySelector(
+          'link[rel="shortcut icon"]'
+        );
+
+      if (!shortcut) {
+
+        shortcut =
+          document.createElement("link");
+
+        shortcut.rel =
+          "shortcut icon";
+
+        document.head.appendChild(
+          shortcut
+        );
+
+      }
+
+      shortcut.href =
+        icon.href;
+
+      shortcut.type =
+        "image/png";
+
+    }
+
+
+    /* =========================================================
+       APPLY SETTINGS
+       ========================================================= */
+
+    function applySettings() {
+
+      document.title =
+        CONFIG.shopName +
+        " – " +
+        CONFIG.brandName +
+        " | Order Online";
+
+      document.getElementById(
+        "shopName"
+      ).textContent =
+        CONFIG.shopName;
+
+      document.getElementById(
+        "brandName"
+      ).textContent =
+        CONFIG.brandName;
+
+      document.getElementById(
+        "footerShopName"
+      ).textContent =
+        CONFIG.shopName;
+
+      document.getElementById(
+        "footerAddress"
+      ).textContent =
+        CONFIG.address;
+
+      document.getElementById(
+        "tagline"
+      ).textContent =
+        CONFIG.tagline;
+
+      document.getElementById(
+        "headerBanner"
+      ).src =
+        normalizeImageUrl(
+          CONFIG.headerBanner
+        );
+
+      document.getElementById(
+        "footerBanner"
+      ).src =
+        normalizeImageUrl(
+          CONFIG.footerBanner
+        );
+
+      updateFavicon();
+
+    }
+
+
+    /* =========================================================
+       APPLY MESSAGES
+       ========================================================= */
+
+    function applyMessages() {
+
+      const setText =
+        (id, key) => {
+
+          const el =
+            document.getElementById(id);
+
+          if (el && MESSAGES[key]) {
+
+            el.textContent =
+              MESSAGES[key];
+
+          }
+
+        };
+
+      setText(
+        "welcomeTitle",
+        "welcome_title"
+      );
+
+      setText(
+        "welcomeText",
+        "welcome_text"
+      );
+
+      setText(
+        "catalogNotice",
+        "catalog_notice"
+      );
+
+      setText(
+        "orderingAsLabel",
+        "ordering_as"
+      );
+
+      setText(
+        "checkoutButton",
+        "checkout"
+      );
+
+      setText(
+        "yourOrderTitle",
+        "your_order"
+      );
+
+      setText(
+        "deliveryDetailsTitle",
+        "delivery_details"
+      );
+
+      setText(
+        "notesLabel",
+        "notes"
+      );
+
+      setText(
+        "placeOrderButton",
+        "place_order"
+      );
+
+      setText(
+        "backProductsButton",
+        "back_products"
+      );
+
+      setText(
+        "orderSuccessTitle",
+        "order_success"
+      );
+
+      setText(
+        "whatsappButton",
+        "send_whatsapp"
+      );
+
+      setText(
+        "copyButton",
+        "copy_details"
+      );
+
+      setText(
+        "newOrderButton",
+        "new_order"
+      );
+
+    }
+
+
+    /* =========================================================
+       SOCIAL ICON
+       ========================================================= */
+
+    function getSocialIcon(name) {
+
+      const n =
+        String(name)
+          .toLowerCase();
+
+      if (n.includes("whatsapp"))
+        return "💬";
+
+      if (n.includes("instagram"))
+        return "📷";
+
+      if (n.includes("facebook"))
+        return "f";
+
+      if (n.includes("youtube"))
+        return "▶";
+
+      if (n.includes("website"))
+        return "🌐";
+
+      return "🔗";
+
+    }
+
+
+    function renderSocialLinks() {
+
+      const container =
+        document.getElementById(
+          "socialLinks"
+        );
+
+      container.innerHTML = "";
+
+      Object.entries(
+        SOCIAL_LINKS
+      ).forEach(
+        ([name, url]) => {
+
+          if (!url) return;
+
+          const a =
+            document.createElement("a");
+
+          a.className =
+            "social-link";
+
+          a.href =
+            url;
+
+          a.target =
+            "_blank";
+
+          a.rel =
+            "noopener noreferrer";
+
+          a.innerHTML =
+            `<span>${getSocialIcon(name)}</span>
+             <span>${escapeHtml(name)}</span>`;
+
+          container.appendChild(a);
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       PRODUCT PRICE
+       ========================================================= */
+
+    function getProductPrice(product) {
+
+      const rolePrices =
+        ROLE_PRICES[
+          product.id
+        ];
+
+      if (
+        rolePrices &&
+        rolePrices[state.role] > 0
+      ) {
+
+        return rolePrices[
+          state.role
+        ];
+
+      }
+
+      return cleanNumber(
+        product.price
+      );
+
+    }
+
+
+    /* =========================================================
+       RENDER PRODUCTS
+       ========================================================= */
+
+    function renderProducts() {
+
+      const grid =
+        document.getElementById(
+          "productsGrid"
+        );
+
+      grid.innerHTML = "";
+
+      PRODUCTS.forEach(product => {
 
         const qty =
           state.cart[
@@ -2597,118 +2834,93 @@ function renderProducts(){
           ] || 0;
 
         const price =
-          getProductPrice(
-            product
+          getProductPrice(product);
+
+        const card =
+          document.createElement("div");
+
+        card.className =
+          "product-card";
+
+        const image =
+          normalizeImageUrl(
+            product.image
           );
 
-        const saving =
-          Math.max(
-            0,
-            cleanNumber(
-              product.mrp
-            ) - price
-          );
+        card.innerHTML = `
 
-        return `
+          <div class="product-image-wrap">
 
-          <div class="card">
+            <img
+              class="product-image"
+              src="${escapeHtml(image)}"
+              alt="${escapeHtml(product.name)}"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
 
-            <div class="tile">
+          </div>
 
-              <img
-                src="${escapeHtml(product.img)}"
-                alt="${escapeHtml(product.name)}"
-                loading="lazy"
-                onerror="this.src='https://via.placeholder.com/150/eef2e8/1b7a3a?text=SVR+Foods'"
-              >
+          <div class="product-body">
 
+            <h3 class="product-name">
+              ${escapeHtml(product.name)}
+            </h3>
+
+            <div class="product-telugu telugu">
+              ${escapeHtml(product.telugu)}
             </div>
 
+            <div class="product-size">
+              ${escapeHtml(product.size)}
+            </div>
 
-            <div class="info">
+            <div class="price-row">
 
-              <h3>
-                ${escapeHtml(product.name)}
-              </h3>
-
-
-              <div class="te">
-                ${escapeHtml(product.te)}
-              </div>
-
-
-              <div class="sub">
-                Pack:
-                <b>
-                  ${escapeHtml(product.size)}
-                </b>
-              </div>
-
-
-              <div class="pr">
-
-                <b>
-                  ${CONFIG.currency}${price}
-                </b>
+              <div>
+                <span class="price">
+                  ${formatMoney(price)}
+                </span>
 
                 ${
-                  product.mrp
-                  ? `<s>
-                      ${CONFIG.currency}${product.mrp}
-                    </s>`
-                  : ""
-                }
-
-                ${
-                  saving > 0
-                  ? `<em>
-                      Save ${CONFIG.currency}${saving}
-                    </em>`
-                  : ""
+                  product.mrp > price
+                    ? `<span class="mrp">${formatMoney(product.mrp)}</span>`
+                    : ""
                 }
 
               </div>
-
 
               ${
                 qty === 0
-
-                ? `
-
-                  <button
-                    class="add"
-                    onclick="updateQty('${escapeJs(product.id)}',1)"
-                  >
-                    ${escapeHtml(
-                      MESSAGES.add_button
-                    )}
-                  </button>
-
-                `
-
-                : `
-
-                  <div class="step">
-
+                  ? `
                     <button
-                      onclick="updateQty('${escapeJs(product.id)}',-1)"
+                      class="add-btn"
+                      onclick="updateQty('${escapeJs(product.id)}', 1)"
                     >
-                      −
+                      ${escapeHtml(MESSAGES.add_button || "ADD")}
                     </button>
+                  `
+                  : `
+                    <div class="qty-control">
 
-                    <span>
-                      ${qty}
-                    </span>
+                      <button
+                        onclick="updateQty('${escapeJs(product.id)}', -1)"
+                      >
+                        −
+                      </button>
 
-                    <button
-                      onclick="updateQty('${escapeJs(product.id)}',1)"
-                    >
-                      +
-                    </button>
+                      <span class="qty-value">
+                        ${qty}
+                      </span>
 
-                  </div>
+                      <button
+                        onclick="updateQty('${escapeJs(product.id)}', 1)"
+                      >
+                        +
+                      </button>
 
-                `
+                    </div>
+                  `
               }
 
             </div>
@@ -2717,995 +2929,903 @@ function renderProducts(){
 
         `;
 
-      })
-      .join("");
+        grid.appendChild(card);
 
-}
+      });
 
-
-/* ============================================================
-   CART
-============================================================ */
-
-function updateQty(id,delta){
-
-  const current =
-    state.cart[id] || 0;
-
-  const next =
-    current + delta;
-
-  if(next <= 0){
-
-    delete state.cart[id];
-
-  }else{
-
-    state.cart[id] =
-      next;
-
-  }
-
-  renderProducts();
-
-  updateBottomBar();
-
-}
-
-
-function updateBottomBar(){
-
-  const bar =
-    document.getElementById(
-      "bar"
-    );
-
-  const totalItems =
-    Object.values(
-      state.cart
-    )
-    .reduce(
-      (sum,q) =>
-        sum + q,
-      0
-    );
-
-  if(totalItems === 0){
-
-    bar.classList.remove(
-      "on"
-    );
-
-    return;
-
-  }
-
-  let subtotal = 0;
-
-  CONFIG.products.forEach(
-    product => {
-
-      const qty =
-        state.cart[
-          product.id
-        ] || 0;
-
-      if(qty){
-
-        subtotal +=
-          qty *
-          getProductPrice(
-            product
-          );
-
-      }
+      updateBottomBar();
 
     }
-  );
 
-  document.getElementById(
-    "barCount"
-  ).textContent =
-    `${totalItems} item${
-      totalItems > 1
-      ? "s"
-      : ""
-    }`;
 
-  document.getElementById(
-    "barTotal"
-  ).textContent =
-    `${CONFIG.currency}${subtotal} ➔ ${MESSAGES.checkout}`;
+    /* =========================================================
+       CART
+       ========================================================= */
 
-  bar.classList.add(
-    "on"
-  );
+    function updateQty(id, change) {
 
-}
+      const current =
+        state.cart[id] || 0;
 
-
-/* ============================================================
-   LOCATION HELPERS
-============================================================ */
-
-function getStates(){
-
-  return [
-    ...Object.keys(
-      LOCATION_DATA
-    ),
-    "Other State"
-  ];
-
-}
-
-
-function handleStateChange(){
-
-  const stateVal =
-    document.getElementById(
-      "custState"
-    ).value;
-
-  const distSelect =
-    document.getElementById(
-      "custDistrict"
-    );
-
-  const manualState =
-    document.getElementById(
-      "manualStateWrap"
-    );
-
-  const manualDistrict =
-    document.getElementById(
-      "manualDistrictWrap"
-    );
-
-  distSelect.innerHTML =
-    `<option value="">
-      Select District
-    </option>`;
-
-  if(
-    stateVal === "Other State"
-  ){
-
-    distSelect.classList.add(
-      "hidden"
-    );
-
-    manualState.classList.add(
-      "on"
-    );
-
-    manualDistrict.classList.add(
-      "on"
-    );
-
-    return;
-
-  }
-
-  distSelect.classList.remove(
-    "hidden"
-  );
-
-  manualState.classList.remove(
-    "on"
-  );
-
-  manualDistrict.classList.remove(
-    "on"
-  );
-
-  if(
-    stateVal &&
-    LOCATION_DATA[stateVal]
-  ){
-
-    LOCATION_DATA[stateVal]
-      .forEach(
-        district => {
-
-          const opt =
-            document.createElement(
-              "option"
-            );
-
-          opt.value =
-            district;
-
-          opt.textContent =
-            district;
-
-          distSelect.appendChild(
-            opt
-          );
-
-        }
-      );
-
-  }
-
-}
-
-
-/* ============================================================
-   CHECKOUT FIELDS
-============================================================ */
-
-function renderCheckoutFields(){
-
-  const fields =
-    document.getElementById(
-      "fields"
-    );
-
-  const isFirm =
-    state.role === "Distributor" ||
-    state.role === "Hotel";
-
-  fields.innerHTML = `
-
-    <label for="custName">
-
-      ${
-        isFirm
-        ? "సంస్థ పేరు / Firm Name *"
-        : "మీ పేరు / Full Name *"
-      }
-
-    </label>
-
-
-    <input
-      id="custName"
-      placeholder="${
-        isFirm
-        ? "e.g. Sri Rama Stores"
-        : "Enter your full name"
-      }"
-      required
-    >
-
-
-    <label for="contactPerson">
-
-      ${
-        isFirm
-        ? "కాంటాక్ట్ పర్సన్ / Contact Person *"
-        : "ప్రత్యామ్నాయ పేరు (Optional)"
-      }
-
-    </label>
-
-
-    <input
-      id="contactPerson"
-      placeholder="Contact person name"
-      ${isFirm ? "required" : ""}
-    >
-
-
-    <label for="custPhone">
-      WhatsApp / మొబైల్ నెంబర్ *
-    </label>
-
-
-    <input
-      id="custPhone"
-      type="tel"
-      inputmode="numeric"
-      maxlength="10"
-      placeholder="10-digit mobile number"
-      required
-    >
-
-
-    <div class="row2">
-
-      <div>
-
-        <label for="custState">
-          రాష్ట్రం / State *
-        </label>
-
-
-        <select
-          id="custState"
-          onchange="handleStateChange()"
-        >
-
-          <option value="">
-            Select State
-          </option>
-
-
-          ${
-            getStates()
-              .map(
-                s =>
-                  `<option value="${escapeHtml(s)}">
-                    ${escapeHtml(s)}
-                  </option>`
-              )
-              .join("")
-          }
-
-        </select>
-
-      </div>
-
-
-      <div>
-
-        <label for="custDistrict">
-          జిల్లా / District *
-        </label>
-
-
-        <select
-          id="custDistrict"
-        >
-
-          <option value="">
-            Select District
-          </option>
-
-        </select>
-
-
-        <div
-          id="manualDistrictWrap"
-          class="manual-location"
-        >
-
-          <input
-            id="manualDistrict"
-            placeholder="Enter District"
-          >
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      id="manualStateWrap"
-      class="manual-location"
-    >
-
-      <label for="manualState">
-        State Name *
-      </label>
-
-
-      <input
-        id="manualState"
-        placeholder="Enter your State"
-      >
-
-    </div>
-
-
-    <div class="row2">
-
-      <div>
-
-        <label for="custMandal">
-          మండలం / Mandal / City / Town *
-        </label>
-
-
-        <input
-          id="custMandal"
-          placeholder="e.g. Mandapeta"
-          required
-        >
-
-      </div>
-
-
-      <div>
-
-        <label for="custVillage">
-          గ్రామం / Village / Area *
-        </label>
-
-
-        <input
-          id="custVillage"
-          placeholder="e.g. Ippanapadu"
-          required
-        >
-
-      </div>
-
-    </div>
-
-
-    <label for="custAddress">
-      ఇంటి / వీధి నెం. / Door No / Street *
-    </label>
-
-
-    <textarea
-      id="custAddress"
-      rows="2"
-      placeholder="D.No, Street"
-      required
-    ></textarea>
-
-
-    <label for="custLandmark">
-      Landmark
-    </label>
-
-
-    <input
-      id="custLandmark"
-      placeholder="Near SBI Bank, Temple, etc."
-    >
-
-
-    <label for="custPincode">
-      పిన్ కోడ్ / PIN Code *
-    </label>
-
-
-    <input
-      id="custPincode"
-      type="text"
-      inputmode="numeric"
-      maxlength="6"
-      placeholder="e.g. 533340"
-      required
-    >
-
-  `;
-
-  handleStateChange();
-
-}
-
-
-/* ============================================================
-   PAYMENT SECTION
-============================================================ */
-
-function renderPaymentSection(){
-
-  const payContainer =
-    document.getElementById(
-      "paymentInfo"
-    );
-
-  const role =
-    state.role;
-
-  const payment =
-    PAYMENT_DATA[role] ||
-    PAYMENT_DATA.User;
-
-  if(
-    payment.mode === "COD" ||
-    role === "Distributor" ||
-    role === "Hotel"
-  ){
-
-    payContainer.innerHTML = `
-
-      <label
-        style="
-          border-color:var(--brand);
-          background:var(--surface);
-        "
-      >
-
-        <input
-          type="radio"
-          name="payMethod"
-          value="COD"
-          checked
-        >
-
-        <div>
-
-          <b style="color:var(--ink);">
-
-            Cash on Delivery (COD)
-
-            <span class="pay-tag">
-
-              ${escapeHtml(
-                payment.status ||
-                "FREE DOOR DELIVERY"
-              )}
-
-            </span>
-
-          </b>
-
-
-          <small>
-
-            ${escapeHtml(
-              payment.note ||
-              "Payment upon delivery"
-            )}
-
-          </small>
-
-        </div>
-
-      </label>
-
-    `;
-
-  }else{
-
-    payContainer.innerHTML = `
-
-      <label
-        style="
-          border-color:#0066cc;
-          background:var(--surface);
-        "
-      >
-
-        <input
-          type="radio"
-          name="payMethod"
-          value="UPI"
-          checked
-        >
-
-
-        <div>
-
-          <b style="color:var(--ink);">
-
-            WhatsApp QR / UPI Payment
-
-            <span class="pay-tag upi">
-
-              ${escapeHtml(
-                payment.status ||
-                "DISPATCH AFTER PAYMENT"
-              )}
-
-            </span>
-
-          </b>
-
-
-          <small>
-
-            ${escapeHtml(
-              payment.note ||
-              "UPI payment required before dispatch"
-            )}
-
-          </small>
-
-        </div>
-
-      </label>
-
-    `;
-
-  }
-
-}
-
-
-/* ============================================================
-   CART OPEN
-============================================================ */
-
-document
-  .getElementById(
-    "openCart"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      const linesEl =
-        document.getElementById(
-          "cartLines"
+      const next =
+        Math.max(
+          0,
+          current + change
         );
 
-      let subtotal = 0;
+      if (next === 0) {
 
-      let totalSaved = 0;
+        delete state.cart[id];
 
-      let html = "";
+      } else {
 
-      CONFIG.products.forEach(
-        product => {
+        state.cart[id] =
+          next;
 
-          const qty =
+      }
+
+      renderProducts();
+
+    }
+
+
+    function getCartItems() {
+
+      return PRODUCTS
+        .filter(
+          product =>
             state.cart[
               product.id
-            ];
-
-          if(qty){
-
-            const price =
-              getProductPrice(
-                product
-              );
-
-            const itemTotal =
-              qty * price;
-
-            subtotal +=
-              itemTotal;
-
-            totalSaved +=
-              qty *
-              Math.max(
-                0,
-                cleanNumber(
-                  product.mrp
-                ) - price
-              );
-
-            html += `
-
-              <div class="line">
-
-                <span>
-
-                  ${escapeHtml(
-                    product.name
-                  )}
-
-                  (${escapeHtml(
-                    product.size
-                  )})
-
-                  ×${qty}
-
-                </span>
-
-
-                <b>
-                  ${CONFIG.currency}${itemTotal}
-                </b>
-
-              </div>
-
-            `;
-
-          }
-
-        }
-      );
-
-
-      html += `
-
-        <div class="line save">
-
-          <span>
-            డిస్కౌంట్ ఆదా (Savings)
-          </span>
-
-
-          <b>
-            -${CONFIG.currency}${totalSaved}
-          </b>
-
-        </div>
-
-
-        <div class="line total">
-
-          <span>
-            మొత్తం బిల్లు (Grand Total)
-          </span>
-
-
-          <span style="color:var(--brand);">
-            ${CONFIG.currency}${subtotal}
-          </span>
-
-        </div>
-
-      `;
-
-
-      linesEl.innerHTML =
-        html;
-
-
-      renderCheckoutFields();
-
-      renderPaymentSection();
-
-
-      document
-        .getElementById(
-          "checkout"
+            ] > 0
         )
-        .classList.add("on");
+        .map(product => ({
+
+          product,
+
+          qty:
+            state.cart[
+              product.id
+            ],
+
+          price:
+            getProductPrice(product)
+
+        }));
 
     }
-  );
 
 
-/* ============================================================
-   CLOSE CHECKOUT
-============================================================ */
+    function getSubtotal() {
 
-document
-  .getElementById(
-    "closeCheckout"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "checkout"
-        )
-        .classList.remove(
-          "on"
+      return getCartItems()
+        .reduce(
+          (sum, item) =>
+            sum +
+            item.price *
+            item.qty,
+          0
         );
 
     }
-  );
 
 
-/* ============================================================
-   PLACE ORDER
-============================================================ */
+    function updateBottomBar() {
 
-document
-  .getElementById(
-    "place"
-  )
-  .addEventListener(
-    "click",
-    () => {
+      const items =
+        getCartItems();
 
-      const name =
-        document
-          .getElementById(
-            "custName"
-          )
-          .value
-          .trim();
+      const count =
+        items.reduce(
+          (sum, item) =>
+            sum + item.qty,
+          0
+        );
 
+      const subtotal =
+        getSubtotal();
 
-      const contactPerson =
-        document
-          .getElementById(
-            "contactPerson"
-          )
-          ?.value
-          .trim() || "";
-
-
-      const phone =
-        document
-          .getElementById(
-            "custPhone"
-          )
-          .value
-          .trim();
-
-
-      const userState =
-        document
-          .getElementById(
-            "custState"
-          )
-          .value;
-
-
-      let district =
-        document
-          .getElementById(
-            "custDistrict"
-          )
-          .value;
-
-
-      const manualStateEl =
+      const bar =
         document.getElementById(
-          "manualState"
+          "cartBar"
         );
 
+      if (count <= 0) {
 
-      const manualDistrictEl =
-        document.getElementById(
-          "manualDistrict"
-        );
-
-
-      const isOtherState =
-        userState === "Other State";
-
-
-      const finalState =
-        isOtherState
-        ? (
-            manualStateEl
-              ?.value
-              .trim() || ""
-          )
-        : userState;
-
-
-      if(isOtherState){
-
-        district =
-          manualDistrictEl
-            ?.value
-            .trim() || "";
-
-      }
-
-
-      const mandal =
-        document
-          .getElementById(
-            "custMandal"
-          )
-          .value
-          .trim();
-
-
-      const village =
-        document
-          .getElementById(
-            "custVillage"
-          )
-          .value
-          .trim();
-
-
-      const address =
-        document
-          .getElementById(
-            "custAddress"
-          )
-          .value
-          .trim();
-
-
-      const landmark =
-        document
-          .getElementById(
-            "custLandmark"
-          )
-          .value
-          .trim();
-
-
-      const pincode =
-        document
-          .getElementById(
-            "custPincode"
-          )
-          .value
-          .trim();
-
-
-      const notes =
-        document
-          .getElementById(
-            "notes"
-          )
-          .value
-          .trim();
-
-
-      const isFirm =
-        state.role === "Distributor" ||
-        state.role === "Hotel";
-
-
-      const phoneValid =
-        /^\d{10}$/.test(
-          phone
-        );
-
-
-      const pinValid =
-        /^\d{6}$/.test(
-          pincode
-        );
-
-
-      if(
-        !name ||
-        (isFirm && !contactPerson) ||
-        !phoneValid ||
-        !finalState ||
-        !district ||
-        !mandal ||
-        !village ||
-        !address ||
-        !pinValid
-      ){
-
-        alert(
-          "దయచేసి అన్ని ముఖ్యమైన వివరాలను సరిగ్గా నమోదు చేయండి."
+        bar.classList.remove(
+          "show"
         );
 
         return;
 
       }
 
+      bar.classList.add(
+        "show"
+      );
 
-      const orderId =
-        generateDailyOrderNumber(
-          "SVR"
+      document.getElementById(
+        "cartCount"
+      ).textContent =
+        count +
+        (
+          count === 1
+            ? " item"
+            : " items"
         );
 
+      document.getElementById(
+        "cartTotal"
+      ).textContent =
+        formatMoney(subtotal);
 
-      let subtotal = 0;
-
-      let summaryText = "";
+    }
 
 
-      CONFIG.products.forEach(
-        product => {
+    /* =========================================================
+       LOCATIONS
+       ========================================================= */
 
-          const qty =
-            state.cart[
-              product.id
-            ];
+    function getStates() {
 
-          if(qty){
+      return Object.keys(
+        LOCATION_DATA
+      );
 
-            const price =
-              getProductPrice(
-                product
-              );
+    }
 
-            const itemTotal =
-              qty * price;
 
-            subtotal +=
-              itemTotal;
+    function handleStateChange() {
 
-            summaryText +=
-              `* ${product.name} (${product.size}) x${qty} = ${CONFIG.currency}${itemTotal}\n`;
+      const stateSelect =
+        document.getElementById(
+          "deliveryState"
+        );
 
-          }
+      const districtSelect =
+        document.getElementById(
+          "deliveryDistrict"
+        );
+
+      const otherWrap =
+        document.getElementById(
+          "otherStateWrap"
+        );
+
+      const selected =
+        stateSelect.value;
+
+      districtSelect.innerHTML =
+        '<option value="">Select district</option>';
+
+      if (
+        selected &&
+        LOCATION_DATA[selected]
+      ) {
+
+        LOCATION_DATA[
+          selected
+        ].forEach(district => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            district;
+
+          option.textContent =
+            district;
+
+          districtSelect.appendChild(
+            option
+          );
+
+        });
+
+      }
+
+      if (
+        selected === "Other"
+      ) {
+
+        otherWrap.style.display =
+          "block";
+
+      } else {
+
+        otherWrap.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       CHECKOUT FIELDS
+       ========================================================= */
+
+    function renderCheckoutFields() {
+
+      const container =
+        document.getElementById(
+          "checkoutFields"
+        );
+
+      const states =
+        getStates();
+
+      container.innerHTML = `
+
+        <div class="field">
+
+          <label>
+            Name *
+          </label>
+
+          <input
+            id="customerName"
+            type="text"
+            placeholder="Enter your name"
+            autocomplete="name"
+          />
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Mobile Number *
+          </label>
+
+          <input
+            id="customerPhone"
+            type="tel"
+            placeholder="10 digit mobile number"
+            autocomplete="tel"
+          />
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            Address *
+          </label>
+
+          <textarea
+            id="deliveryAddress"
+            placeholder="House / Street / Village / Area"
+          ></textarea>
+
+        </div>
+
+        <div class="two-col">
+
+          <div class="field">
+
+            <label>
+              State *
+            </label>
+
+            <select
+              id="deliveryState"
+              onchange="handleStateChange()"
+            >
+
+              <option value="">
+                Select state
+              </option>
+
+              ${states
+                .map(
+                  s =>
+                    `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`
+                )
+                .join("")}
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+
+            <label>
+              District *
+            </label>
+
+            <select
+              id="deliveryDistrict"
+            >
+
+              <option value="">
+                Select district
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div
+          id="otherStateWrap"
+          class="field"
+        >
+
+          <label>
+            Other State
+          </label>
+
+          <input
+            id="otherState"
+            type="text"
+            placeholder="Enter state"
+          />
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            PIN Code
+          </label>
+
+          <input
+            id="deliveryPin"
+            type="text"
+            inputmode="numeric"
+            placeholder="PIN Code"
+            maxlength="6"
+          />
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =========================================================
+       PAYMENT SECTION
+       ========================================================= */
+
+    function renderPaymentSection() {
+
+      const container =
+        document.getElementById(
+          "paymentSection"
+        );
+
+      const data =
+        PAYMENT_DATA[
+          state.role
+        ] ||
+        PAYMENT_DATA.User;
+
+      container.innerHTML = `
+
+        <h4>
+          Payment & Delivery
+        </h4>
+
+        <div class="payment-box">
+
+          <div class="payment-title">
+            ${escapeHtml(data.method)}
+          </div>
+
+          <div class="payment-text">
+            ${escapeHtml(data.delivery)}
+            <br>
+            ${escapeHtml(data.note)}
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =========================================================
+       OPEN CHECKOUT
+       ========================================================= */
+
+    function openCheckout() {
+
+      const items =
+        getCartItems();
+
+      if (!items.length) {
+
+        alert(
+          "Please add at least one product."
+        );
+
+        return;
+
+      }
+
+      renderCheckoutFields();
+
+      renderPaymentSection();
+
+      renderCheckoutOrderList();
+
+      renderCheckoutSummary();
+
+      document
+        .getElementById(
+          "checkoutModal"
+        )
+        .classList.add("show");
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    function closeCheckout() {
+
+      document
+        .getElementById(
+          "checkoutModal"
+        )
+        .classList.remove("show");
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    /* =========================================================
+       CHECKOUT ORDER LIST
+       ========================================================= */
+
+    function renderCheckoutOrderList() {
+
+      const container =
+        document.getElementById(
+          "checkoutOrderList"
+        );
+
+      const items =
+        getCartItems();
+
+      container.innerHTML =
+        items
+          .map(item => {
+
+            const total =
+              item.price *
+              item.qty;
+
+            return `
+
+              <div class="order-item">
+
+                <div>
+
+                  <div class="order-item-name">
+                    ${escapeHtml(item.product.name)}
+                  </div>
+
+                  <div class="order-item-meta">
+                    ${escapeHtml(item.product.size)}
+                    × ${item.qty}
+                  </div>
+
+                </div>
+
+                <div>
+                  ${formatMoney(item.price)}
+                </div>
+
+                <div class="order-item-total">
+                  ${formatMoney(total)}
+                </div>
+
+              </div>
+
+            `;
+
+          })
+          .join("");
+
+    }
+
+
+    /* =========================================================
+       SUMMARY
+       ========================================================= */
+
+    function getDeliveryCharge() {
+
+      const subtotal =
+        getSubtotal();
+
+      let deliveryCharge =
+        cleanNumber(
+          CONFIG.deliveryCharge
+        );
+
+      const freeAbove =
+        cleanNumber(
+          CONFIG.freeDeliveryAbove
+        );
+
+      if (
+        freeAbove > 0 &&
+        subtotal >= freeAbove
+      ) {
+
+        deliveryCharge = 0;
+
+      }
+
+      return deliveryCharge;
+
+    }
+
+
+    function renderCheckoutSummary() {
+
+      const subtotal =
+        getSubtotal();
+
+      const delivery =
+        getDeliveryCharge();
+
+      const total =
+        subtotal +
+        delivery;
+
+      document.getElementById(
+        "checkoutSummary"
+      ).innerHTML = `
+
+        <div class="summary-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong>
+            ${formatMoney(subtotal)}
+          </strong>
+
+        </div>
+
+        <div class="summary-row">
+
+          <span>
+            Delivery
+          </span>
+
+          <strong>
+            ${
+              delivery === 0
+                ? "FREE"
+                : formatMoney(delivery)
+            }
+          </strong>
+
+        </div>
+
+        <div class="summary-row total">
+
+          <span>
+            Total
+          </span>
+
+          <strong>
+            ${formatMoney(total)}
+          </strong>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =========================================================
+       ORDER NUMBER
+       ========================================================= */
+
+    function generateOrderNumber() {
+
+      const now =
+        new Date();
+
+      const date =
+        now.getFullYear() +
+        String(
+          now.getMonth() + 1
+        ).padStart(2, "0") +
+        String(
+          now.getDate()
+        ).padStart(2, "0");
+
+      const storageKey =
+        "svr_order_counter_" +
+        date;
+
+      let counter =
+        Number(
+          localStorage.getItem(
+            storageKey
+          ) || 0
+        );
+
+      counter++;
+
+      localStorage.setItem(
+        storageKey,
+        String(counter)
+      );
+
+      return (
+        "SVR-" +
+        date +
+        "-" +
+        String(counter).padStart(
+          3,
+          "0"
+        )
+      );
+
+    }
+
+
+    /* =========================================================
+       PLACE ORDER
+       ========================================================= */
+
+    function placeOrder() {
+
+      const name =
+        document.getElementById(
+          "customerName"
+        ).value.trim();
+
+      const phone =
+        document.getElementById(
+          "customerPhone"
+        ).value.trim();
+
+      const address =
+        document.getElementById(
+          "deliveryAddress"
+        ).value.trim();
+
+      const selectedState =
+        document.getElementById(
+          "deliveryState"
+        ).value;
+
+      const district =
+        document.getElementById(
+          "deliveryDistrict"
+        ).value;
+
+      const pin =
+        document.getElementById(
+          "deliveryPin"
+        ).value.trim();
+
+      const notes =
+        document.getElementById(
+          "notes"
+        ).value.trim();
+
+      let finalState =
+        selectedState;
+
+      if (
+        selectedState === "Other"
+      ) {
+
+        finalState =
+          document.getElementById(
+            "otherState"
+          ).value.trim();
+
+      }
+
+      if (!name) {
+
+        alert(
+          "Please enter your name."
+        );
+
+        return;
+
+      }
+
+      if (!phone) {
+
+        alert(
+          "Please enter your mobile number."
+        );
+
+        return;
+
+      }
+
+      if (!address) {
+
+        alert(
+          "Please enter delivery address."
+        );
+
+        return;
+
+      }
+
+      if (!selectedState) {
+
+        alert(
+          "Please select your state."
+        );
+
+        return;
+
+      }
+
+      if (
+        selectedState === "Other" &&
+        !finalState
+      ) {
+
+        alert(
+          "Please enter your state."
+        );
+
+        return;
+
+      }
+
+      if (
+        selectedState !== "Other" &&
+        !district
+      ) {
+
+        alert(
+          "Please select your district."
+        );
+
+        return;
+
+      }
+
+      const items =
+        getCartItems();
+
+      const subtotal =
+        getSubtotal();
+
+      const delivery =
+        getDeliveryCharge();
+
+      const grandTotal =
+        subtotal +
+        delivery;
+
+      const orderNo =
+        generateOrderNumber();
+
+      state.orderNumber =
+        orderNo;
+
+      let message =
+        "";
+
+      message +=
+        "*SVR FOOD ORDER*\\n\\n";
+
+      message +=
+        "*ORDER NO:* " +
+        orderNo +
+        "\\n";
+
+      message +=
+        "*Ordering as:* " +
+        state.role +
+        "\\n\\n";
+
+      message +=
+        "*CUSTOMER DETAILS*\\n";
+
+      message +=
+        "Name: " +
+        name +
+        "\\n";
+
+      message +=
+        "Mobile: " +
+        phone +
+        "\\n";
+
+      message +=
+        "Address: " +
+        address +
+        "\\n";
+
+      message +=
+        "State: " +
+        finalState +
+        "\\n";
+
+      if (district) {
+
+        message +=
+          "District: " +
+          district +
+          "\\n";
+
+      }
+
+      if (pin) {
+
+        message +=
+          "PIN: " +
+          pin +
+          "\\n";
+
+      }
+
+      message +=
+        "\\n*ORDER ITEMS*\\n";
+
+      items.forEach(
+        (item, index) => {
+
+          const itemTotal =
+            item.price *
+            item.qty;
+
+          message +=
+            (index + 1) +
+            ". " +
+            item.product.name +
+            " - " +
+            item.product.size +
+            " × " +
+            item.qty +
+            " = " +
+            formatMoney(itemTotal) +
+            "\\n";
 
         }
       );
 
+      message +=
+        "\\nSubtotal: " +
+        formatMoney(subtotal) +
+        "\\n";
 
-      let deliveryCharge = 0;
+      message +=
+        "Delivery: " +
+        (
+          delivery === 0
+            ? "FREE"
+            : formatMoney(delivery)
+        ) +
+        "\\n";
 
-
-      if(
-        CONFIG.freeDeliveryAbove > 0 &&
-        subtotal <
-        CONFIG.freeDeliveryAbove
-      ){
-
-        deliveryCharge =
-          CONFIG.deliveryCharge;
-
-      }
-
-
-      const grandTotal =
-        subtotal +
-        deliveryCharge;
-
+      message +=
+        "*TOTAL: " +
+        formatMoney(grandTotal) +
+        "*\\n";
 
       const payment =
         PAYMENT_DATA[
@@ -3713,557 +3833,393 @@ document
         ] ||
         PAYMENT_DATA.User;
 
+      message +=
+        "\\nPayment: " +
+        payment.method +
+        "\\n";
 
-      const paymentMode =
-        payment.mode ||
-        (
-          isFirm
-          ? "COD"
-          : "UPI"
-        );
+      message +=
+        "Delivery: " +
+        payment.delivery +
+        "\\n";
 
+      if (notes) {
 
-      const paymentStatus =
-        payment.status ||
-        (
-          isFirm
-          ? "Free Door Delivery"
-          : "Dispatch after Payment"
-        );
-
-
-      const paymentNote =
-        payment.note ||
-        (
-          isFirm
-          ? "Payment upon delivery"
-          : "UPI payment required before dispatch"
-        );
-
-
-      let paymentTerms = "";
-
-
-      if(
-        paymentMode === "COD"
-      ){
-
-        paymentTerms =
-`[+] *Delivery Status:* ${paymentStatus}
-[+] *Payment Mode:* CASH ON DELIVERY (COD)
-
-[>] *Payment Note:* ${paymentNote}`;
-
-      }else{
-
-        paymentTerms =
-`[+] *Delivery Status:* ${paymentStatus}
-[+] *Payment Mode:* ONLINE / PREPAID (WhatsApp QR)
-
-[>] *Payment Note:* ${paymentNote}`;
+        message +=
+          "\\nNotes: " +
+          notes +
+          "\\n";
 
       }
 
+      message +=
+        "\\nPlease confirm the order. Thank you!";
 
-      const waMsg =
-
-`*${CONFIG.shopName.toUpperCase()} (${CONFIG.brandName.toUpperCase()} BRAND)*
-*ORDER REQUEST / ఆర్డర్ వివరాలు*
-----------------------------------------
-*Order ID:* #${orderId}
-*Customer Type:* ${state.role}
-
-*ORDER DETAILS*
-----------------------------------------
-${summaryText}----------------------------------------
-*Subtotal:* ${CONFIG.currency}${subtotal}
-*Delivery:* ${
-  deliveryCharge === 0
-  ? "Free (ఉచితం)"
-  : CONFIG.currency +
-    deliveryCharge
-}
-*TOTAL:* ${CONFIG.currency}${grandTotal}
-
-${paymentTerms}
-
-*DELIVERY ADDRESS*
-----------------------------------------
-${
-  isFirm
-  ? `*Firm Name:* ${name}
-*Contact Person:* ${contactPerson}
-`
-  : `*Name:* ${name}
-`
-}
-*State:* ${finalState}
-*District:* ${district}
-*Mandal / City:* ${mandal}
-*Village / Area:* ${village}
-*Door No / Street:* ${address}
-${landmark ? `*Landmark:* ${landmark}\n` : ""}
-*PIN Code:* ${pincode}
-*WhatsApp / Contact:* ${phone}
-${notes ? `*Notes:* ${notes}\n` : ""}
-----------------------------------------
-_${CONFIG.shopName}_
-_"${CONFIG.tagline}"_`;
-
-
-      state.latestOrderMsg =
-        waMsg;
-
+      state.orderMessage =
+        message;
 
       document.getElementById(
-        "cTitle"
+        "orderNumber"
       ).textContent =
-        `${MESSAGES.order_success} (#${orderId})`;
+        orderNo;
 
-
-      if(isFirm){
-
-        document.getElementById(
-          "cText"
-        ).textContent =
-          `ధన్యవాదాలు, ${name}. ${
-            paymentMode === "COD"
-            ? "Cash on Delivery and Door Delivery are selected."
-            : ""
-          } Click below to send your order on WhatsApp.`;
-
-      }else{
-
-        document.getElementById(
-          "cText"
-        ).textContent =
-          `ధన్యవాదాలు, ${name}. Please click the button below to send your order to WhatsApp.`;
-
-      }
-
-
-      document.getElementById(
-        "cHelp"
-      ).textContent =
-        `Order ID: #${orderId} | Total: ${CONFIG.currency}${grandTotal}`;
-
-
-      document.getElementById(
-        "waBtn"
-      ).href =
-        `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(waMsg)}`;
-
+      closeCheckout();
 
       document
         .getElementById(
-          "checkout"
+          "confirmationModal"
         )
-        .classList.remove(
-          "on"
-        );
+        .classList.add("show");
 
-
-      document
-        .getElementById(
-          "confirm"
-        )
-        .classList.add(
-          "on"
-        );
-
-
-      state.cart = {};
-
-
-      renderProducts();
-
-      updateBottomBar();
+      document.body.style.overflow =
+        "hidden";
 
     }
-  );
 
 
-/* ============================================================
-   COPY ORDER
-============================================================ */
+    /* =========================================================
+       WHATSAPP
+       ========================================================= */
 
-document
-  .getElementById(
-    "copyBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
+    function sendWhatsApp() {
 
-      if(
-        !state.latestOrderMsg
-      ){
-
-        return;
-
-      }
-
-
-      navigator.clipboard
-        .writeText(
-          state.latestOrderMsg
+      const number =
+        String(
+          CONFIG.whatsappNumber
         )
-        .then(
-          () => {
+          .replace(/\D/g, "");
 
-            alert(
-              "ఆర్డర్ వివరాలు కాపీ చేయబడ్డాయి."
-            );
-
-          }
-        )
-        .catch(
-          () => {
-
-            alert(
-              "Copy failed. Please use the WhatsApp button."
-            );
-
-          }
+      const url =
+        "https://wa.me/" +
+        number +
+        "?text=" +
+        encodeURIComponent(
+          state.orderMessage
         );
 
-    }
-  );
-
-
-/* ============================================================
-   NEW ORDER
-============================================================ */
-
-document
-  .getElementById(
-    "newOrder"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "confirm"
-        )
-        .classList.remove(
-          "on"
-        );
-
-    }
-  );
-
-
-/* ============================================================
-   DAILY ORDER NUMBER
-============================================================ */
-
-function generateDailyOrderNumber(
-  prefix="SVR"
-){
-
-  const now =
-    new Date();
-
-  const year =
-    now.getFullYear();
-
-  const month =
-    String(
-      now.getMonth()+1
-    ).padStart(
-      2,
-      "0"
-    );
-
-  const day =
-    String(
-      now.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-  const dateKey =
-    `${year}${month}${day}`;
-
-  const storedDate =
-    localStorage.getItem(
-      "svr_order_date"
-    );
-
-  let currentCount =
-    parseInt(
-      localStorage.getItem(
-        "svr_order_count"
-      ) || "0",
-      10
-    );
-
-  if(
-    storedDate !== dateKey
-  ){
-
-    currentCount = 1;
-
-    localStorage.setItem(
-      "svr_order_date",
-      dateKey
-    );
-
-  }else{
-
-    currentCount += 1;
-
-  }
-
-  localStorage.setItem(
-    "svr_order_count",
-    currentCount
-  );
-
-  return `${prefix}-${dateKey}-${String(
-    currentCount
-  ).padStart(
-    3,
-    "0"
-  )}`;
-
-}
-
-
-/* ============================================================
-   ROLE SELECTION
-============================================================ */
-
-const whoModal =
-  document.getElementById(
-    "who"
-  );
-
-
-const mainContent =
-  document.getElementById(
-    "mainContent"
-  );
-
-
-const mainFoot =
-  document.getElementById(
-    "mainFoot"
-  );
-
-
-function selectRole(
-  selectedRole
-){
-
-  state.role =
-    selectedRole;
-
-  document.getElementById(
-    "whoLabel"
-  ).textContent =
-    state.role;
-
-  whoModal.classList.remove(
-    "on"
-  );
-
-  mainContent.classList.add(
-    "active"
-  );
-
-  mainFoot.classList.add(
-    "active"
-  );
-
-  renderProducts();
-
-  updateBottomBar();
-
-}
-
-
-document
-  .getElementById(
-    "changeWho"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      whoModal.classList.add(
-        "on"
+      window.open(
+        url,
+        "_blank"
       );
 
     }
-  );
 
 
-whoModal
-  .querySelectorAll(
-    "button[data-t]"
-  )
-  .forEach(
-    btn => {
+    /* =========================================================
+       COPY
+       ========================================================= */
 
-      btn.addEventListener(
+    async function copyOrderDetails() {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          state.orderMessage
+        );
+
+        alert(
+          "Order details copied."
+        );
+
+      } catch (error) {
+
+        alert(
+          "Copy failed. Please try again."
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       NEW ORDER
+       ========================================================= */
+
+    function newOrder() {
+
+      state.cart = {};
+
+      state.checkoutData = {};
+
+      state.orderNumber = "";
+
+      state.orderMessage = "";
+
+      document
+        .getElementById(
+          "confirmationModal"
+        )
+        .classList.remove("show");
+
+      document.body.style.overflow =
+        "";
+
+      renderProducts();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =========================================================
+       ROLE
+       ========================================================= */
+
+    function openRoleModal() {
+
+      document
+        .getElementById(
+          "roleModal"
+        )
+        .classList.add("show");
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    function closeRoleModal() {
+
+      document
+        .getElementById(
+          "roleModal"
+        )
+        .classList.remove("show");
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    function selectRole(role) {
+
+      state.role =
+        role;
+
+      document.getElementById(
+        "currentRole"
+      ).textContent =
+        role;
+
+      closeRoleModal();
+
+      renderProducts();
+
+    }
+
+
+    /* =========================================================
+       THEME
+       ========================================================= */
+
+    function toggleTheme() {
+
+      document.body.classList.toggle(
+        "dark"
+      );
+
+      localStorage.setItem(
+        "svr_theme",
+        document.body.classList.contains(
+          "dark"
+        )
+          ? "dark"
+          : "light"
+      );
+
+    }
+
+
+    function loadTheme() {
+
+      const theme =
+        localStorage.getItem(
+          "svr_theme"
+        );
+
+      if (theme === "dark") {
+
+        document.body.classList.add(
+          "dark"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       INITIAL LOAD
+       ========================================================= */
+
+    async function init() {
+
+      loadTheme();
+
+      document.getElementById(
+        "year"
+      ).textContent =
+        new Date().getFullYear();
+
+      applySettings();
+
+      applyMessages();
+
+      renderProducts();
+
+      renderSocialLinks();
+
+      openRoleModal();
+
+      try {
+
+        await Promise.allSettled([
+
+          loadSettings(),
+
+          loadProducts(),
+
+          loadRolePrices(),
+
+          loadPaymentDelivery(),
+
+          loadMessages(),
+
+          loadLocations(),
+
+          loadSocialLinks()
+
+        ]);
+
+      } catch (error) {
+
+        console.warn(
+          "Sheet loading issue:",
+          error
+        );
+
+      }
+
+      applySettings();
+
+      applyMessages();
+
+      renderProducts();
+
+      renderSocialLinks();
+
+      document.getElementById(
+        "loading"
+      ).classList.add(
+        "hidden"
+      );
+
+    }
+
+
+    /* =========================================================
+       CLOSE OVERLAY WHEN CLICKING OUTSIDE
+       ========================================================= */
+
+    document
+      .getElementById(
+        "checkoutModal"
+      )
+      .addEventListener(
         "click",
-        e => {
+        function(event) {
 
-          selectRole(
-            e.currentTarget
-              .getAttribute(
-                "data-t"
-              )
-          );
+          if (
+            event.target === this
+          ) {
+
+            closeCheckout();
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "confirmationModal"
+      )
+      .addEventListener(
+        "click",
+        function(event) {
+
+          if (
+            event.target === this
+          ) {
+
+            this.classList.remove(
+              "show"
+            );
+
+            document.body.style.overflow =
+              "";
+
+          }
+
+        }
+      );
+
+
+    /* =========================================================
+       SERVICE WORKER / PWA
+       ========================================================= */
+
+    if (
+      "serviceWorker" in navigator
+    ) {
+
+      window.addEventListener(
+        "load",
+        function() {
+
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then(
+              registration => {
+
+                console.log(
+                  "Service Worker registered:",
+                  registration.scope
+                );
+
+              }
+            )
+            .catch(
+              error => {
+
+                console.warn(
+                  "Service Worker registration failed:",
+                  error
+                );
+
+              }
+            );
 
         }
       );
 
     }
-  );
 
 
-/* ============================================================
-   LOAD EVERYTHING FROM GOOGLE SHEET
-============================================================ */
+    /* =========================================================
+       START
+       ========================================================= */
 
-async function loadGoogleSheetData(){
+    init();
 
-  const status =
-    document.getElementById(
-      "sheetStatus"
-    );
-
-  status.textContent =
-    "Connecting to SVR Food Products control sheet...";
-
-  try{
-
-    const results =
-      await Promise.allSettled([
-
-        loadSettings(),
-
-        loadProducts(),
-
-        loadRolePrices(),
-
-        loadPaymentDelivery(),
-
-        loadMessages(),
-
-        loadLocations(),
-
-        loadSocialLinks()
-
-      ]);
-
-    const successCount =
-      results.filter(
-        r =>
-          r.status ===
-          "fulfilled"
-      ).length;
-
-    state.sheetLoaded =
-      successCount > 0;
-
-    applySettings();
-
-    applyMessages();
-
-    renderProducts();
-
-    renderSocialLinks();
-
-    if(state.sheetLoaded){
-
-      status.textContent =
-        `✓ Website connected to Google Sheet (${successCount}/7 sections loaded)`;
-
-    }else{
-
-      status.textContent =
-        "Using website backup data.";
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Google Sheet connection error:",
-      error
-    );
-
-    status.textContent =
-      "Using website backup data.";
-
-    renderSocialLinks();
-
-  }
-
-}
-
-
-/* ============================================================
-   START
-============================================================ */
-
-applySettings();
-
-applyMessages();
-
-renderProducts();
-
-updateBottomBar();
-
-renderSocialLinks();
-
-loadGoogleSheetData();
-
-
-/* ============================================================
-   PWA SERVICE WORKER
-============================================================ */
-
-if("serviceWorker" in navigator){
-
-  window.addEventListener(
-    "load",
-    () => {
-
-      navigator.serviceWorker
-        .register("./sw.js")
-        .then(
-          () => {
-
-            console.log(
-              "SVR Food Service Worker Registered"
-            );
-
-          }
-        )
-        .catch(
-          error => {
-
-            console.error(
-              "Service Worker Error:",
-              error
-            );
-
-          }
-        );
-
-    }
-  );
-
-}
-
-</script>
+  </script>
 
 </body>
 </html>
